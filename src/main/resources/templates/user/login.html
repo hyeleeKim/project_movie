@@ -10,53 +10,49 @@
     <link rel="stylesheet" th:href="@{/resources/stylesheets/login.css}">
 </head>
 <body>
-<div id="loginContainer" class="container">
-    <form id="loginForm" method="POST">
-        <span class="title">회원 로그인</span>
-        <span class="subtitle">아이디(이메일)</span>
-        <label class="label">
-            <input type="email" class="_object-input input" maxlength="50" name="email" placeholder="이메일 주소">
-        </label>
-        <span class="warning email" rel="emailWarning">올바른 이메일을 입력해 주세요</span>
-        <span class="subtitle">비밀번호</span>
-        <label class="label">
-            <input type="password" class="_object-input input" maxlength="50" name="password" placeholder="비밀번호">
-        </label>
-        <span class="warning password" rel="passwordWarning">올바른 비밀번호를 입력해 주세요</span>
-        <span class="warning login" rel="loginWarning">이메일 혹은 비밀번호가 올바르지 않습니다.</span>
-        <label class="_object-check-wrapper">
-            <input class="_check-input" type="checkbox" name="rememberEmail">
-            <span class="_check-text">이메일 저장</span>
-        </label>
-        <label class="label">
-            <input class="_object-button _color-concept" type="submit" value="로그인">
-        </label>
-        <ul class="menu">
-            <li class="item">
-                <a class="link" href="#" data-method="showRecover">이메일/비밀번호 찾기</a>
-            </li>
-            <li class="item"> | </li>
-            <li class="item">
-                <a class="link" href="#" data-method="showRegister">회원가입</a>
-            </li>
-        </ul>
-    </form>
-</div>
-<div id="recoverContainer" class="container">
-    <form class="recoverForm">
-        <span class="title">아이디 찾기</span>
-        <span class="subtitle">이메일</span>
-        <label class="label">
-            <input type="email" class="_object-input input" maxlength="50" name="email" placeholder="이메일 주소">
-        </label>
-        <span class="warning email" rel="emailWarning">올바른 이메일을 입력해 주세요</span>
-        <span class="subtitle">비밀번호</span>
-        <label class="label">
-            <input type="password" class="_object-input input" maxlength="50" name="password" placeholder="비밀번호">
-        </label>
 
+<form id="loginForm">
+    <span class="title">회원 로그인</span>
+    <span class="subtitle">아이디(이메일)</span>
+    <label class="label">
+        <input type="email" class="_object-input input" maxlength="50" name="email" placeholder="이메일 주소">
+    </label>
+    <span class="warning email" rel="emailWarning">올바른 이메일을 입력해 주세요</span>
+    <span class="subtitle">비밀번호</span>
+    <label class="label">
+        <input type="password" class="_object-input input" maxlength="50" name="password" placeholder="비밀번호">
+    </label>
+    <span class="warning password" rel="passwordWarning">올바른 비밀번호를 입력해 주세요</span>
+    <span class="warning login" rel="loginWarning">이메일 혹은 비밀번호가 올바르지 않습니다.</span>
+    <label class="_object-check-wrapper">
+        <input class="_check-input" type="checkbox" name="rememberEmail">
+        <span class="_check-text">이메일 저장</span>
+    </label>
+    <label class="label">
+        <input class="_object-button _color-concept" type="submit" value="로그인">
+    </label>
+    <ul class="menu">
+        <li class="item">
+            <a class="link" href="#" data-method="showRecover">이메일/비밀번호 찾기</a>
+        </li>
+        <li class="item"> |</li>
+        <li class="item">
+            <a class="link" href="#" data-method="showRegister">회원가입</a>
+        </li>
+    </ul>
+</form>
+<form class="recoverForm visible">
+    <span class="title">아이디 찾기</span>
+    <span class="subtitle">이메일</span>
+    <label class="label">
+        <input type="email" class="_object-input input" maxlength="50" name="email" placeholder="이메일 주소">
+    </label>
+    <span class="warning email" rel="emailWarning">올바른 이메일을 입력해 주세요</span>
+    <span class="subtitle">비밀번호</span>
+    <label class="label">
+        <input type="password" class="_object-input input" maxlength="50" name="password" placeholder="비밀번호">
+    </label>
+</form>
 
-    </form>
-</div>
 </body>
 </html>

@@ -64,18 +64,15 @@ ol, ul {
 }
 
 
+
+
 /*endregion*/
 
 /*region loginForm*/
 
-#loginContainer{
-    width:100vw;
-    height: 100vh;
-}
 
-
-#loginContainer> #loginForm,
-#recoverContainer> #recoverForm{
+#loginForm,#recoverForm
+{
     top: 50%;
     left: 50%;
     width: 30rem;
@@ -94,13 +91,14 @@ ol, ul {
     justify-content: flex-start;
 }
 
-#loginContainer > #loginForm > * + *{
+ #loginForm > * + *
+{
     margin-top: 0.5rem;
 }
 
 
 
-#loginContainer > #loginForm > .warning{
+#loginForm > .warning{
     max-height: 0;
     color: #ef5350;
     font-size: 0.9rem;
@@ -118,7 +116,8 @@ ol, ul {
 }
 
 
-#loginContainer > #loginForm > .title{
+ #loginForm > .title
+{
     font-size: 1.3rem;
     font-weight: 600;
     margin-bottom: 1rem;
@@ -128,12 +127,12 @@ ol, ul {
     padding-bottom: 0.5rem;
 }
 
-#loginContainer > #loginForm >.subtitle{
+#loginForm >.subtitle{
     font-size: 0.8rem;
     margin-bottom: 0.5rem;
 }
 
-#loginContainer > #loginForm > .label {
+ #loginForm > .label {
     align-items: stretch;
     display: flex;
     flex-direction: column;
@@ -141,13 +140,13 @@ ol, ul {
     margin-bottom: 0.8rem;
 }
 
-#loginContainer > #loginForm >.label> .input {
+ #loginForm >.label> .input {
     border-bottom: 0.0125rem solid #727272;
     padding : 0.5rem;
 }
 
 
-#loginContainer > #loginForm > .button-container{
+ #loginForm > .button-container{
     display: grid;
     gap: 1rem;
     grid-template-columns: 1fr ;
@@ -157,7 +156,7 @@ ol, ul {
 
 }
 
-#loginContainer > #loginForm > .label> ._object-button {
+#loginForm > .label> ._object-button {
     height: 2.5rem;
     font-size: 1rem;
     font-weight: 600;
@@ -168,7 +167,7 @@ ol, ul {
 
 
 
-#loginContainer > #loginForm > .menu {
+#loginForm > .menu {
     display: flex;
     flex-direction : row;
     justify-content : center ;
@@ -176,17 +175,17 @@ ol, ul {
 }
 
 
-#loginContainer > #loginForm > .menu >.item + .item{
+#loginForm > .menu >.item + .item{
     margin-left: 0.5rem;
 }
 
 
 
-#loginContainer > #loginForm > .menu >.item>.link{
+#loginForm > .menu >.item>.link{
     font-size: 0.9rem;
 }
 
-#loginContainer >#loginForm >._object-check-wrapper{
+#loginForm >._object-check-wrapper{
     margin-bottom : 0.5rem;
 }
 
