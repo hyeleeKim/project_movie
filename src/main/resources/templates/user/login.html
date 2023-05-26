@@ -6,12 +6,12 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>로그인</title>
+    <script defer th:src="@{/resources/scripts/common.js}"></script>
     <script defer th:src="@{/resources/scripts/login.js}"></script>
     <link rel="stylesheet" th:href="@{/resources/stylesheets/login.css}">
 </head>
 <body>
-
-<form id="loginForm">
+<form id="loginForm" class="visible">
     <span class="title">회원 로그인</span>
     <span class="subtitle">아이디(이메일)</span>
     <label class="label">
@@ -33,7 +33,7 @@
     </label>
     <ul class="menu">
         <li class="item">
-            <a class="link" href="#" data-method="showRecover">이메일/비밀번호 찾기</a>
+            <a class="link" href="#" data-method="showRecover">아이디/비밀번호 찾기</a>
         </li>
         <li class="item"> |</li>
         <li class="item">
@@ -41,17 +41,65 @@
         </li>
     </ul>
 </form>
-<form class="recoverForm visible">
-    <span class="title">아이디 찾기</span>
-    <span class="subtitle">이메일</span>
-    <label class="label">
-        <input type="email" class="_object-input input" maxlength="50" name="email" placeholder="이메일 주소">
-    </label>
-    <span class="warning email" rel="emailWarning">올바른 이메일을 입력해 주세요</span>
-    <span class="subtitle">비밀번호</span>
-    <label class="label">
-        <input type="password" class="_object-input input" maxlength="50" name="password" placeholder="비밀번호">
-    </label>
+<form id="recoverForm">
+    <div class="option-container">
+        <label class="label email">
+            <input checked class="option " name="option" type="radio" value="email">
+            <span class="title">이메일 찾기</span>
+        </label>
+        <label class="label password">
+            <input class="option" name="option" type="radio" value="password">
+            <span class="title">비밀번호 재설정</span>
+        </label>
+    </div>
+    <div class="field email-container">
+        <span class="subtitle">이름</span>
+        <label class="label">
+            <input autofocus type="text" class="_object-input input" maxlength="10" name="name"
+                   placeholder="이름">
+        </label>
+        <span class="subtitle">생년월일</span>
+        <label class="label">
+            <input autofocus type="text" class="_object-input input" maxlength="10" name="name"
+                   placeholder="생년월일">
+        </label>
+        <span class="subtitle">연락처</span>
+        <label class="label button-container">
+            <input type="text" class="_object-input input" maxlength="12" name="eContact" placeholder="연락처('-' 없이 입력)">
+            <input type="button" class="_object-button" name="eContactSend" value="인증번호 전송">
+        </label>
+        <span class="subtitle">인증번호 확인</span>
+        <label class="label button-container">
+            <input disabled type="text" class="_object-input input"
+                   name="eContactCode" maxlength="6" placeholder="인증번호">
+            <input disabled class="_object-button" name="eContactVerify" type="button" value="인증번호 확인">
+        </label>
+        <span class="warning email" rel="emailWarning">올바른 이메일을 적어주세요</span>
+        <span class="text">휴대폰번호가 변경된 경우 하단 휴대폰 인증 찾기를 통하여 아이디찾기를 진행해주시기 바랍니다.</span>
+        <input class="_object-button _color-concept" type="submit" value="아이디 찾기">
+    </div>
+    <div class="field password-container">
+        <span class="subtitle">아이디</span>
+        <label class="label">
+            <input autofocus type="email" class="_object-input input" maxlength="10" name="name"
+                   placeholder="이메일 주소">
+        </label>
+        <span class="warning" rel="warning">올바른 이메일을 적어주세요</span>
+        <span class="subtitle">이름</span>
+        <label class="label">
+            <input autofocus type="text" class="_object-input input" maxlength="10" name="name"
+                   placeholder="이름">
+        </label>
+        <span class="subtitle">생년월일</span>
+        <label class="label">
+            <input autofocus type="date" class="_object-input input" maxlength="10" name="name"
+                   placeholder="생년월일">
+        </label>
+        <span class="text">휴대폰번호가 변경된 경우 하단 휴대폰 인증 찾기를 통하여 아이디찾기를 진행해주시기 바랍니다.</span>
+        <input class="_object-button _color-concept" type="submit" value="비밀번호 재설정">
+        <span class="warning" rel="warning"></span>
+    </div>
+
 </form>
 
 </body>

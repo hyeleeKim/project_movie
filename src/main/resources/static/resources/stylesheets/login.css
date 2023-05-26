@@ -5,10 +5,7 @@
 
 html {
     font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
-
-
 }
-
 
 body {
     margin: 0;
@@ -41,6 +38,10 @@ input, select, textarea {
     padding: unset;
 }
 
+input[type="radio"]{
+    appearance: unset;
+}
+
 
 ol, ul {
     list-style-type: none;
@@ -51,18 +52,35 @@ ol, ul {
 
 }
 
-._object-button._color-concept{
-    background-color: #1f0d3b;
+._object-button {
+    border-radius: 0.25rem;
+    background-color: #e0e0e0;
+    cursor: pointer;
+    padding: 0.6rem 0.8rem;
+    margin: 0 0.5rem;
+    font-size: 1rem;
 }
 
 ._object-button:hover {
-    background-color: #492b6e;
+    filter: brightness(95%);
 }
 
 ._object-button:active {
-    background-color: #5d388d;
+    filter: brightness(90%);
+
 }
 
+._object-button._color-concept {
+    background-color: #1f0d3b;
+}
+
+._object-button._color-concept:hover {
+    background-color: #643584;
+}
+
+._object-button._color-concept:active {
+    background-color: #803e7e;
+}
 
 
 
@@ -71,8 +89,7 @@ ol, ul {
 /*region loginForm*/
 
 
-#loginForm,#recoverForm
-{
+#loginForm, #recoverForm {
     top: 50%;
     left: 50%;
     width: 30rem;
@@ -83,6 +100,9 @@ ol, ul {
     padding: 2.5rem;
     transform: translate(-50%, -50%);
     position: absolute;
+    opacity: 0;
+    pointer-events: none;
+    transition-property: opacity;
 
 
     align-items: stretch;
@@ -91,14 +111,21 @@ ol, ul {
     justify-content: flex-start;
 }
 
- #loginForm > * + *
-{
+#loginForm.visible,
+#recoverForm.visible {
+    opacity: 1;
+    pointer-events: all;
+}
+
+
+#loginForm > * + *,
+#recoverForm > * + * {
     margin-top: 0.5rem;
 }
 
 
-
-#loginForm > .warning{
+#loginForm > .warning,
+#recoverForm >.field> .warning {
     max-height: 0;
     color: #ef5350;
     font-size: 0.9rem;
@@ -111,82 +138,82 @@ ol, ul {
 }
 
 
-#loginContainer > #loginForm > .warning.visible{
+#loginForm > .warning.visible,
+#recoverForm >.field> .warning.visible {
     overflow: visible;
 }
 
 
- #loginForm > .title
-{
+#loginForm > .title{
     font-size: 1.3rem;
     font-weight: 600;
     margin-bottom: 1rem;
     border-bottom: 0.25rem solid #81c5c0;
-    width : 6.5rem;
     text-align: center;
     padding-bottom: 0.5rem;
 }
 
-#loginForm >.subtitle{
+#loginForm > .subtitle,
+#recoverForm >.field>.subtitle {
     font-size: 0.8rem;
     margin-bottom: 0.5rem;
 }
 
- #loginForm > .label {
+#loginForm > .label,
+#recoverForm>.field> .label{
     align-items: stretch;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    margin-bottom: 0.8rem;
+    margin-bottom: 2rem;
 }
 
- #loginForm >.label> .input {
+#loginForm > .label > .input,
+#recoverForm>.field> .label> .input{
     border-bottom: 0.0125rem solid #727272;
-    padding : 0.5rem;
+    padding: 0.5rem;
 }
 
 
- #loginForm > .button-container{
+#loginForm > .button-container {
     display: grid;
     gap: 1rem;
-    grid-template-columns: 1fr ;
+    grid-template-columns: 1fr;
     background-color: #bce1ea;
     box-sizing: border-box;
     border-radius: 1rem;
 
 }
 
-#loginForm > .label> ._object-button {
+#loginForm > .label > ._object-button,
+#recoverForm>.field>._object-button{
     height: 2.5rem;
     font-size: 1rem;
     font-weight: 600;
     border-radius: 0.5rem;
-    color : white;
+    color: white;
 }
-
-
 
 
 #loginForm > .menu {
     display: flex;
-    flex-direction : row;
-    justify-content : center ;
-    align-items:center;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
 
-#loginForm > .menu >.item + .item{
+#loginForm > .menu > .item + .item {
     margin-left: 0.5rem;
 }
 
 
-
-#loginForm > .menu >.item>.link{
+#loginForm > .menu > .item > .link {
     font-size: 0.9rem;
 }
 
-#loginForm >._object-check-wrapper{
-    margin-bottom : 0.5rem;
+#loginForm > ._object-check-wrapper {
+    margin-bottom: 0.5rem;
 }
 
 
@@ -194,6 +221,81 @@ ol, ul {
 
 /*recoverForm*/
 
+
+#recoverForm >.option-container{
+    display: grid;
+    gap: 0.5rem;
+    grid-template-columns: 1fr 1fr;
+}
+
+#recoverForm >.option-container >.label{
+    cursor: pointer;
+    padding: 0.5rem;
+
+    align-items: center;
+    display: flex;
+    flex-direction : row;
+    justify-content : center;
+
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+#recoverForm >.option-container >.label >.title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+#recoverForm >.option-container >.label:hover {
+    border-bottom: 0.25rem solid #81c5c0;
+}
+
+
+
+#recoverForm >.option-container >.label:has(>.option:checked) {
+    border-bottom: 0.25rem solid #81c5c0;
+}
+
+
+
+#recoverForm >.email-container,
+#recoverForm >.password-container{
+    display: none;
+}
+
+#recoverForm >.option-container:has(> .label.email >.option:checked) ~ .email-container{
+    display: flex;
+}
+
+#recoverForm >.option-container:has(> .label.password >.option:checked) ~ .password-container{
+    display: flex;
+}
+
+#recoverForm >.field {
+    align-items: stretch;
+    flex-direction : column;
+    justify-content : flex-start;
+}
+
+#recoverForm >.field >.text{
+    margin: 3rem 0;
+    font-size: 0.8rem;
+}
+
+#recoverForm >.field >.button-container {
+    /*align-items : stretch;*/
+    /*display: flex;*/
+    /*flex-direction : row;*/
+    /*justify-content : space-around;*/
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 2fr 0.4fr;
+
+}
 
 
 
