@@ -1,0 +1,145 @@
+@charset "UTF-8";
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard.css");
+
+
+html {
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+}
+
+
+body {
+
+    margin-block: unset;
+    margin-inline: unset;
+    padding-inline: unset;
+    padding-block: unset;
+}
+
+
+a:link, a:visited {
+    color: #0288d1;
+    text-decoration: none;
+}
+
+a:hover, a:visited:hover {
+    text-decoration: underline;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font: inherit;
+    margin-block: unset;
+    margin-inline: unset;
+}
+
+
+input, select, textarea {
+    background-color: inherit;
+    border: unset;
+    color: inherit;
+    margin: unset;
+    outline: unset;
+    font: inherit;
+    padding: unset;
+}
+
+
+ol, ul {
+    list-style-type: none;
+    margin-block: unset;
+    margin-inline: unset;
+    padding-inline: unset;
+    padding-block: unset;
+
+}
+
+
+
+#loginForm{
+    top: 50%;
+    left: 50%;
+    width: 28rem;
+    max-height: calc(100vh - 2rem);
+    background-color: #fafafa;
+    border-radius: 0.5rem;
+    box-sizing: border-box;
+    padding: 2.5rem;
+    pointer-events: none;
+    position: fixed;
+    transform: translate(-50%, -50%);
+
+
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+#loginForm > * + *{
+    margin-top: 0.5rem;
+}
+
+
+
+#loginForm > .warning{
+    max-height: 0;
+    color: #ef5350;
+    font-size: 0.9rem;
+    margin: unset;
+    overflow: hidden;
+    padding-top: 0;
+    transition-duration: 250ms;
+    transition-property: max-height, padding-top;
+    transition-timing-function: ease;
+}
+
+
+#loginForm > .warning.visible{
+    overflow: visible;
+}
+
+
+#loginForm > .title{
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    border-bottom: 0.25rem solid deepskyblue;
+    width : 6.5rem;
+    text-align: center;
+}
+
+#loginForm >.subtitle{
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+}
+
+#loginForm > .label {
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+#loginForm > .button-container{
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr ;
+}
+
+#loginForm >.label> .input {
+    border-bottom: 0.0125rem solid #afd5e5;
+    padding : 0.5rem;
+    margin-bottom: 1rem
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

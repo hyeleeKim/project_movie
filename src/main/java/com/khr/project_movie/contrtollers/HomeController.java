@@ -11,6 +11,6 @@ public class HomeController {
 
     @RequestMapping(value="/" , method = RequestMethod.GET)
     public ModelAndView getIndex(){
-        return new ModelAndView("home/index");
+        return new ModelAndView("user/login");
     }
 }

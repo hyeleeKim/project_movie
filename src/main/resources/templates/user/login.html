@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>로그인</title>
+    <script defer th:src="@{/resources/scripts/login.js}"></script>
+    <link  rel="stylesheet" th:href="@{/resources/stylesheets/login.css}">
+</head>
+<body>
+<form id="loginForm">
+    <span class="title">회원 로그인</span>
+    <span class="subtitle">이메일</span>
+    <label class="label">
+        <input type="email" class="_object-input input" maxlength="50" name="email" placeholder="이메일 주소">
+    </label>
+    <span class="warning email" rel="emailWarning">올바른 이메일을 입력해 주세요</span>
+    <span class="subtitle">비밀번호</span>
+    <label class="label">
+        <input type="password" class="_object-input input" maxlength="50" name="password" placeholder="비밀번호">
+    </label>
+    <span class="warning password" rel="passwordWarning">올바른 비밀번호를 입력해 주세요</span>
+    <span class="warning login" rel="loginWarning">이메일 혹은 비밀번호가 올바르지 않습니다.</span>
+    <label class="_object-check-wrapper">
+        <input class="_check-input" type="checkbox" name="rememberEmail">
+        <span class="_check-toggle"></span>
+        <span class="_check-text">이메일 저장</span>
+    </label>
+    <div class="button-container">
+        <input class="_object-button _color-concept" type="submit" value="로그인">
+    </div>
+    <ul class="menu">
+        <li class="item">
+            <span class="text">아직 계정이 없으신가요?</span>
+            <a class="link" href="#" data-method="showRegister">회원가입</a>
+        </li>
+        <li class="item">
+            <span class="text">이메일 혹은 비밀번호를 분실하셨나요?</span>
+            <a class="link" href="#" data-method="showRecover">계정 복구</a>
+        </li>
+    </ul>
+</form>
+</body>
+</html>
