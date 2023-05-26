@@ -1,23 +1,22 @@
 @charset "UTF-8";
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard.css");
 
+/*region common*/
 
 html {
     font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+
+
 }
 
 
 body {
-
-    margin-block: unset;
-    margin-inline: unset;
-    padding-inline: unset;
-    padding-block: unset;
+    margin: 0;
 }
 
 
 a:link, a:visited {
-    color: #0288d1;
+    color: #727272;
     text-decoration: none;
 }
 
@@ -52,20 +51,41 @@ ol, ul {
 
 }
 
+._object-button._color-concept{
+    background-color: #1f0d3b;
+}
+
+._object-button:hover {
+    background-color: #492b6e;
+}
+
+._object-button:active {
+    background-color: #5d388d;
+}
 
 
-#loginForm{
+/*endregion*/
+
+/*region loginForm*/
+
+#loginContainer{
+    width:100vw;
+    height: 100vh;
+}
+
+
+#loginContainer> #loginForm,
+#recoverContainer> #recoverForm{
     top: 50%;
     left: 50%;
-    width: 28rem;
+    width: 30rem;
     max-height: calc(100vh - 2rem);
-    background-color: #fafafa;
+    /*background-color: #fafafa;*/
     border-radius: 0.5rem;
     box-sizing: border-box;
     padding: 2.5rem;
-    pointer-events: none;
-    position: fixed;
     transform: translate(-50%, -50%);
+    position: absolute;
 
 
     align-items: stretch;
@@ -74,13 +94,13 @@ ol, ul {
     justify-content: flex-start;
 }
 
-#loginForm > * + *{
+#loginContainer > #loginForm > * + *{
     margin-top: 0.5rem;
 }
 
 
 
-#loginForm > .warning{
+#loginContainer > #loginForm > .warning{
     max-height: 0;
     color: #ef5350;
     font-size: 0.9rem;
@@ -93,53 +113,90 @@ ol, ul {
 }
 
 
-#loginForm > .warning.visible{
+#loginContainer > #loginForm > .warning.visible{
     overflow: visible;
 }
 
 
-#loginForm > .title{
+#loginContainer > #loginForm > .title{
     font-size: 1.3rem;
     font-weight: 600;
     margin-bottom: 1rem;
-    border-bottom: 0.25rem solid deepskyblue;
+    border-bottom: 0.25rem solid #81c5c0;
     width : 6.5rem;
     text-align: center;
+    padding-bottom: 0.5rem;
 }
 
-#loginForm >.subtitle{
+#loginContainer > #loginForm >.subtitle{
     font-size: 0.8rem;
     margin-bottom: 0.5rem;
 }
 
-#loginForm > .label {
+#loginContainer > #loginForm > .label {
     align-items: stretch;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    margin-bottom: 0.8rem;
 }
 
-#loginForm > .button-container{
+#loginContainer > #loginForm >.label> .input {
+    border-bottom: 0.0125rem solid #727272;
+    padding : 0.5rem;
+}
+
+
+#loginContainer > #loginForm > .button-container{
     display: grid;
     gap: 1rem;
     grid-template-columns: 1fr ;
+    background-color: #bce1ea;
+    box-sizing: border-box;
+    border-radius: 1rem;
+
 }
 
-#loginForm >.label> .input {
-    border-bottom: 0.0125rem solid #afd5e5;
-    padding : 0.5rem;
-    margin-bottom: 1rem
+#loginContainer > #loginForm > .label> ._object-button {
+    height: 2.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 0.5rem;
+    color : white;
 }
 
 
 
 
+#loginContainer > #loginForm > .menu {
+    display: flex;
+    flex-direction : row;
+    justify-content : center ;
+    align-items:center;
+}
+
+
+#loginContainer > #loginForm > .menu >.item + .item{
+    margin-left: 0.5rem;
+}
+
+
+
+#loginContainer > #loginForm > .menu >.item>.link{
+    font-size: 0.9rem;
+}
+
+#loginContainer >#loginForm >._object-check-wrapper{
+    margin-bottom : 0.5rem;
+}
+
+
+/*endregion*/
+
+/*recoverForm*/
 
 
 
 
-
-
-
-
+/*endregion*/
 

@@ -5,12 +5,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-@RequestMapping(value="/")
+@RequestMapping(value="movie")
 @Controller
 public class HomeController {
 
-    @RequestMapping(value="/" , method = RequestMethod.GET)
+    @RequestMapping(value="login" , method = RequestMethod.GET)
     public ModelAndView getIndex(){
         return new ModelAndView("user/login");
+    }
+
+    @RequestMapping(value="login" , method = RequestMethod.POST)
+    public ModelAndView postIndex(){
+//        return new ModelAndView("user/login");
+        return null;
     }
 }
