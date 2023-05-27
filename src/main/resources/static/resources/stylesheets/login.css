@@ -102,12 +102,12 @@ ol, ul {
     top: 50%;
     left: 50%;
     width: 30rem;
-    max-height: calc(100vh - 2rem);
-    /*background-color: #fafafa;*/
+    height: auto;
+    /*max-height: calc(100vh - 2rem);*/
     border-radius: 0.5rem;
     box-sizing: border-box;
     padding: 2.5rem;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -40%);
     position: absolute;
     opacity: 0;
     pointer-events: none;
