@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-
+@RequestMapping(value = "user")
 @Controller
 public class HomeController {
 
@@ -19,9 +19,8 @@ public class HomeController {
     }
 
 
-    @RequestMapping(value = "loginDo", method = RequestMethod.POST)
+    @RequestMapping(value = "login", method = RequestMethod.POST)
     public ModelAndView postIndex() {
-//        ModelAndView modelAndView = new ModelAndView("user/login");
 
 
         return null;
