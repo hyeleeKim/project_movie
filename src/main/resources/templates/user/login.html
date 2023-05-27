@@ -11,11 +11,11 @@
     <link rel="stylesheet" th:href="@{/resources/stylesheets/login.css}">
 </head>
 <body>
-<form id="loginForm" class="visible">
+<form id="loginForm" method="POST" th:action="@{/user/login}" class="visible">
     <span class="title">회원 로그인</span>
     <span class="subtitle">아이디(이메일)</span>
     <label class="label">
-        <input type="email" class="_object_input input" maxlength="50" name="email" placeholder="이메일 주소" value="이메일">
+        <input type="email" class="_object_input input" maxlength="50" name="email" placeholder="이메일 주소" >
     </label>
     <span class="warning email" rel="emailWarning"></span>
     <span class="subtitle">비밀번호</span>

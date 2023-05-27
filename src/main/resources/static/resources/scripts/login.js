@@ -93,24 +93,23 @@ loginForm.onsubmit = e => {
     }
     if (loginForm['password'].value === '') {
         loginForm.passwordWarning.show('비밀번호를 입력해 주세요');
-        return;
     }
 
-    const xhr = new XMLHttpRequest();
-    const formData = new FormData();
-    formData.append("email",loginForm['email'].value);
-    formData.append("password",loginForm['password'].value);
-    xhr.open('POST','user/login');
-    xhr.onreadystatechange = () =>{
-        if(xhr.readyState === XMLHttpRequest.DONE){
-            if(xhr.status >= 200 && xhr.status < 400){
-
-            } else {
-
-            }
-        }
-    };
-    xhr.send(formData);
+    // const xhr = new XMLHttpRequest();
+    // const formData = new FormData();
+    // formData.append("email",loginForm['email'].value);
+    // formData.append("password",loginForm['password'].value);
+    // xhr.open('POST','/user/login');
+    // xhr.onreadystatechange = () =>{
+    //     if(xhr.readyState === XMLHttpRequest.DONE){
+    //         if(xhr.status >= 200 && xhr.status < 400){
+    //
+    //         } else {
+    //
+    //         }
+    //     }
+    // };
+    // xhr.send(formData);
 }
 
 // 아이디,비밀번호 재설정 경고
@@ -211,7 +210,6 @@ recoverForm.onsubmit = e => {
         }
         if(recoverForm['pBirth'].value === ''){
             recoverForm.pBirthWarning.show('생년월일을 입력해 주세요');
-            return;
         }
 
     }
