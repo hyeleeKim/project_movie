@@ -1,0 +1,668 @@
+@charset "UTF-8";
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard.css");
+
+/*region common*/
+
+html {
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+}
+
+body {
+    margin: unset;
+}
+
+
+a:link, a:visited {
+    color: #727272;
+    text-decoration: none;
+}
+
+a:hover, a:visited:hover {
+    text-decoration: underline;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font: inherit;
+    margin-block: unset;
+    margin-inline: unset;
+}
+
+
+input, select, textarea {
+    background-color: inherit;
+    border: unset;
+    color: inherit;
+    margin: unset;
+    outline: unset;
+    font: inherit;
+    padding: unset;
+}
+
+input[type="radio"] {
+    appearance: unset;
+}
+
+
+a, ol, ul {
+    list-style-type: none;
+    margin-block: unset;
+    margin-inline: unset;
+    padding-inline: unset;
+    padding-block: unset;
+
+}
+
+._object-button {
+    border-radius: 0.25rem;
+    background-color: #e0e0e0;
+    cursor: pointer;
+    padding: 0.6rem 0.8rem;
+    margin: 0 0.5rem;
+    font-size: 1rem;
+}
+
+._object-button:hover {
+    filter: brightness(95%);
+}
+
+._object-button:active {
+    filter: brightness(90%);
+
+}
+
+._object-button:disabled {
+    background-color: #eeeeee;
+    color: #bdbdbd;
+    cursor: default;
+    filter: none;
+}
+
+._object-button._blue {
+    background-color: #576ea0;
+}
+
+
+._object-button._color-concept {
+    background-color: #803e7e;
+}
+
+._object-button._color-concept:hover {
+    filter: brightness(95%);
+}
+
+._object-button._color-concept:active {
+    filter: brightness(90%);
+}
+
+
+/*endregion*/
+
+/*region loginForm*/
+#loginForm, #recoverForm {
+    top: 50%;
+    left: 50%;
+    width: 30rem;
+    height: auto;
+    /*max-height: calc(100vh - 2rem);*/
+    box-sizing: border-box;
+    padding: 2.5rem;
+    transform: translate(-50%, -40%);
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+    transition-property: opacity;
+
+
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+#loginForm.visible,
+#recoverForm.visible {
+    opacity: 1;
+    pointer-events: all;
+}
+
+
+#loginForm > .warning,
+#recoverForm > .field > .warning {
+    max-height: 0;
+    color: #ef5350;
+    font-size: 0.9rem;
+    margin: unset;
+    overflow: hidden;
+    padding-top: 0;
+    transition-duration: 250ms;
+    transition-property: max-height, padding-top;
+    transition-timing-function: ease;
+}
+
+#loginForm > .warning.visible,
+#recoverForm > .field > .warning.visible {
+    max-height: 3rem;
+    padding: 0.5rem 0.5rem;
+}
+
+
+#loginForm > .title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    border-bottom: 0.25rem solid #81c5c0;
+    text-align: center;
+    padding-bottom: 0.5rem;
+}
+
+#loginForm > .subtitle,
+#recoverForm > .field > .subtitle {
+    font-size: 0.8rem;
+    margin: 2rem 0 0.5rem 0;
+
+}
+
+#loginForm > .label,
+#recoverForm > .field > .label {
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+#loginForm > .label > .input,
+#recoverForm > .field > .label > .input {
+    border-bottom: 0.0125rem solid #727272;
+    padding: 0.5rem;
+    background: none;
+    color: grey;
+}
+
+
+#loginForm > .button-container {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+    background-color: #bce1ea;
+    box-sizing: border-box;
+    border-radius: 1rem;
+
+}
+
+#loginForm > .label > ._object-button,
+#recoverForm > .field > ._object-button {
+    height: 2.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 0.5rem;
+    color: white;
+}
+
+
+#loginForm > .menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    margin: 1rem 0;
+}
+
+
+#loginForm > .menu > .item + .item {
+
+    padding-left: 10px;
+    margin-left: 10px;
+    border-left: 1px solid #909090;
+}
+
+
+#loginForm > .menu > .item > .link {
+    font-size: 0.9rem;
+}
+
+#loginForm > ._object-check-wrapper {
+    margin: 1.5rem 0;
+}
+
+
+/*endregion*/
+
+/*region register*/
+#registerForm {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+    min-width: 32rem;
+}
+
+#registerForm.visible {
+    opacity: 1;
+    pointer-events: all;
+}
+
+#registerForm > .header {
+
+    align-items: stretch;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+#registerForm > .header > .text-container {
+    flex: 1;
+    margin-right: 2rem;
+
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+#registerForm > .header > .text-container > .title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    border-bottom: 0.25rem solid #81c5c0;
+    padding-bottom: 0.5rem;
+
+    text-align: center;
+}
+
+
+#registerForm > .header > .text-container > .subtitle {
+    color: #808b96;
+    display: none;
+    padding-top: 0.3rem;
+    text-align: center;
+}
+
+
+#registerForm.step-1 > .header > .text-container > .subtitle.step-1 {
+    display: block;
+}
+
+#registerForm.step-2 > .header > .text-container > .subtitle.step-2 {
+    display: block;
+}
+
+#registerForm.step-3 > .header > .text-container > .subtitle.step-3 {
+    display: block;
+}
+
+#registerForm.step-4 > .header > .text-container > .subtitle.step-4 {
+    display: block;
+}
+
+#registerForm > .header > .step-container {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+#registerForm > .header > .step-container >.number-container> .number {
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: #f8f8f8;
+    border-radius: 50%;
+    color: #abb2b9;
+    font-size: 1.125rem;
+    font-weight: 400;
+    user-select: none;
+
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    margin: 0 0.25rem;
+}
+
+#registerForm > .header > .step-container > .number-container,
+#registerForm >.header >.step-container>.stage-container{
+    display: flex;
+    flex-direction : row;
+}
+#registerForm >.header >.step-container>.stage-container>.stage{
+    visibility: hidden;
+}
+
+#registerForm.step-1 > .header > .step-container >.number-container> .number.step-1,
+#registerForm.step-2 > .header > .step-container >.number-container>  .number.step-2,
+#registerForm.step-3 > .header > .step-container >.number-container>  .number.step-3,
+#registerForm.step-4 > .header > .step-container >.number-container>  .number.step-4 {
+    color: #f76265;
+    font-weight: 600;
+}
+
+#registerForm.step-1 > .header > .step-container >.stage-container> .stage.step-1,
+#registerForm.step-2 > .header > .step-container >.stage-container> .stage.step-2,
+#registerForm.step-3 > .header > .step-container >.stage-container> .stage.step-3,
+#registerForm.step-4 > .header > .step-container >.stage-container> .stage.step-4 {
+    visibility: visible;
+    font-size: 0.8rem;
+}
+
+
+#registerForm > .section {
+    display: none;
+    padding: 1.5rem 2rem;
+    margin-bottom: 1rem;
+
+    align-items: stretch;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+#registerForm.step-1 > .section.step-1 {
+    display: flex;
+    margin-bottom: 1.5rem;
+}
+
+#registerForm.step-2 > .section.step-2 {
+    display: flex;
+}
+
+#registerForm.step-3 > .section.step-3 {
+    display: flex;
+    align-items : stretch;
+    flex-direction : column;
+    justify-content : flex-start;
+    padding: 0 3rem;
+    margin-bottom: 2.5rem;
+}
+
+#registerForm.step-4 > .section.step-4 {
+    display: flex;
+    flex-direction: column;
+}
+
+
+/*회원가입 1단계*/
+#registerForm.step-1 > .section.step-1 > .subtitle {
+    font-size: 0.8rem;
+    margin: 2rem 0 0.5rem 0;
+}
+
+#registerForm.step-1 > .section.step-1 > .button-container {
+
+    display: grid;
+    grid-template-columns: 2fr 0.4fr;
+}
+
+#registerForm.step-1 > .section.step-1 > .label>.line{
+    box-sizing: border-box;
+    width: calc(100% - 2rem);
+}
+
+
+#registerForm.step-1 > .section.step-1 > .label > .input {
+    border-bottom: 0.0125rem solid #727272;
+    padding: 0.5rem;
+    background: none;
+    color: grey;
+
+}
+
+#registerForm.step-1 > .section.step-1 > .label > ._object-button {
+    margin: 0 1rem;
+}
+
+/*회원가입 2단계*/
+
+#registerForm.step-2 > .section.step-2 > .label {
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    position: relative;
+}
+
+#registerForm.step-2 > .section.step-2 > .label > .title {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+#registerForm.step-2 > .section.step-2 > .label > .title::before {
+    top: -0.0625rem;
+    width: 0.5rem;
+    height: 0.5rem;
+    background-color: #abb2b9;
+    border-radius: 50%;
+    content: '';
+    display: inline-block;
+    margin-right: 0.5rem;
+    position: relative;
+    vertical-align: middle;
+}
+
+#registerForm.step-2 > .section.step-2  > .label > .content {
+    height: 10rem;
+    resize: none;
+    border: 0.0625rem solid #eaecee;
+    border-radius: 0.25rem;
+    padding: 0.8rem 0.8rem;
+    font-weight: 300;
+}
+
+
+#registerForm.step-2 >.section.step-2 >.check-container  {
+    margin : 0.5rem 0;
+}
+
+/*회원가입 3단계*/
+
+
+#registerForm.step-3 >.section.step-3 >.subtitle {
+    font-size : 0.8rem;
+    margin: 2rem 0 0.5rem 0;
+}
+
+
+#registerForm.step-3 >.section.step-3> .label > .input {
+    border-bottom: 0.0125rem solid #727272;
+    padding: 0.5rem;
+    background: none;
+    color: grey;
+
+    box-sizing: border-box;
+    width: 100%;
+}
+
+/*회원가입 4단계*/
+
+#registerForm.step-4 >.section.step-4 >.image{
+    max-width:32rem;
+    margin: 1rem;
+}
+
+#registerForm.step-4 >.section.step-4 >.text {
+    text-align: center;
+    font-size: 0.8rem;
+}
+#registerForm.step-4 >.section.step-4 >.text.title{
+    font-size: 1rem;
+    font-weight: 600;
+}
+#registerForm.step-4 >.section.step-4 >.title +.title{
+    margin-top: 1rem;
+}
+
+#registerForm.step-4 >.section.step-4 >.text +.text{
+    margin-bottom: 2rem;
+}
+
+
+
+/*버튼*/
+#registerForm > .button-container {
+    align-items: stretch;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+
+#registerForm > .button-container >._object-button._color-concept {
+    color: white;
+    text-align: center;
+    text-decoration: none;
+
+    width: 10rem;
+    margin: 0 0.5rem;
+    padding: 0.5rem 0.5rem;
+    box-sizing: border-box;
+}
+
+#registerForm > .button-container > ._object-button {
+    color: black;
+    text-align: center;
+    text-decoration: none;
+
+    width: 10rem;
+    margin: 0 0.5rem;
+    padding: 0.5rem 0.5rem;
+    box-sizing: border-box;
+}
+
+#registerForm > .button-container > .button.finish {
+    display: none;
+}
+
+#registerForm > .button-container > .button.main {
+    display: none;
+}
+
+#registerForm.step-4 > .button-container > .button.next {
+    display: none;
+}
+
+#registerForm.step-4 > .button-container > .button.cancel {
+    display: none;
+}
+
+
+#registerForm.step-4 > .button-container > .button.main {
+    display: inline-block;
+}
+
+#registerForm.step-4 > .button-container > .button.finish {
+    display: inline-block;
+}
+
+
+
+
+/*endregion*/
+
+/*region recoverForm*/
+#recoverForm > .option-container {
+    display: grid;
+    gap: 0.5rem;
+    grid-template-columns: 1fr 1fr;
+}
+
+#recoverForm > .option-container > .label {
+    cursor: pointer;
+    padding: 0.5rem;
+
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    font-size: 1.3rem;
+    font-weight: 600;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+#recoverForm > .option-container > .label > .title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+#recoverForm > .option-container > .label:hover {
+    border-bottom: 0.25rem solid #81c5c0;
+}
+
+
+#recoverForm > .option-container > .label:has(>.option:checked) {
+    border-bottom: 0.25rem solid #81c5c0;
+}
+
+
+#recoverForm > .email-container,
+#recoverForm > .password-container {
+    display: none;
+}
+
+#recoverForm > .option-container:has(> .label.email >.option:checked) ~ .email-container {
+    display: flex;
+}
+
+#recoverForm > .option-container:has(> .label.password >.option:checked) ~ .password-container {
+    display: flex;
+}
+
+#recoverForm > .field {
+    align-items: stretch;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+#recoverForm > .field > .text {
+    margin: 2rem 0;
+    font-size: 0.8rem;
+    color: #727272;
+}
+
+#recoverForm > .field > .button-container {
+    /*align-items : stretch;*/
+    /*display: flex;*/
+    /*flex-direction : row;*/
+    /*justify-content : space-around;*/
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 2fr 0.4fr;
+
+}
+
+#recoverForm > .find-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    height: auto;
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background-color: #f8f8f8;
+    border-radius: 0.5rem;
+}
+
+
+#recoverForm > .find-container > * {
+    margin-bottom: 0.7rem;
+}
+
+#recoverForm > .find-container > .subtitle {
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+#recoverForm > .find-container > .text {
+    font-size: 0.8rem;
+    color: #727272;
+}
+
+
+/*endregion*/
+
+

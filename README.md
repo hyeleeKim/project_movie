@@ -13,3 +13,6 @@
 - JAVA 11
 - Maven 4.0.0
 - Spring Boot 2.7.12
+- MyBatis
+- Tomcat
+- MariaDB
