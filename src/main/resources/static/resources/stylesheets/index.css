@@ -1,101 +1,6 @@
 @charset "UTF-8";
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard.css");
 
-/*region common*/
-
-html {
-    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
-}
-
-body {
-    margin: unset;
-}
-
-
-a:link, a:visited {
-    color: #727272;
-    text-decoration: none;
-}
-
-a:hover, a:visited:hover {
-    text-decoration: underline;
-}
-
-h1, h2, h3, h4, h5, h6 {
-    font: inherit;
-    margin-block: unset;
-    margin-inline: unset;
-}
-
-
-input, select, textarea {
-    background-color: inherit;
-    border: unset;
-    color: inherit;
-    margin: unset;
-    outline: unset;
-    font: inherit;
-    padding: unset;
-}
-
-input[type="radio"] {
-    appearance: unset;
-}
-
-
-a, ol, ul {
-    list-style-type: none;
-    margin-block: unset;
-    margin-inline: unset;
-    padding-inline: unset;
-    padding-block: unset;
-
-}
-
-._object-button {
-    border-radius: 0.25rem;
-    background-color: #e0e0e0;
-    cursor: pointer;
-    padding: 0.6rem 0.8rem;
-    margin: 0 0.5rem;
-    font-size: 1rem;
-}
-
-._object-button:hover {
-    filter: brightness(95%);
-}
-
-._object-button:active {
-    filter: brightness(90%);
-
-}
-
-._object-button:disabled {
-    background-color: #eeeeee;
-    color: #bdbdbd;
-    cursor: default;
-    filter: none;
-}
-
-._object-button._blue {
-    background-color: #576ea0;
-}
-
-
-._object-button._color-concept {
-    background-color: #803e7e;
-}
-
-._object-button._color-concept:hover {
-    filter: brightness(95%);
-}
-
-._object-button._color-concept:active {
-    filter: brightness(90%);
-}
-
-
-/*endregion*/
 
 /*region loginForm*/
 #loginForm, #recoverForm {
@@ -396,7 +301,6 @@ a, ol, ul {
     box-sizing: border-box;
     width: calc(100% - 2rem);
 }
-
 
 #registerForm.step-1 > .section.step-1 > .label > .input {
     border-bottom: 0.0125rem solid #727272;

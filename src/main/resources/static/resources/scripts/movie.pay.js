@@ -1,0 +1,31 @@
+const numberEl = document.querySelectorAll('.number-input');
+const number = document.querySelectorAll('.number');
+
+
+for (let i = 0; i < numberEl.length; i++) {
+    numberEl[i].oninput = () =>{
+        number[i].innerText = numberEl[i].value;
+
+        if (numberEl[i].value.length >= numberEl[i].maxLength) {
+            if (i < numberEl.length - 1) {
+                numberEl[i + 1].focus();
+            }
+        }
+    }
+}
+const expireEl = document.querySelectorAll('.expire-input');
+
+const month = document.querySelector('.month');
+const year = document.querySelector('.year');
+
+expireEl[0].oninput = () => {
+    month.innerText = expireEl[0].value;
+    if(expireEl[0].value.length >= expireEl[0].maxLength){
+        expireEl[1].focus();
+    }
+}
+
+expireEl[1].oninput = () => year.innerText = expireEl[1].value;
+
+
+

@@ -10,11 +10,12 @@
     <script defer th:src="@{/resources/scripts/index.login.js}"></script>
     <script defer th:src="@{/resources/scripts/register.js}"></script>
     <script defer th:src="@{/resources/scripts/recover.js}"></script>
+    <link rel="stylesheet" th:href="@{/resources/stylesheets/common.css}">
     <link rel="stylesheet" th:href="@{/resources/stylesheets/index.css}">
 
 </head>
 <body>
-<form id="loginForm" >
+<form id="loginForm" class="visible">
     <span class="title">회원 로그인</span>
     <span class="subtitle">아이디(이메일)</span>
     <label class="label">
@@ -114,7 +115,7 @@
         <input type="button" class="_object-button" name="contact" value="휴대폰 인증">
     </div>
 </form>
-<form id="registerForm" class="visible step-1">
+<form id="registerForm">
     <header class="header">
         <div class="text-container">
             <h2 class="title">회원가입</h2>
@@ -163,7 +164,7 @@
     </section>
     <section class="section step-2">
         <label class="label">
-            <p class="title">서비스 이용약관</p>
+            <span class="title">서비스 이용약관</span>
             <textarea readonly class="_object-input content" spellcheck="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris malesuada, velit sed efficitur gravida, felis ex auctor ipsum, eu facilisis libero ipsum vel magna. Donec metus diam, feugiat non congue in, auctor quis ex. Praesent vitae rutrum risus, at dignissim tellus. Ut ipsum libero, bibendum vitae arcu id, molestie pellentesque mi. Morbi quis quam non dui ornare sagittis. Etiam sed eros augue. Phasellus a nibh vitae dui cursus tincidunt. Etiam sed malesuada nulla. Fusce lacinia ligula nec est volutpat aliquam. Aliquam purus ex, pulvinar id tellus vel, interdum ultricies sapien. Quisque finibus pulvinar dolor ut bibendum.
 
 Proin eget orci finibus, vulputate elit ut, congue tortor. Mauris est magna, malesuada vitae dolor sed, hendrerit tincidunt massa. Curabitur massa mauris, blandit eu volutpat vitae, scelerisque at ante. Nullam suscipit ex augue, a cursus felis viverra eget. Praesent sodales elit quam, sed maximus massa sollicitudin ut. Morbi id elit id leo viverra porttitor eget sed risus. Praesent fringilla quam nec justo facilisis faucibus. Pellentesque eget orci ullamcorper, gravida nisl et, hendrerit eros. Donec varius rutrum neque ut eleifend. Cras eget massa sollicitudin massa pellentesque auctor ac et justo. Cras faucibus congue ligula, eu dapibus mi lacinia a. Maecenas accumsan, tellus ut malesuada rhoncus, quam tellus lobortis velit, sed tempus odio dolor quis arcu. Maecenas viverra sapien at imperdiet lacinia. Nam erat magna, ultrices vel mollis sed, posuere nec augue. Duis tristique vehicula leo.
@@ -179,7 +180,7 @@ Morbi rutrum neque semper, dictum ex suscipit, congue magna. Fusce tortor arcu, 
             <span class="text">서비스 이용약관 동의 <span class="color">(필수)</span></span>
         </label>
         <label class="label">
-            <p class="title">개인정보 수집 및 이용 </p>
+            <span class="title">개인정보 수집 및 이용 </span>
             <textarea readonly class="_object-input content" spellcheck="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris malesuada, velit sed efficitur gravida, felis ex auctor ipsum, eu facilisis libero ipsum vel magna. Donec metus diam, feugiat non congue in, auctor quis ex. Praesent vitae rutrum risus, at dignissim tellus. Ut ipsum libero, bibendum vitae arcu id, molestie pellentesque mi. Morbi quis quam non dui ornare sagittis. Etiam sed eros augue. Phasellus a nibh vitae dui cursus tincidunt. Etiam sed malesuada nulla. Fusce lacinia ligula nec est volutpat aliquam. Aliquam purus ex, pulvinar id tellus vel, interdum ultricies sapien. Quisque finibus pulvinar dolor ut bibendum.
 
 Proin eget orci finibus, vulputate elit ut, congue tortor. Mauris est magna, malesuada vitae dolor sed, hendrerit tincidunt massa. Curabitur massa mauris, blandit eu volutpat vitae, scelerisque at ante. Nullam suscipit ex augue, a cursus felis viverra eget. Praesent sodales elit quam, sed maximus massa sollicitudin ut. Morbi id elit id leo viverra porttitor eget sed risus. Praesent fringilla quam nec justo facilisis faucibus. Pellentesque eget orci ullamcorper, gravida nisl et, hendrerit eros. Donec varius rutrum neque ut eleifend. Cras eget massa sollicitudin massa pellentesque auctor ac et justo. Cras faucibus congue ligula, eu dapibus mi lacinia a. Maecenas accumsan, tellus ut malesuada rhoncus, quam tellus lobortis velit, sed tempus odio dolor quis arcu. Maecenas viverra sapien at imperdiet lacinia. Nam erat magna, ultrices vel mollis sed, posuere nec augue. Duis tristique vehicula leo.
@@ -233,10 +234,9 @@ Morbi rutrum neque semper, dictum ex suscipit, congue magna. Fusce tortor arcu, 
         </label>
         <span class="warning nickname" rel="nicknameWarning"></span>
         <span class="warning contact" rel="contactWarning"></span>
-        </div>
     </section>
     <section class="section step-4">
-        <img class="image" th:src="@{/resources/images/congratulation.jpg}">
+        <img class="image" th:src="@{/resources/images/congratulation.jpg}" alt="">
         <span class="title text">입력하신 이메일로 계정 인증을 위한 링크가 담긴 메일을 전송하였습니다.</span>
         <span class="title text">전송된 링크는 1시간 동안 유효함으로 유의해주시기 바랍니다.</span>
         <span class="text">* 이메일 인증을 완료한 후 로그인 및 서비스 이용이 가능합니다. *</span>

@@ -7,30 +7,29 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping(value="user")
+@RequestMapping(value = "user")
 public class UserController {
 
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
-    public ModelAndView postLogin(@RequestParam("email")String email,
-                                  @RequestParam("password")String password) {
+    public ModelAndView postLogin(@RequestParam("email") String email,
+                                  @RequestParam("password") String password) {
         ModelAndView modelAndView = new ModelAndView("home/index");
-        modelAndView.addObject("email",email);
-        modelAndView.addObject("password",password);
+        modelAndView.addObject("email", email);
+        modelAndView.addObject("password", password);
         System.out.println(email);
         System.out.println(password);
         return modelAndView;
     }
 
-    @RequestMapping(value="register", method = RequestMethod.GET)
-    public ModelAndView getRegister(){
-        return new ModelAndView("user/register");
-
+    @RequestMapping(value = "register", method = RequestMethod.GET)
+    public ModelAndView getRegister() {
+        return null;
     }
 
-    @RequestMapping(value="recover", method = RequestMethod.GET)
-    public ModelAndView getRecover(){
-        return new ModelAndView("user/recover");
+    @RequestMapping(value = "recover", method = RequestMethod.GET)
+    public ModelAndView getRecover() {
+        return null;
     }
 
 }
