@@ -129,8 +129,49 @@
     margin: 1.5rem 0;
 }
 
+#loginForm >.speed-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    height: auto;
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background-color: #f8f8f8;
+    border-radius: 0.5rem;
+
+    position: relative;
+}
+#loginForm >.speed-container >.subtitle {
+    font-size: 1.3rem;
+    text-align: center;
+    font-weight: 500;
+}
+#loginForm >.speed-container >.speedLogin {
+    display: flex;
+    flex-direction : column;
+    justify-content : center ;
+}
+#loginForm >.speed-container >.speedLogin>.logo {
+    position: relative;
+    text-decoration: none;
+    margin-top: 1rem;
+    left: 4.5rem;
+
+}
+
+#loginForm >.speed-container >.speedLogin>.logo >.image{
+    height: 3rem;
+    width: 60%;
+}
 
 /*endregion*/
+
+
+
+
+
+
 
 /*region register*/
 #registerForm {

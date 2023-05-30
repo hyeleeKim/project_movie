@@ -1,8 +1,78 @@
 @charset "UTF-8";
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard.css");
 
+/*region payForm*/
+
+body {
+
+}
+
+
+html {
+    margin-inline: unset;
+    margin-block: unset;
+    padding-inline: unset;
+    padding-block: unset;
+}
+
+
+#payForm {
+    border: 0.0125rem solid black;
+    width: 70rem;
+    min-height: 50rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 0.5rem;
+}
+
+
+#payForm > .head {
+    height: 3rem;
+    background-color: #81c5c0;
+    font-weight: 600;
+}
+
+#payForm > .head >.title {
+    font-size: 1.3rem;
+    float: left;
+}
+
+
+#payForm > .head >.right {
+    float:right;
+    font-size: 1.3rem;
+    color: black;
+
+}
+#payForm > .head >.right>* {
+
+    color: black;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*endregion*/
+
+
+/* region 결제-container*/
 #container {
     height: 100vh;
+
+    opacity: 0;
+    user-select: unset;
 
     align-items: center;
     display: flex;
@@ -11,6 +81,12 @@
     margin-top: 1rem;
 }
 
+#container.visible {
+    opacity: 1;
+    user-select: all;
+}
+
+
 #container > .card-container {
     user-select: none;
     border-radius: 0.5rem;
@@ -18,7 +94,7 @@
     height: 12rem;
     width: 22rem;
     /*margin-bottom: -10rem;*/
-    background : linear-gradient(45deg,#187ab7,white);
+    background: linear-gradient(45deg, #187ab7, white);
 }
 
 
@@ -39,8 +115,8 @@
     text-align: center;
 }
 
-#container > .card-container > .card-number-box > *+*{
-    margin-left : 0.5rem;
+#container > .card-container > .card-number-box > * + * {
+    margin-left: 0.5rem;
 }
 
 #container > .card-container > .box-container {
@@ -64,8 +140,6 @@
 #container > .card-container > .box-container > .box > .subtitle {
     text-align: center;
 }
-
-
 
 
 #container > #cardForm {
@@ -105,7 +179,7 @@
 }
 
 #container > #cardForm > .label > .pwd > .input,
-#container > #cardForm > .label > .expire > .input{
+#container > #cardForm > .label > .expire > .input {
     width: 2rem;
     text-align: center;
     letter-spacing: 0.3rem;
@@ -143,8 +217,6 @@
 }
 
 
-
-
 #container > #cardForm > .button-container {
     align-items: stretch;
     display: flex;
@@ -155,7 +227,7 @@
     margin-top: 3rem;
 }
 
-#container>#cardForm>.button-container> ._object-button._color-concept {
+#container > #cardForm > .button-container > ._object-button._color-concept {
     color: white;
     text-align: center;
     text-decoration: none;
@@ -165,7 +237,7 @@
     box-sizing: border-box;
 }
 
-#container>#cardForm>.button-container >._object-button {
+#container > #cardForm > .button-container > ._object-button {
     color: black;
     text-align: center;
     text-decoration: none;
@@ -177,4 +249,4 @@
 }
 
 
-
+/*endregion*/
