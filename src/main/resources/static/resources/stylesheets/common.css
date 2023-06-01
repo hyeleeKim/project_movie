@@ -82,6 +82,11 @@ a, ol, ul {
 }
 
 
+._object-button._pink {
+    background-color: #ef5350;
+}
+
+
 ._object-button._color-concept {
     background-color: #803e7e;
 }

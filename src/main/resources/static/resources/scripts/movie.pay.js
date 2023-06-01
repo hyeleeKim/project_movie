@@ -1,6 +1,7 @@
 const numberEl = document.querySelectorAll('.number-input');
 const number = document.querySelectorAll('.number');
-
+const payForm = document.getElementById('payForm');
+const container = document.getElementById('container');
 
 for (let i = 0; i < numberEl.length; i++) {
     numberEl[i].oninput = () =>{
@@ -28,4 +29,19 @@ expireEl[0].oninput = () => {
 expireEl[1].oninput = () => year.innerText = expireEl[1].value;
 
 
+payForm.onsubmit = e => {
+    e.preventDefault();
+    container.classList.add('visible');
+    payForm.classList.remove('visible');
+}
 
+
+
+
+container.show = () => {
+    container.classList.add('visible');
+}
+
+container.hide = () => {
+    container.classList.remove('visible');
+}

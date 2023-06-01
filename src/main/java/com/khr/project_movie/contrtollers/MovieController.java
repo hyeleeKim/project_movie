@@ -5,12 +5,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-@RequestMapping(value = "movie")
+@RequestMapping(value = "charge")
 @Controller
 public class MovieController {
-    @RequestMapping(value = "pay", method = RequestMethod.GET)
-    public ModelAndView getPay() {
+    @RequestMapping(value = "", method = RequestMethod.GET)
+    public ModelAndView getCharge() {
 
         return new ModelAndView("movie/movie.pay");
     }
+
+    @RequestMapping(value = "payment", method = RequestMethod.GET)
+    public ModelAndView getPayment() {
+
+        return new ModelAndView("movie/movie.pay");
+    }
+
+
+
 }

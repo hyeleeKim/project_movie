@@ -9,12 +9,49 @@
     <link rel="stylesheet" th:href="@{/resources/stylesheets/movie.css}">
 </head>
 <body>
-<form id="payForm">
+<form id="payForm" class="visible">
     <div class="head">
         <span class="title">영화예매</span>
-        <div class="right">
-            <a href="">예매 다시하기</a>
+        <!--        <div class="right">-->
+        <!--            <a class="link" href="#">예매 다시하기</a>-->
+        <!--        </div>-->
+    </div>
+    <div class="group reservation-container">
+        <div class="title">예매 정보</div>
+        <div class="information">
+            <img class="image" src="/resources/images/movie-poster.jpg" alt="">
+            <div class="text movieTitle">
+                <div class="image fifteen"></div>
+                <b>영화제목</b>
+            </div>
+            <span class="text">극장</span>
+            <span class="text">날짜</span>
         </div>
+        <div class="seat-container">
+            <span class="text">상영관</span>
+            <span class="text">시간</span>
+            <span class="text">인원</span>
+            <span class="text seat">좌석</span>
+        </div>
+    </div>
+    <div class="group payWay-container">
+        <div class="title">결제수단 선택</div>
+        <div class="button-container">
+            <a class="link _object-button" th:href="@{/charge/payment}">예매 다시하기</a>
+        </div>
+    </div>
+    <div class="group price-container">
+        <div class="title">결제금액</div>
+        <div class="information">
+            <span class="text">티켓금액</span>
+            <span class="text">성인</span>
+            <span class="text">청소년</span>
+            <span class="text">어린이</span>
+        </div>
+        <div class="totalPrice">
+            <span class="title">총 결제 금액</span>
+        </div>
+        <input class="_object-button _pink" type="submit" value="결제하기">
     </div>
 </form>
 <div id="container">

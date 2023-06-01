@@ -7,8 +7,7 @@ body {
 
 }
 
-
-html {
+* {
     margin-inline: unset;
     margin-block: unset;
     padding-inline: unset;
@@ -17,51 +16,209 @@ html {
 
 
 #payForm {
-    border: 0.0125rem solid black;
-    width: 70rem;
-    min-height: 50rem;
+    /*border: 0.0125rem solid black;*/
+    min-width: 70rem;
+    height: 40rem;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border-radius: 0.5rem;
+    opacity: 0;
+    pointer-events: none;
+
+}
+
+#payForm.visible{
+    opacity: 1;
+    pointer-events: all;
 }
 
 
 #payForm > .head {
-    height: 3rem;
+    height: 1.5rem;
     background-color: #81c5c0;
     font-weight: 600;
+    padding: 0.7rem 2rem;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+
 }
 
-#payForm > .head >.title {
+#payForm > .head > .title {
     font-size: 1.3rem;
     float: left;
 }
 
 
-#payForm > .head >.right {
-    float:right;
+#payForm > .head > .right {
+    float: right;
     font-size: 1.3rem;
     color: black;
 
 }
-#payForm > .head >.right>* {
+
+#payForm > .head > .right > * {
 
     color: black;
 
 }
 
+#payForm > .group {
+    background-color: #f8f8f8;
+    box-sizing: border-box;
+}
 
 
+#payForm > .group + .group {
+    border-left: 0.0125rem solid #abb2b9;
+}
+
+#payForm > .group > .title {
+    box-sizing: border-box;
+    font-size: 1.3rem;
+    font-weight: 500;
+    padding: 0.7rem;
+    background-color: #462d82;
+    color: white;
+    text-align: center;
+}
+
+#payForm > .reservation-container {
+    float: left;
+    width: 40%;
+    height: 40rem;
+    border-bottom-left-radius: 0.5rem;
+}
 
 
+#payForm > .reservation-container > .information,
+#payForm > .reservation-container > .seat-container,
+#payForm > .price-container > .information {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem 0;
+}
+
+#payForm > .reservation-container > .seat-container {
+    border-top: 0.0125rem solid #abb2b9;
+    margin: 0.5rem 0;
+    padding: 1rem 0;
+}
+
+#payForm > .reservation-container > .information > .image {
+    align-self: center;
+    width: 40%;
+
+    margin-bottom: 1rem;
+}
 
 
+#payForm > .reservation-container > .information > .movieTitle {
+    display: flex;
+    flex-direction: row;
+}
+
+#payForm > .reservation-container > .information > .movieTitle > .image {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-right: 0.5rem;
+}
+
+#payForm > .reservation-container > .information > .movieTitle > .image.all {
+    background: url("../images/all-grade.png");
+    background-size: cover;
+}
+
+#payForm > .reservation-container > .information > .movieTitle > .image.child {
+    background: url("../images/12-grade.png");
+    background-size: cover;
+}
+
+#payForm > .reservation-container > .information > .movieTitle > .image.fifteen {
+    background: url("../images/15-grade.png");
+    background-size: cover;
+}
+
+#payForm > .reservation-container > .information > .movieTitle > .image.adult {
+    background: url("../images/18-grade.png");
+    background-size: cover;
+}
+
+#payForm > .reservation-container > .information > .text,
+#payForm > .reservation-container > .seat-container > .text {
+    align-self: flex-start;
+    margin: 0.5rem 3rem;
+    font-size: 1rem;
+    font-weight: 500;
+
+}
+
+#payForm > .payWay-container {
+    float: left;
+    height: 40rem;
+    width: 30%;
+
+    position: relative;
+}
+
+#payForm > .payWay-container > .button-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    align-self: stretch;
+
+    position: absolute;
+    bottom: 0;
+}
+
+#payForm > .payWay-container > .button-container > ._object-button {
+    margin: unset;
+    font-size: 1.2rem;
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
+    text-align: center;
+}
 
 
+#payForm > .price-container {
+    float: left;
+    height: 40rem;
+    width: 30%;
+    border-bottom-right-radius: 0.5rem;
+
+    position: relative;
+}
+
+#payForm > .price-container > .information {
+    padding: 2rem 3rem;
+    font-size: 1rem;
+    border-bottom: 0.0125rem solid #abb2b9;
+    box-sizing: border-box;
+}
 
 
+#payForm > .price-container > ._object-button {
+    width: 100%;
+    margin: unset;
+    color: white;
+    font-size: 1.2rem;
+
+    position: absolute;
+    bottom: 0;
+
+}
+
+
+#payForm > .price-container >.totalPrice {
+
+}
+
+#payForm > .price-container >.totalPrice>.title {
+    font-size: 1.3rem;
+    margin-left: 1rem;
+}
 
 
 /*endregion*/
@@ -70,7 +227,7 @@ html {
 /* region 결제-container*/
 #container {
     height: 100vh;
-
+    pointer-events: none;
     opacity: 0;
     user-select: unset;
 
@@ -79,9 +236,12 @@ html {
     flex-direction: column;
     justify-content: flex-start;
     margin-top: 1rem;
+    transition-property: opacity;
 }
 
+
 #container.visible {
+
     opacity: 1;
     user-select: all;
 }
