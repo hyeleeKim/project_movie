@@ -83,6 +83,10 @@ body {
     text-align: center;
 }
 
+#payForm >.group >.subGroup >.box{
+    margin: 0.5rem;
+}
+
 #payForm > .reservation-container {
     float: left;
     width: 40%;
@@ -92,14 +96,14 @@ body {
 
 
 #payForm > .reservation-container > .information,
-#payForm > .reservation-container > .seat-container,
+#payForm > .reservation-container > .detail-information,
 #payForm > .price-container > .information {
     display: flex;
     flex-direction: column;
     margin: 1rem 0;
 }
 
-#payForm > .reservation-container > .seat-container {
+#payForm > .reservation-container > .detail-information {
     border-top: 0.0125rem solid #abb2b9;
     margin: 0.5rem 0;
     padding: 1rem 0;
@@ -116,6 +120,13 @@ body {
 #payForm > .reservation-container > .information > .movieTitle {
     display: flex;
     flex-direction: row;
+    justify-content: center;
+
+    margin-bottom: 1rem;
+}
+
+#payForm > .reservation-container > .information > .movieTitle >.movieName{
+    font-size: 1.4rem;
 }
 
 #payForm > .reservation-container > .information > .movieTitle > .image {
@@ -144,13 +155,16 @@ body {
     background-size: cover;
 }
 
-#payForm > .reservation-container > .information > .text,
-#payForm > .reservation-container > .seat-container > .text {
-    align-self: flex-start;
-    margin: 0.5rem 3rem;
-    font-size: 1rem;
+#payForm > .reservation-container > .information > .box>.subtitle,
+#payForm > .reservation-container > .detail-information > .box >.subtitle {
+    margin: 0.5rem 4rem 0.5rem 3rem;
+    font-size: 1.1rem;
     font-weight: 500;
 
+}
+
+#payForm >.reservation-container>.detail-information >.theater>.text{
+    margin-left : -0.8rem;
 }
 
 #payForm > .payWay-container {
@@ -161,7 +175,8 @@ body {
     position: relative;
 }
 
-#payForm > .payWay-container > .button-container {
+#payForm > .payWay-container > .button-container,
+#payForm > .price-container >.button-container{
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -172,7 +187,7 @@ body {
     bottom: 0;
 }
 
-#payForm > .payWay-container > .button-container > ._object-button {
+#payForm > .payWay-container > .button-container > ._object-button{
     margin: unset;
     font-size: 1.2rem;
     text-decoration: none;
@@ -192,12 +207,33 @@ body {
 }
 
 #payForm > .price-container > .information {
-    padding: 2rem 3rem;
     font-size: 1rem;
     border-bottom: 0.0125rem solid #abb2b9;
     box-sizing: border-box;
 }
 
+#payForm > .price-container >.information >.subtitle {
+    font-size: 1.3rem;
+    margin: 1rem;
+}
+
+
+#payForm > .price-container >.information >.box{
+    margin: 1rem 0 1rem 2rem;
+
+}
+
+#payForm > .price-container >.information >.box > .subtitle{
+    font-size : 1.1rem;
+}
+
+#payForm > .price-container >.information >.box >.adult+.text{
+    margin-left: 1rem;
+}
+
+#payForm > .price-container >.information >.box> .text{
+    padding: 3rem;
+}
 
 #payForm > .price-container > ._object-button {
     width: 100%;
@@ -207,25 +243,35 @@ body {
 
     position: absolute;
     bottom: 0;
+}
 
+#payForm > .price-container > .button-container > ._object-button{
+    margin: unset;
+    font-size: 1.2rem;
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+    text-align: center;
 }
 
 
 #payForm > .price-container >.totalPrice {
-
+    padding: 1rem 0;
 }
 
-#payForm > .price-container >.totalPrice>.title {
+#payForm > .price-container >.totalPrice>.subtitle {
     font-size: 1.3rem;
     margin-left: 1rem;
 }
+
+
 
 
 /*endregion*/
 
 
 /* region 결제-container*/
-#container {
+#cardForm {
     height: 100vh;
     pointer-events: none;
     opacity: 0;
@@ -240,14 +286,14 @@ body {
 }
 
 
-#container.visible {
+#cardForm.visible {
 
     opacity: 1;
     user-select: all;
 }
 
 
-#container > .card-container {
+#cardForm > .card-container {
     user-select: none;
     border-radius: 0.5rem;
     position: relative;
@@ -258,28 +304,28 @@ body {
 }
 
 
-#container > .card-container > .imageBox {
+#cardForm > .card-container > .imageBox {
     align-items: center;
     display: flex;
     justify-content: space-between;
     padding: 0.65rem 1rem;
 }
 
-#container > .card-container > .imageBox > .image {
+#cardForm > .card-container > .imageBox > .image {
     height: 3rem;
 }
 
-#container > .card-container > .card-number-box {
+#cardForm > .card-container > .card-number-box {
     padding: 2.5rem 2rem;
     font-size: 1.5rem;
     text-align: center;
 }
 
-#container > .card-container > .card-number-box > * + * {
+#cardForm > .card-container > .card-number-box > * + * {
     margin-left: 0.5rem;
 }
 
-#container > .card-container > .box-container {
+#cardForm > .card-container > .box-container {
     margin-top: -2rem;
     display: flex;
     flex-direction: column;
@@ -287,22 +333,22 @@ body {
     margin-bottom: 1rem;
 }
 
-#container > .card-container > .box-container > .box {
+#cardForm > .card-container > .box-container > .box {
     align-self: flex-end;
     padding-right: 1rem;
     font-size: 1rem;
 }
 
-#container > .card-container > .box-container > .box > .title {
+#cardForm > .card-container > .box-container > .box > .title {
     font-size: 0.7rem;
 }
 
-#container > .card-container > .box-container > .box > .subtitle {
+#cardForm > .card-container > .box-container > .box > .subtitle {
     text-align: center;
 }
 
 
-#container > #cardForm {
+#cardForm > #card-information {
     margin: 2rem 2rem;
     width: 30rem;
 
@@ -312,7 +358,7 @@ body {
     justify-content: center;
 }
 
-#container > #cardForm > .title {
+#cardForm > #card-information > .title {
     font-size: 1.3rem;
     padding-bottom: 0.5rem;
     border-bottom: 0.25rem solid #81c5c0;
@@ -320,7 +366,7 @@ body {
     font-weight: 600;
 }
 
-#container > #cardForm > .label {
+#cardForm > #card-information > .label {
     align-items: stretch;
     display: flex;
     flex-direction: column;
@@ -329,35 +375,35 @@ body {
     padding: 0 2rem;
 }
 
-#container > #cardForm > .label > .input,
-#container > #cardForm > .label > .pwd > .input,
-#container > #cardForm > .label > .expire > .input {
+#cardForm > #card-information > .label > .input,
+#cardForm > #card-information > .label > .pwd > .input,
+#cardForm > #card-information > .label > .expire > .input {
     border-bottom: 0.0125rem solid #727272;
     padding: 0.5rem;
     background: none;
     color: grey;
 }
 
-#container > #cardForm > .label > .pwd > .input,
-#container > #cardForm > .label > .expire > .input {
+#cardForm > #card-information > .label > .pwd > .input,
+#cardForm > #card-information > .label > .expire > .input {
     width: 2rem;
     text-align: center;
     letter-spacing: 0.3rem;
 }
 
-#container > #cardForm > .label > .birth-input {
+#cardForm > #card-information > .label > .birth-input {
     width: 8rem;
     letter-spacing: 0.3rem;
 }
 
-#container > #cardForm > .label > .number {
+#cardForm > #card-information > .label > .number {
     width: 100%;
     display: flex;
     flex-direction: row;
     box-sizing: border-box;
 }
 
-#container > #cardForm > .label > .number > .input {
+#cardForm > #card-information > .label > .number > .input {
     width: calc((100% / 4) - 3.5rem);
     border-bottom: 0.0125rem solid #727272;
     padding: 0.5rem 0.5rem;
@@ -367,17 +413,17 @@ body {
     letter-spacing: 0.1rem;
 }
 
-#container > #cardForm > .label > .number > .input + .input {
+#cardForm > #card-information > .label > .number > .input + .input {
     margin-left: 0.5rem;
 }
 
-#container > #cardForm > .label > .subtitle {
+#cardForm > #card-information > .label > .subtitle {
     font-size: 0.8rem;
     margin-top: 2rem;
 }
 
 
-#container > #cardForm > .button-container {
+#cardForm > #card-information > .button-container {
     align-items: stretch;
     display: flex;
     flex-direction: row;
@@ -387,7 +433,8 @@ body {
     margin-top: 3rem;
 }
 
-#container > #cardForm > .button-container > ._object-button._color-concept {
+
+#cardForm > #card-information > .button-container > ._object-button._color-concept {
     color: white;
     text-align: center;
     text-decoration: none;
@@ -397,7 +444,7 @@ body {
     box-sizing: border-box;
 }
 
-#container > #cardForm > .button-container > ._object-button {
+#cardForm > #card-information > .button-container > ._object-button {
     color: black;
     text-align: center;
     text-decoration: none;

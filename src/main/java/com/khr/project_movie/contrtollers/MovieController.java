@@ -8,16 +8,16 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping(value = "charge")
 @Controller
 public class MovieController {
-    @RequestMapping(value = "", method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView getCharge() {
 
-        return new ModelAndView("movie/movie.pay");
+        return new ModelAndView("charge/charge");
     }
 
     @RequestMapping(value = "payment", method = RequestMethod.GET)
     public ModelAndView getPayment() {
 
-        return new ModelAndView("movie/movie.pay");
+        return new ModelAndView("charge/payment");
     }
 
 

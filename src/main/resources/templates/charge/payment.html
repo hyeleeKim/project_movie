@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>FilmSQ</title>
+  <script defer th:src="@{/resources/scripts/common.js}"></script>
+  <script defer th:src="@{/resources/scripts/movie.pay.js}"></script>
+  <link rel="stylesheet" th:href="@{/resources/stylesheets/common.css}">
+  <link rel="stylesheet" th:href="@{/resources/stylesheets/movie.css}">
+</head>
+<body>
+<form id="cardForm" action="/charge/payment" class="visible" >
+  <div class="card-container">
+    <div class="imageBox">
+      <img class="image" src="/resources/images/chip.png" alt="">
+      <img class="image" src="/resources/images/logo.png" alt="">
+    </div>
+
+    <div class="card-number-box">
+      <span class="number">####</span><span class="number">####</span><span
+            class="number">####</span><span class="number">####</span>
+    </div>
+    <div class="box-container">
+      <div class="box">
+        <span class="title">MONTH/YEAR</span>
+        <div class="subtitle">
+          <span class="month">MM</span>
+          <span>/</span>
+          <span class="year">YY</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="card-information">
+    <span class="title">신용카드 번호입력</span>
+    <label class="label">
+      <span class="subtitle">카드번호</span>
+      <span class="number">
+                <input autofocus placeholder="0000" type="text" maxlength="4" class="number-input input"
+                       name="cNumber-1">
+                <input autofocus placeholder="0000" type="text" maxlength="4" class="number-input input"
+                       name="cNumber-2">
+                <input autofocus placeholder="0000" type="text" maxlength="4" class="number-input input"
+                       name="cNumber-3">
+                <input autofocus placeholder="0000" type="text" maxlength="4" class="number-input input"
+                       name="cNumber-4">
+            </span>
+    </label>
+    <label class="label">
+      <span class="subtitle">비밀번호</span>
+      <span class="pwd">
+                <input autofocus placeholder="00" type="text" class="pwd-input input" name="cPassword" maxlength="2">
+                <span>**</span>
+            </span>
+    </label>
+    <label class="label">
+      <span class="subtitle">유효기간</span>
+      <span class="expire">
+                <input placeholder="MM" maxlength="2" type="text" class="expire-input input" name="cMonth">
+                <span>/</span>
+                <input placeholder="YY" maxlength="2" type="text" class="expire-input input" name="cYear">
+            </span>
+    </label>
+    <label class="label">
+      <span class="subtitle">생년월일</span>
+      <input maxlength="8" placeholder="20000101" type="text" class="birth-input input" name="cBirth">
+    </label>
+    <div class="button-container">
+      <a class="_object-button button cancel" href="#">취소</a>
+      <input class="_object-button _color-concept button next" type="submit" value="확인">
+    </div>
+  </div>
+</form>
+</body>
+</html>

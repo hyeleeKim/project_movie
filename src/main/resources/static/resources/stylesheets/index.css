@@ -32,7 +32,8 @@
 
 
 #loginForm > .warning,
-#recoverForm > .field > .warning {
+#recoverForm > .field > .warning,
+#registerForm >.section >.warning {
     max-height: 0;
     color: #ef5350;
     font-size: 0.9rem;
@@ -45,7 +46,8 @@
 }
 
 #loginForm > .warning.visible,
-#recoverForm > .field > .warning.visible {
+#recoverForm > .field > .warning.visible ,
+#registerForm >.section >.warning.visible {
     max-height: 3rem;
     padding: 0.5rem 0.5rem;
 }

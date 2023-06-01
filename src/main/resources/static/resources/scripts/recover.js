@@ -6,7 +6,8 @@ recoverForm.show = () => {
 }
 
 
-recoverForm.nameWarning = recoverForm.querySelector('[rel="nameWarning"]');
+// 아이디 찾기 경고
+recoverForm.nameWarning = recoverForm.querySelector('[rel="eNameWarning"]');
 recoverForm.nameWarning.show = (text) => {
     recoverForm.nameWarning.innerText = text;
     recoverForm.nameWarning.classList.add('visible');
@@ -14,7 +15,7 @@ recoverForm.nameWarning.show = (text) => {
 recoverForm.nameWarning.hide = () =>
     recoverForm.nameWarning.classList.remove('visible');
 
-recoverForm.birthWarning = recoverForm.querySelector('[rel="birthWarning"]');
+recoverForm.birthWarning = recoverForm.querySelector('[rel="eBirthWarning"]');
 recoverForm.birthWarning.show = (text) => {
     recoverForm.birthWarning.innerText = text;
     recoverForm.birthWarning.classList.add('visible');
@@ -23,22 +24,23 @@ recoverForm.birthWarning.hide = () => {
     recoverForm.birthWarning.classList.remove('visible')
 }
 
-
-recoverForm.contactWarning = recoverForm.querySelector('[rel="contactWarning"]');
+recoverForm.contactWarning = recoverForm.querySelector('[rel="eContactWarning"]');
 recoverForm.contactWarning.show = (text) => {
     recoverForm.contactWarning.innerText = text;
     recoverForm.contactWarning.classList.add('visible');
 }
 recoverForm.contactWarning.hide = () => recoverForm.contactWarning.classList.remove('visible');
 
-recoverForm.contactCodeWarning = recoverForm.querySelector('[rel="contactCodeWarning"]');
+recoverForm.contactCodeWarning = recoverForm.querySelector('[rel="eContactCodeWarning"]');
 recoverForm.contactCodeWarning.show = (text) => {
     recoverForm.contactCodeWarning.innerText = text;
     recoverForm.contactCodeWarning.classList.add('visible');
 }
 recoverForm.contactCodeWarning.classList.remove('visible');
 
-recoverForm.emailWarning = recoverForm.querySelector('[rel="emailWarning"]');
+
+//비밀번호 재설정
+recoverForm.emailWarning = recoverForm.querySelector('[rel="pMailWarning"]');
 recoverForm.emailWarning.show = (text) => {
     recoverForm.emailWarning.innerText = text;
     recoverForm.emailWarning.classList.add('visible');

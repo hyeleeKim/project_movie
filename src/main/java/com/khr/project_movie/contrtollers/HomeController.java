@@ -14,7 +14,7 @@ public class HomeController {
             method = RequestMethod.GET,
             produces = MediaType.TEXT_HTML_VALUE)
     public ModelAndView getLogin() {
-        return new ModelAndView("home/index");
+        return new ModelAndView("home/login");
     }
 
 

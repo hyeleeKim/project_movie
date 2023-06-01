@@ -12,49 +12,75 @@
 <form id="payForm" class="visible">
     <div class="head">
         <span class="title">영화예매</span>
-        <!--        <div class="right">-->
-        <!--            <a class="link" href="#">예매 다시하기</a>-->
-        <!--        </div>-->
     </div>
     <div class="group reservation-container">
         <div class="title">예매 정보</div>
-        <div class="information">
+        <div class="subGroup information">
             <img class="image" src="/resources/images/movie-poster.jpg" alt="">
             <div class="text movieTitle">
                 <div class="image fifteen"></div>
-                <b>영화제목</b>
+                <b class="movieName">범죄도시3</b>
             </div>
-            <span class="text">극장</span>
-            <span class="text">날짜</span>
+            <div class="box">
+                <span class="subtitle">극장</span>
+                <span class="text">대구 상인점</span>
+            </div>
+            <div class="box">
+                <span class="subtitle">날짜</span>
+                <span class="text">2023-06-01</span>
+            </div>
         </div>
-        <div class="seat-container">
-            <span class="text">상영관</span>
-            <span class="text">시간</span>
-            <span class="text">인원</span>
-            <span class="text seat">좌석</span>
+        <div class="subGroup detail-information">
+            <div class="box theater">
+                <span class="subtitle">상영관</span>
+                <span class="text">1관</span>
+            </div>
+            <div class="box">
+                <span class="subtitle">시간</span>
+                <span class="text">10:00</span>
+            </div>
+            <div class="box">
+                <span class="subtitle">인원</span>
+                <span class="text">2명</span>
+            </div>
+            <div class="box">
+                <span class="subtitle">좌석</span>
+                <span class="text seat">A1,A2</span>
+            </div>
         </div>
     </div>
     <div class="group payWay-container">
         <div class="title">결제수단 선택</div>
         <div class="button-container">
-            <a class="link _object-button" th:href="@{/charge/payment}">예매 다시하기</a>
+            <a class="link _object-button" href="#">예매 다시하기</a>
         </div>
     </div>
     <div class="group price-container">
         <div class="title">결제금액</div>
         <div class="information">
-            <span class="text">티켓금액</span>
-            <span class="text">성인</span>
-            <span class="text">청소년</span>
-            <span class="text">어린이</span>
+            <span class="subtitle">티켓금액</span>
+            <div class="box">
+                <span class="adult subtitle">성인</span>
+                <span class="text">가격 * 명</span>
+            </div>
+            <div class="box">
+                <span class="fifteen subtitle">청소년</span>
+                <span class="text">가격 * 명</span>
+            </div>
+            <div class="box">
+                <span class="child subtitle">어린이</span>
+                <span class="text">가격 * 명</span>
+            </div>
         </div>
         <div class="totalPrice">
-            <span class="title">총 결제 금액</span>
+            <span class="subtitle">총 결제 금액</span>
         </div>
-        <input class="_object-button _pink" type="submit" value="결제하기">
+        <div class="button-container">
+            <a class="_object-button _pink" href="/charge/payment">결제하기</a>
+        </div>
     </div>
 </form>
-<div id="container">
+<form id="cardForm" action="/charge/payment" >
     <div class="card-container">
         <div class="imageBox">
             <img class="image" src="/resources/images/chip.png" alt="">
@@ -76,7 +102,7 @@
             </div>
         </div>
     </div>
-    <form id="cardForm">
+    <div id="card-information">
         <span class="title">신용카드 번호입력</span>
         <label class="label">
             <span class="subtitle">카드번호</span>
@@ -114,7 +140,7 @@
             <a class="_object-button button cancel" href="#">취소</a>
             <input class="_object-button _color-concept button next" type="submit" value="확인">
         </div>
-    </form>
-</div>
+    </div>
+</form>
 </body>
 </html>

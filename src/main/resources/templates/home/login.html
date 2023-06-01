@@ -15,18 +15,16 @@
 
 </head>
 <body>
-<form id="loginForm" class="visible">
+<form id="loginForm" >
     <span class="title">회원 로그인</span>
     <span class="subtitle">아이디(이메일)</span>
     <label class="label">
         <input type="email" class="_object-input input" maxlength="50" name="email" placeholder="이메일 주소">
     </label>
-    <span class="warning email" rel="emailWarning"></span>
     <span class="subtitle">비밀번호</span>
     <label class="label">
         <input type="password" class="_object-input input" maxlength="50" name="password" placeholder="비밀번호">
     </label>
-    <span class="warning password" rel="passwordWarning"></span>
     <span class="warning login" rel="loginWarning"></span>
     <label class="_object-check-wrapper">
         <input class="_check_input" type="checkbox" name="rememberEmail">
@@ -73,20 +71,20 @@
             <input autofocus type="text" class="_object-input input" maxlength="10" name="eName"
                    placeholder="이름">
         </label>
-        <span class="warning email" rel="nameWarning"></span>
+        <span class="warning email" rel="eNameWarning"></span>
         <span class="subtitle">생년월일</span>
         <label class="label">
             <input autofocus type="date" class="_object-input input" maxlength="10" name="eBirth"
                    placeholder="생년월일">
         </label>
-        <span class="warning birth" rel="birthWarning"></span>
+        <span class="warning birth" rel="eBirthWarning"></span>
         <span class="subtitle">연락처</span>
         <label class="label button-container">
             <input autofocus type="text" class="_object-input input" maxlength="12" name="eContact"
                    placeholder="연락처('_' 없이 입력)">
             <input type="button" class="_object-button" name="eContactSend" value="인증번호 전송">
         </label>
-        <span class="warning contact" rel="contactWarning"></span>
+        <span class="warning contact" rel="eContactWarning"></span>
         <span class="subtitle">인증번호 확인</span>
         <label class="label button-container">
             <input type="text" class="_object-input input"
@@ -104,7 +102,7 @@
             <input autofocus type="email" class="_object-input input" maxlength="50" name="pMail"
                    placeholder="이메일 주소">
         </label>
-        <span class="warning" rel="emailWarning"></span>
+        <span class="warning" rel="pMailWarning"></span>
         <span class="subtitle">이름</span>
         <label class="label">
             <input autofocus type="text" class="_object-input input" maxlength="10" name="pName"
@@ -127,7 +125,7 @@
         <input type="button" class="_object-button" name="contact" value="휴대폰 인증">
     </div>
 </form>
-<form id="registerForm">
+<form id="registerForm" class="visible step-3 " >
     <header class="header">
         <div class="text-container">
             <h2 class="title">회원가입</h2>
@@ -155,24 +153,25 @@
     <section class="section step-1">
         <span class="subtitle">이름</span>
         <label class="label">
-            <input autofocus type="text" class="_object-input input line" maxlength="12" name="name"
+            <input autofocus type="text" class="_object-input input line" maxlength="12" name="cName"
                    placeholder="이름">
         </label>
+        <span class="warning name" rel="cNameWarning"></span>
         <span class="subtitle">연락처</span>
         <label class="label button-container">
-            <input autofocus type="text" class="_object-input input" maxlength="12" name="contact"
+            <input autofocus type="text" class="_object-input input" maxlength="12" name="cContact"
                    placeholder="연락처('_' 없이 입력)">
-            <input type="button" class="_object-button" name="eContactSend" value="인증번호 전송">
+            <input type="button" class="_object-button" name="cContactSend" value="인증번호 전송">
         </label>
-        <span class="warning contact" rel="contactWarning"></span>
+        <span class="warning contact" rel="cContactWarning"></span>
         <span class="subtitle">인증번호 확인</span>
         <label class="label button-container">
-            <input disabled type="text" class="_object-input input"
-                   name="eContactCode" maxlength="6" placeholder="인증번호(6자리)">
-            <input disabled class="_object-button" name="eContactVerify" type="button" value="인증번호 확인">
+            <input type="text" class="_object-input input"
+                   name="cContactCode" maxlength="6" placeholder="인증번호(6자리)">
+            <input class="_object-button" name="cContactVerify" type="button" value="인증번호 확인">
         </label>
+        <span class="warning contactCode" rel="cContactCodeWarning"></span>
         <input hidden name="contactSalt" type="hidden">
-        <span class="warning contactCode" rel="contactCodeWarning"></span>
     </section>
     <section class="section step-2">
         <label class="label">
@@ -217,13 +216,13 @@ Morbi rutrum neque semper, dictum ex suscipit, congue magna. Fusce tortor arcu, 
         <span class="warning name" rel="nameWarning"></span>
         <span class="subtitle">생년월일</span>
         <label class="label">
-            <input autofocus type="date" class="_object-input input" maxlength="10" name="eBirth"
+            <input autofocus type="date" class="_object-input input" maxlength="10" name="birth"
                    placeholder="생년월일">
         </label>
         <span class="warning birth" rel="birthWarning"></span>
-        <span class="subtitle">아이디</span>
+        <span class="subtitle">아이디(이메일)</span>
         <label class="label">
-            <input autofocus type="email" class="_object-input input" maxlength="50" name="pMail"
+            <input autofocus type="email" class="_object-input input" maxlength="50" name="mail"
                    placeholder="이메일 주소">
         </label>
         <span class="warning" rel="emailWarning"></span>
@@ -245,7 +244,6 @@ Morbi rutrum neque semper, dictum ex suscipit, congue magna. Fusce tortor arcu, 
                    placeholder="별명 (2자 이상 10자 이하 완성 한글)" type="text">
         </label>
         <span class="warning nickname" rel="nicknameWarning"></span>
-        <span class="warning contact" rel="contactWarning"></span>
     </section>
     <section class="section step-4">
         <img class="image" th:src="@{/resources/images/congratulation.jpg}" alt="">

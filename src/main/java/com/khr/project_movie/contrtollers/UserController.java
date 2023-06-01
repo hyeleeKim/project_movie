@@ -11,10 +11,11 @@ import org.springframework.web.servlet.ModelAndView;
 public class UserController {
 
 
+
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public ModelAndView postLogin(@RequestParam("email") String email,
                                   @RequestParam("password") String password) {
-        ModelAndView modelAndView = new ModelAndView("home/index");
+        ModelAndView modelAndView = new ModelAndView("login");
         modelAndView.addObject("email", email);
         modelAndView.addObject("password", password);
         System.out.println(email);
