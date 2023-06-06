@@ -143,21 +143,22 @@
 
 #loginForm > .speed-container > .speedLogin {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    gap: 1rem;
     justify-content: center;
 }
 
 #loginForm > .speed-container > .speedLogin > .logo {
-    position: relative;
+    /*position: relative;*/
     text-decoration: none;
     margin-top: 1rem;
     left: 4.5rem;
-
+    flex:1;
 }
 
 #loginForm > .speed-container > .speedLogin > .logo > .image {
     height: 3rem;
-    width: 60%;
+    width: 100%;
 }
 
 /*endregion*/
