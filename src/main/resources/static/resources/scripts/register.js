@@ -9,7 +9,7 @@ registerForm.show = () => {
 
 // 경고 보이게 하기
 function showWarning(element, text) {
-    element.innerText = text;
+    element.innerHTML = text;
     element.classList.add('visible');
 }
 
@@ -18,10 +18,6 @@ function hideWarning(element) {
 }
 
 // 1단계 경고 (연락처 인증)
-registerForm.cNameWarning = document.querySelector('[rel="cNameWarning"]');
-registerForm.cNameWarning.show = (text) => showWarning(registerForm.cNameWarning, text);
-registerForm.cNameWarning.hide = () => hideWarning(registerForm.cNameWarning);
-
 registerForm.cContactWarning = document.querySelector('[rel ="cContactWarning"]');
 registerForm.cContactWarning.show = (text) => showWarning(registerForm.cContactWarning, text);
 registerForm.cContactWarning.hide = () => hideWarning(registerForm.cContactWarning);
@@ -68,19 +64,55 @@ registerForm.nicknameWarning.hide = () => hideWarning(registerForm.nicknameWarni
 
 // 회원가입 휴대폰 인증
 registerForm['cContactSend'].onclick = () => {
+    registerForm.cContactWarning.hide();
+
+
     if (registerForm['cContact'].value === '') {
-        registerForm.contactWarning.show("전화번호를 입력해주세요.");
+        registerForm.cContactWarning.show('휴대전화 번호를 입력해주세요.');
+        registerForm['cContact'].focus();
         return;
     }
-    if(!RegExp(/^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/).test(registerForm['cContact'].value)){
-        registerForm.contactWarning.show('올바른 전화번호를 입력해주세요.');
+    if(!RegExp(/^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/).test(registerForm['cContact'].value)) {
+        registerForm.cContactWarning.show('올바른 전화번호를 입력해주세요.');
+        registerForm['cContact'].focus();
+        registerForm['cContact'].select();
         return;
     }
 
-    registerForm['cContact'].setAttribute('disabled','disabled');
-    registerForm['cContactSend'].setAttribute('disabled','disabled');
-    registerForm['cContactCode'].removeAttribute('disabled');
-    registerForm['cContactVerify'].removeAttribute('disabled');
+    const xhr = new XMLHttpRequest();
+    const formData = new FormData();
+    formData.append("contact",registerForm['cContact'].value);
+    xhr.open('POST','/sendContactCode');
+    xhr.onreadystatechange = () =>{
+        if(xhr.readyState === XMLHttpRequest.DONE){
+            if(xhr.status >= 200 && xhr.status < 400){
+                const responseObject = JSON.parse(xhr.responseText);
+                switch(responseObject['result']){
+                    case 'success' :
+                        registerForm['cContact'].setAttribute('disabled','disabled');
+                        registerForm['cContactSend'].setAttribute('disabled','disabled');
+                        registerForm['cContactCode'].removeAttribute('disabled');
+                        registerForm['cContactVerify'].removeAttribute('disabled');
+                        registerForm['cContactCode'].focus();
+                        registerForm.cContactWarning.show('입력하신 번호로 인증번호롤 전송했습니다. <br> 아래 확인란에 5분 이내로 입력해 주세요.');
+                        break;
+                    case 'failure_duplicate':
+                        registerForm.cContactWarning.show('이미 회원가입된 번호입니다. 가입하신 아이디로 로그인해주세요.<br>기억이 나지 않으시면 아이디 찾기를 이용해 주세요.');
+                        break;
+                    default :
+                        registerForm.cContactWarning.show('인증번호 전송에 실패했습니다. 잠시 후 다시 시도해 주세요.');
+                }
+            } else {
+              registerForm.cContactWarning.show('서버와 통신하지 못했습니다. 잠시 후 다시 시도해 주세요.');
+            }
+        }
+    };
+    xhr.send(formData);
+    
+
+
+
+
 }
 
 
@@ -88,7 +120,6 @@ registerForm['cContactSend'].onclick = () => {
 registerForm.onsubmit = e => {
     e.preventDefault();
 
-    registerForm.cNameWarning.hide();
     registerForm.cContactWarning.hide();
     registerForm.cContactCodeWarning.hide();
     registerForm.nameWarning.hide();
@@ -98,23 +129,18 @@ registerForm.onsubmit = e => {
     registerForm.nicknameWarning.hide();
 
     if (registerForm.classList.contains('step-1')) {
-        if (registerForm['cName'].value === '') {
-            registerForm.cNameWarning.show("이름을 입력해 주세요.");
-            registerForm['cName'].focus();
-            return;
-        }
+
         if (registerForm['cContact'].value === '') {
-            registerForm.cContactWarning.show("연락처를 입력해 주세요.");
+            registerForm.cContactWarning.show('휴대전화 번호를 입력해 주세요.');
             registerForm['cContact'].focus();
             return;
         }
-        if (registerForm['cContact'].value.length !== 11) {
-            registerForm.cContactWarning.show("올바른 연락처를 입력해 주세요.");
-            registerForm['cContact'].focus();
+        if(!RegExp(/^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/).test(registerForm['cContact'].value)){
+            registerForm.cContactWarning.show('올바른 전화번호를 입력해주세요.');
             return;
         }
         if (registerForm['cContactCode'].value === '') {
-            registerForm.cContactCodeWarning.show("인증번호를 입력해 주세요.");
+            registerForm.cContactCodeWarning.show('인증번호를 입력해 주세요.');
             registerForm['cContactCode'].focus();
             return;
         }
@@ -124,12 +150,12 @@ registerForm.onsubmit = e => {
     } else if (registerForm.classList.contains('step-2')) {
         registerForm.agreeWarning.hide();
         if (!registerForm['agreeService'].checked) {
-            registerForm.agreeWarning.show("서비스 이용약관 동의해 주세요.");
+            registerForm.agreeWarning.show('서비스 이용약관 동의해 주세요.');
             registerForm['agreeService'].select();
             return;
         }
         if (!registerForm['agreePrivacy'].checked) {
-            registerForm.agreeWarning.show("개인정보 수집 및 이용 동의해 주세요.");
+            registerForm.agreeWarning.show('개인정보 수집 및 이용 동의해 주세요.');
             return;
         }
 
@@ -137,7 +163,7 @@ registerForm.onsubmit = e => {
         registerForm.classList.add('step-3');
     } else if (registerForm.classList.contains('step-3')) {
         if (registerForm['name'].value === '') {
-            registerForm.nameWarning.show("이름을 입력해 주세요.");
+            registerForm.nameWarning.show('이름을 입력해 주세요.');
             registerForm['name'].focus();
             return;
         }
@@ -147,7 +173,7 @@ registerForm.onsubmit = e => {
             return;
         }
         if (registerForm['email'].value === '') {
-            registerForm.emailWarning.show("이메일을 입력해 주세요.")
+            registerForm.emailWarning.show('이메일을 입력해 주세요.')
             registerForm['email'].focus();
             return;
         }
@@ -162,7 +188,7 @@ registerForm.onsubmit = e => {
             return;
         }
         if (registerForm['nickname'].value === '') {
-            registerForm.nicknameWarning.show("닉네임을 입력해 주세요");
+            registerForm.nicknameWarning.show('닉네임을 입력해 주세요');
             registerForm['nickname'].focus();
             return;
         }

@@ -15,16 +15,14 @@ body {
 
 
 #payForm {
-    /*border: 0.0125rem solid black;*/
     min-width: 70rem;
     height: 40rem;
     position: absolute;
-    top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, 0);
     opacity: 0;
     pointer-events: none;
-
+    margin-top: 3rem;
 }
 
 #payForm.visible{
@@ -209,6 +207,7 @@ body {
     font-size: 1rem;
     border-bottom: 0.0125rem solid #abb2b9;
     box-sizing: border-box;
+    padding-bottom: 1rem;
 }
 
 #payForm > .price-container >.information >.subtitle {
@@ -227,7 +226,7 @@ body {
 }
 
 #payForm > .price-container >.information >.box >.adult+.text{
-    margin-left: 1rem;
+    margin-left: 0.9rem;
 }
 
 #payForm > .price-container >.information >.box> .text{
@@ -281,7 +280,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    margin-top: 1rem;
+    margin-top: 3rem;
     transition-property: opacity;
 }
 

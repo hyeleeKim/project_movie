@@ -166,9 +166,9 @@
 /*region register*/
 #registerForm {
     width: 40rem;
-    /*max-height: calc(100vh - 5rem);*/
+    min-height: calc(100vh - 20rem);
     padding: 2.5rem;
-    margin: 4rem 0;
+    margin: 4rem 0 5rem 0;
     box-sizing: border-box;
 
     position: relative;

@@ -9,7 +9,7 @@ html {
 
 body {
     margin: unset;
-    min-height: 100vh;
+    position: relative;
 }
 
 
@@ -127,10 +127,10 @@ a, ol, ul {
 footer {
     background-color: lightgray;
     min-height: 5rem;
-    position: relative;
-    bottom: 0;
-    /*width: 100vw;*/
+    position: absolute;
+    width: 100%;
 }
+
 
 
 

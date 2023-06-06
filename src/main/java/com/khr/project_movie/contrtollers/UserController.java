@@ -3,10 +3,13 @@ package com.khr.project_movie.contrtollers;
 import com.khr.project_movie.entities.RegisterCodeEntity;
 import com.khr.project_movie.enums.RegisterSendCodeResult;
 import com.khr.project_movie.services.UserService;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -33,16 +36,20 @@ public class UserController {
     }
 
 
-    @RequestMapping(value="registerSendCode", method = RequestMethod.POST)
-    public RegisterSendCodeResult postRegisterSendCode(RegisterCodeEntity registerCode){
-        return RegisterSendCodeResult.SUCCESS;
+    @ResponseBody
+    @RequestMapping(value="sendContactCode",
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public String postSendContactCode(RegisterCodeEntity registerCode){
+        RegisterSendCodeResult result = this.userService.sendContactCode(registerCode);
+        JSONObject responseObject = new JSONObject();
+        responseObject.put("result",result.name().toLowerCase());
+        return responseObject.toString() ;
     }
 
     @ResponseBody
     @RequestMapping(value = "register", method = RequestMethod.POST)
     public String postRegister(){
-
-
         return null;
     }
 

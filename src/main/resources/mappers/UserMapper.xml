@@ -3,5 +3,31 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.khr.project_movie.mappers.UserMapper">
-
+    <insert id="insertRegisterContactCode"
+    useGeneratedKeys="true"
+    keyColumn="index"
+    keyProperty="index"
+    parameterType="com.khr.project_movie.entities.RegisterCodeEntity">
+    INSERT INTO `moviesq`.`register_codes`(`contact`, `code`, `salt`, `created_at`, `expires_at`, `expired_flag`)
+        VALUE (#{contact},
+               #{code},
+               #{salt},
+               IFNULL(#{createdAt},DEFAULT(`created_at`)),
+               #{expiresAt},
+               IFNULL(#{isExpired}, DEFAULT(`expired_flag`)))
+    </insert>
+    <select id="selectUserByContact"
+            resultType="com.khr.project_movie.entities.UserEntity">
+        SELECT `email` AS `email`,
+               `password` AS `password`,
+               `name` AS `name`,
+               `birthday` AS `birthday`,
+               `contact` AS `contact`,
+               `status` AS `status`,
+               `admin_flag` AS `isAdmin`,
+               `registered_at` AS `registeredAt`
+        FROM `moviesq`.`users`
+        WHERE `contact` = #{contact}
+        LIMIT 1
+    </select>
 </mapper>

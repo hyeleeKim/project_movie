@@ -14,7 +14,7 @@
 </head>
 <body>
 <th:block layout:fragment="customContents">
-<form id="registerForm" class="step-4">
+<form id="registerForm" class="step-1">
   <header class="header">
     <div class="text-container">
       <h2 class="title">회원가입</h2>
@@ -40,12 +40,6 @@
     </div>
   </header>
   <section class="section step-1">
-    <span class="subtitle">이름</span>
-    <label class="label">
-      <input autofocus type="text" class="_object-input input line" maxlength="12" name="cName"
-             placeholder="이름">
-    </label>
-    <span class="warning contact" rel="cNameWarning"></span>
     <span class="subtitle">연락처</span>
     <label class="label button-container">
       <input autofocus type="text" class="_object-input input" maxlength="12" name="cContact"
@@ -131,9 +125,8 @@ Morbi rutrum neque semper, dictum ex suscipit, congue magna. Fusce tortor arcu, 
   </section>
   <section class="section step-4">
     <img class="image" th:src="@{/resources/images/congratulation.jpg}" alt="">
-    <span class="title text">입력하신 이메일로 계정 인증을 위한 링크가 담긴 메일을 전송하였습니다.</span>
-    <span class="title text">전송된 링크는 1시간 동안 유효함으로 유의해주시기 바랍니다.</span>
-    <span class="text">* 이메일 인증을 완료한 후 로그인 및 서비스 이용이 가능합니다. *</span>
+    <span class="title text">[] 님 회원가입이 완료되었습니다.</span>
+    <span class="text">* 로그인 이후 MovieSQ 서비스 이용이 가능합니다. *</span>
   </section>
   <div class="button-container">
     <a class="_object-button button cancel" href="#">취소</a>
