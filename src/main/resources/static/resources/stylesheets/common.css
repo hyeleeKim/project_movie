@@ -98,6 +98,9 @@ a, ol, ul {
     height: 2rem;
     margin: 0 2rem;
 }
+.mainMenu > .listMenu >a {
+    text-decoration: none;
+}
 
 .loginMenu {
     margin: 2rem 0;
