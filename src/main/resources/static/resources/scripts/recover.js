@@ -39,7 +39,7 @@ recoverForm.contactCodeWarning.show = (text) => {
 recoverForm.contactCodeWarning.classList.remove('visible');
 
 
-//비밀번호 재설정
+//비밀번호 재설정 경고
 recoverForm.emailWarning = recoverForm.querySelector('[rel="pMailWarning"]');
 recoverForm.emailWarning.show = (text) => {
     recoverForm.emailWarning.innerText = text;
@@ -62,8 +62,41 @@ recoverForm.pBirthWarning.show = (text) => {
 recoverForm.pBirthWarning.classList.remove('visible');
 
 
+// 이메일 찾기 인증번호 전송
+recoverForm['eContactSend'].onclick = () => {
+    if (recoverForm['eContact'].value === '') {
+        recoverForm.contactWarning.show('연락처를 입력해주세요.');
+        return;
+    }
 
-// 아이디 찾기 미작성 제출 경고
+    if (!RegExp(/^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/).test(recoverForm['eContact'].value)) {
+        recoverForm.contactWarning.show('정확한 휴대전화번호를 입력해주세요.');
+        return;
+    }
+
+    const xhr = new XMLHttpRequest();
+    const formData = new FormData();
+    xhr.open('POST','/registerSendCode');
+    formData.append("name",recoverForm['eName'].value);
+    formData.append("birth",recoverForm['eBirth'].value);
+    formData.append("eContact",recoverForm['eContact'].value);
+    xhr.onreadystatechange = () => {
+        if(xhr.readyState === XMLHttpRequest.DONE){
+            if(xhr.status >=200 && xhr.status <300){
+                alert('성공');
+            }else{
+
+            }
+        }
+    };
+    xhr.send(formData);
+
+
+}
+
+
+
+// 아이디 찾기 경고
 recoverForm.onsubmit = e => {
     e.preventDefault();
     recoverForm.emailWarning.hide();
@@ -92,7 +125,11 @@ recoverForm.onsubmit = e => {
             return;
         }
 
+
+
+
     }
+    // 비밀번호 재설정
     if (recoverForm['option'].value === 'password') {
         if (recoverForm['pMail'].value === '') {
             recoverForm.emailWarning.show('이메일을 입력해 주세요');

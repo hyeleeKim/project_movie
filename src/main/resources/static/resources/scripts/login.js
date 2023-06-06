@@ -39,19 +39,22 @@ loginForm.onsubmit = e => {
     e.preventDefault();
     loginForm.emailWarning.hide();
     loginForm.passwordWarning.hide();
+    loginForm.loginWarning.hide();
+
     if (loginForm['email'].value === '') {
         loginForm.emailWarning.show('아이디(이메일)를 입력해 주세요');
         return;
     }
     if (loginForm['password'].value === '') {
         loginForm.passwordWarning.show('비밀번호를 입력해 주세요');
+        return;
     }
 
     const xhr = new XMLHttpRequest();
     const formData = new FormData();
     formData.append("email",loginForm['email'].value);
     formData.append("password",loginForm['password'].value);
-    xhr.open('POST','/user/login');
+    xhr.open('POST','/login');
     xhr.onreadystatechange = () =>{
         if(xhr.readyState === XMLHttpRequest.DONE){
             if(xhr.status >= 200 && xhr.status < 400){
@@ -64,4 +67,3 @@ loginForm.onsubmit = e => {
     xhr.send(formData);
 }
 
-// 아이디,비밀번호 재설정 경고

@@ -6,14 +6,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-@RequestMapping(value = "/")
+@RequestMapping(value = "reserve")
 @Controller
-public class HomeController {
+public class ReserveController {
 
-    @RequestMapping(value = "/",
-            method = RequestMethod.GET,
-            produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getIndex() {
-        return new ModelAndView("home/index");
+    @RequestMapping(value = "payment", method = RequestMethod.GET,
+    produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getPayment() {
+
+        return new ModelAndView("pages/reserve");
     }
+
+
 }

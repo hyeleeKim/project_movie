@@ -4,18 +4,14 @@
 
 /*region loginForm*/
 #loginForm, #recoverForm {
-    top: 50%;
-    left: 50%;
     width: 30rem;
     height: auto;
-    /*max-height: calc(100vh - 2rem);*/
     box-sizing: border-box;
     padding: 2.5rem;
-    transform: translate(-50%, -40%);
-    position: absolute;
-    opacity: 0;
-    pointer-events: none;
-    transition-property: opacity;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+    margin-top: 3rem;
 
 
     align-items: stretch;
@@ -24,16 +20,10 @@
     justify-content: flex-start;
 }
 
-#loginForm.visible,
-#recoverForm.visible {
-    opacity: 1;
-    pointer-events: all;
-}
-
 
 #loginForm > .warning,
 #recoverForm > .field > .warning,
-#registerForm >.section >.warning {
+#registerForm > .section > .warning {
     max-height: 0;
     color: #ef5350;
     font-size: 0.9rem;
@@ -46,8 +36,8 @@
 }
 
 #loginForm > .warning.visible,
-#recoverForm > .field > .warning.visible ,
-#registerForm >.section >.warning.visible {
+#recoverForm > .field > .warning.visible,
+#registerForm > .section > .warning.visible {
     max-height: 3rem;
     padding: 0.5rem 0.5rem;
 }
@@ -131,7 +121,7 @@
     margin: 1.5rem 0;
 }
 
-#loginForm >.speed-container {
+#loginForm > .speed-container {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -144,17 +134,20 @@
 
     position: relative;
 }
-#loginForm >.speed-container >.subtitle {
+
+#loginForm > .speed-container > .subtitle {
     font-size: 1.3rem;
     text-align: center;
     font-weight: 500;
 }
-#loginForm >.speed-container >.speedLogin {
+
+#loginForm > .speed-container > .speedLogin {
     display: flex;
-    flex-direction : column;
-    justify-content : center ;
+    flex-direction: column;
+    justify-content: center;
 }
-#loginForm >.speed-container >.speedLogin>.logo {
+
+#loginForm > .speed-container > .speedLogin > .logo {
     position: relative;
     text-decoration: none;
     margin-top: 1rem;
@@ -162,7 +155,7 @@
 
 }
 
-#loginForm >.speed-container >.speedLogin>.logo >.image{
+#loginForm > .speed-container > .speedLogin > .logo > .image {
     height: 3rem;
     width: 60%;
 }
@@ -170,26 +163,19 @@
 /*endregion*/
 
 
-
-
-
-
-
 /*region register*/
 #registerForm {
-    top: 50%;
+    width: 40rem;
+    /*max-height: calc(100vh - 5rem);*/
+    padding: 2.5rem;
+    margin: 4rem 0;
+    box-sizing: border-box;
+
+    position: relative;
     left: 50%;
-    transform: translate(-50%, -50%);
-    position: absolute;
-    opacity: 0;
-    pointer-events: none;
-    min-width: 32rem;
+    transform: translate(-50%, 0);
 }
 
-#registerForm.visible {
-    opacity: 1;
-    pointer-events: all;
-}
 
 #registerForm > .header {
 
@@ -250,7 +236,7 @@
     justify-content: flex-end;
 }
 
-#registerForm > .header > .step-container >.number-container> .number {
+#registerForm > .header > .step-container > .number-container > .number {
     width: 2.5rem;
     height: 2.5rem;
     background-color: #f8f8f8;
@@ -269,26 +255,27 @@
 }
 
 #registerForm > .header > .step-container > .number-container,
-#registerForm >.header >.step-container>.stage-container{
+#registerForm > .header > .step-container > .stage-container {
     display: flex;
-    flex-direction : row;
+    flex-direction: row;
 }
-#registerForm >.header >.step-container>.stage-container>.stage{
+
+#registerForm > .header > .step-container > .stage-container > .stage {
     visibility: hidden;
 }
 
-#registerForm.step-1 > .header > .step-container >.number-container> .number.step-1,
-#registerForm.step-2 > .header > .step-container >.number-container>  .number.step-2,
-#registerForm.step-3 > .header > .step-container >.number-container>  .number.step-3,
-#registerForm.step-4 > .header > .step-container >.number-container>  .number.step-4 {
+#registerForm.step-1 > .header > .step-container > .number-container > .number.step-1,
+#registerForm.step-2 > .header > .step-container > .number-container > .number.step-2,
+#registerForm.step-3 > .header > .step-container > .number-container > .number.step-3,
+#registerForm.step-4 > .header > .step-container > .number-container > .number.step-4 {
     color: #f76265;
     font-weight: 600;
 }
 
-#registerForm.step-1 > .header > .step-container >.stage-container> .stage.step-1,
-#registerForm.step-2 > .header > .step-container >.stage-container> .stage.step-2,
-#registerForm.step-3 > .header > .step-container >.stage-container> .stage.step-3,
-#registerForm.step-4 > .header > .step-container >.stage-container> .stage.step-4 {
+#registerForm.step-1 > .header > .step-container > .stage-container > .stage.step-1,
+#registerForm.step-2 > .header > .step-container > .stage-container > .stage.step-2,
+#registerForm.step-3 > .header > .step-container > .stage-container > .stage.step-3,
+#registerForm.step-4 > .header > .step-container > .stage-container > .stage.step-4 {
     visibility: visible;
     font-size: 0.8rem;
 }
@@ -315,9 +302,9 @@
 
 #registerForm.step-3 > .section.step-3 {
     display: flex;
-    align-items : stretch;
-    flex-direction : column;
-    justify-content : flex-start;
+    align-items: stretch;
+    flex-direction: column;
+    justify-content: flex-start;
     padding: 0 3rem;
     margin-bottom: 2.5rem;
 }
@@ -340,7 +327,7 @@
     grid-template-columns: 2fr 0.4fr;
 }
 
-#registerForm.step-1 > .section.step-1 > .label>.line{
+#registerForm.step-1 > .section.step-1 > .label > .line {
     box-sizing: border-box;
     width: calc(100% - 2rem);
 }
@@ -386,7 +373,7 @@
     vertical-align: middle;
 }
 
-#registerForm.step-2 > .section.step-2  > .label > .content {
+#registerForm.step-2 > .section.step-2 > .label > .content {
     height: 10rem;
     resize: none;
     border: 0.0625rem solid #eaecee;
@@ -396,20 +383,20 @@
 }
 
 
-#registerForm.step-2 >.section.step-2 >.check-container  {
-    margin : 0.5rem 0;
+#registerForm.step-2 > .section.step-2 > .check-container {
+    margin: 0.5rem 0;
 }
 
 /*회원가입 3단계*/
 
 
-#registerForm.step-3 >.section.step-3 >.subtitle {
-    font-size : 0.8rem;
+#registerForm.step-3 > .section.step-3 > .subtitle {
+    font-size: 0.8rem;
     margin: 2rem 0 0.5rem 0;
 }
 
 
-#registerForm.step-3 >.section.step-3> .label > .input {
+#registerForm.step-3 > .section.step-3 > .label > .input {
     border-bottom: 0.0125rem solid #727272;
     padding: 0.5rem;
     background: none;
@@ -421,27 +408,28 @@
 
 /*회원가입 4단계*/
 
-#registerForm.step-4 >.section.step-4 >.image{
-    max-width:32rem;
+#registerForm.step-4 > .section.step-4 > .image {
+    max-width: 32rem;
     margin: 1rem;
 }
 
-#registerForm.step-4 >.section.step-4 >.text {
+#registerForm.step-4 > .section.step-4 > .text {
     text-align: center;
     font-size: 0.8rem;
 }
-#registerForm.step-4 >.section.step-4 >.text.title{
+
+#registerForm.step-4 > .section.step-4 > .text.title {
     font-size: 1rem;
     font-weight: 600;
 }
-#registerForm.step-4 >.section.step-4 >.title +.title{
+
+#registerForm.step-4 > .section.step-4 > .title + .title {
     margin-top: 1rem;
 }
 
-#registerForm.step-4 >.section.step-4 >.text +.text{
+#registerForm.step-4 > .section.step-4 > .text + .text {
     margin-bottom: 2rem;
 }
-
 
 
 /*버튼*/
@@ -456,7 +444,7 @@
 }
 
 
-#registerForm > .button-container >._object-button._color-concept {
+#registerForm > .button-container > ._object-button._color-concept {
     color: white;
     text-align: center;
     text-decoration: none;
@@ -502,8 +490,6 @@
 #registerForm.step-4 > .button-container > .button.finish {
     display: inline-block;
 }
-
-
 
 
 /*endregion*/

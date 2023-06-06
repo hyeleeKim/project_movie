@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<header id="menuContainer" th:fragment="headerFragment">
+    <div id="menu">
+        <div><img alt="" class="logo" th:src="@{/resources/images/logo.png}"></div>
+        <ul class="mainMenu">
+            <li class="listMenu"><a href="#"><span>예매</span></a></li>
+            <li class="active listMenu"><a href="#"><span>영화</span></a></li>
+            <li class="listMenu"><a href="#"><span>영화관</span></a></li>
+            <li class="listMenu"><a href="#"><span>고객지원</span></a></li>
+            <li class="listMenu"><a href="#"><span>마이페이지</span></a></li>
+        </ul>
+        <div class="loginMenu">
+            <a th:href="@{/login}" class="listLogin">로그인</a>
+            <a th:href="@{/register}" class="listRegister">회원가입</a>
+        </div>
+    </div>
+</header>

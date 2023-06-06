@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/resources/stylesheets/common.css}">
+</head>
+<body>
+<!-- header fragment 사용 -->
+<th:block th:replace="layouts/header :: header"></th:block>
+
+<!-- content fragment 사용 -->
+
+<th:block layout:fragment="customContents"></th:block>
+
+<!-- footer fragment 사용 -->
+<th:block th:replace="layouts/footer :: footer"></th:block>
+
+</body>
+</html>

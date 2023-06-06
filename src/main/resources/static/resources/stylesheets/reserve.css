@@ -2,7 +2,6 @@
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard.css");
 
 /*region payForm*/
-
 body {
 
 }
@@ -224,7 +223,7 @@ body {
 }
 
 #payForm > .price-container >.information >.box > .subtitle{
-    font-size : 1.1rem;
+    font-size : 1rem;
 }
 
 #payForm > .price-container >.information >.box >.adult+.text{
@@ -232,7 +231,8 @@ body {
 }
 
 #payForm > .price-container >.information >.box> .text{
-    padding: 3rem;
+    padding: 2rem;
+    font-size: 0.9rem;
 }
 
 #payForm > .price-container > ._object-button {
@@ -271,11 +271,11 @@ body {
 
 
 /* region 결제-container*/
-#cardForm {
+#container {
     height: 100vh;
     pointer-events: none;
     opacity: 0;
-    user-select: unset;
+
 
     align-items: center;
     display: flex;
@@ -286,14 +286,13 @@ body {
 }
 
 
-#cardForm.visible {
-
+#container.visible {
+    pointer-events: all;
     opacity: 1;
-    user-select: all;
 }
 
 
-#cardForm > .card-container {
+#container > .card-container {
     user-select: none;
     border-radius: 0.5rem;
     position: relative;
@@ -304,28 +303,28 @@ body {
 }
 
 
-#cardForm > .card-container > .imageBox {
+#container > .card-container > .imageBox {
     align-items: center;
     display: flex;
     justify-content: space-between;
     padding: 0.65rem 1rem;
 }
 
-#cardForm > .card-container > .imageBox > .image {
+#container > .card-container > .imageBox > .image {
     height: 3rem;
 }
 
-#cardForm > .card-container > .card-number-box {
+#container > .card-container > .card-number-box {
     padding: 2.5rem 2rem;
     font-size: 1.5rem;
     text-align: center;
 }
 
-#cardForm > .card-container > .card-number-box > * + * {
+#container > .card-container > .card-number-box > * + * {
     margin-left: 0.5rem;
 }
 
-#cardForm > .card-container > .box-container {
+#container > .card-container > .box-container {
     margin-top: -2rem;
     display: flex;
     flex-direction: column;
@@ -333,22 +332,22 @@ body {
     margin-bottom: 1rem;
 }
 
-#cardForm > .card-container > .box-container > .box {
+#container > .card-container > .box-container > .box {
     align-self: flex-end;
     padding-right: 1rem;
     font-size: 1rem;
 }
 
-#cardForm > .card-container > .box-container > .box > .title {
+#container > .card-container > .box-container > .box > .title {
     font-size: 0.7rem;
 }
 
-#cardForm > .card-container > .box-container > .box > .subtitle {
+#container > .card-container > .box-container > .box > .subtitle {
     text-align: center;
 }
 
 
-#cardForm > #card-information {
+#container > #cardForm {
     margin: 2rem 2rem;
     width: 30rem;
 
@@ -358,7 +357,7 @@ body {
     justify-content: center;
 }
 
-#cardForm > #card-information > .title {
+#container > #cardForm > .title {
     font-size: 1.3rem;
     padding-bottom: 0.5rem;
     border-bottom: 0.25rem solid #81c5c0;
@@ -366,7 +365,7 @@ body {
     font-weight: 600;
 }
 
-#cardForm > #card-information > .label {
+#container > #cardForm > .label {
     align-items: stretch;
     display: flex;
     flex-direction: column;
@@ -375,35 +374,35 @@ body {
     padding: 0 2rem;
 }
 
-#cardForm > #card-information > .label > .input,
-#cardForm > #card-information > .label > .pwd > .input,
-#cardForm > #card-information > .label > .expire > .input {
+#container > #cardForm > .label > .input,
+#container > #cardForm > .label > .pwd > .input,
+#container > #cardForm > .label > .expire > .input {
     border-bottom: 0.0125rem solid #727272;
     padding: 0.5rem;
     background: none;
     color: grey;
 }
 
-#cardForm > #card-information > .label > .pwd > .input,
-#cardForm > #card-information > .label > .expire > .input {
+#container > #cardForm > .label > .pwd > .input,
+#container > #cardForm > .label > .expire > .input {
     width: 2rem;
     text-align: center;
     letter-spacing: 0.3rem;
 }
 
-#cardForm > #card-information > .label > .birth-input {
+#container > #cardForm > .label > .birth-input {
     width: 8rem;
     letter-spacing: 0.3rem;
 }
 
-#cardForm > #card-information > .label > .number {
+#container > #cardForm > .label > .number {
     width: 100%;
     display: flex;
     flex-direction: row;
     box-sizing: border-box;
 }
 
-#cardForm > #card-information > .label > .number > .input {
+#container > #cardForm > .label > .number > .input {
     width: calc((100% / 4) - 3.5rem);
     border-bottom: 0.0125rem solid #727272;
     padding: 0.5rem 0.5rem;
@@ -413,17 +412,17 @@ body {
     letter-spacing: 0.1rem;
 }
 
-#cardForm > #card-information > .label > .number > .input + .input {
+#container > #cardForm > .label > .number > .input + .input {
     margin-left: 0.5rem;
 }
 
-#cardForm > #card-information > .label > .subtitle {
+#container > #cardForm > .label > .subtitle {
     font-size: 0.8rem;
     margin-top: 2rem;
 }
 
 
-#cardForm > #card-information > .button-container {
+#container > #cardForm > .button-container {
     align-items: stretch;
     display: flex;
     flex-direction: row;
@@ -433,8 +432,7 @@ body {
     margin-top: 3rem;
 }
 
-
-#cardForm > #card-information > .button-container > ._object-button._color-concept {
+#container > #cardForm > .button-container > ._object-button._color-concept {
     color: white;
     text-align: center;
     text-decoration: none;
@@ -444,7 +442,7 @@ body {
     box-sizing: border-box;
 }
 
-#cardForm > #card-information > .button-container > ._object-button {
+#container > #cardForm > .button-container > ._object-button {
     color: black;
     text-align: center;
     text-decoration: none;

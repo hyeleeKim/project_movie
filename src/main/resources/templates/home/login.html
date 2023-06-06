@@ -1,5 +1,8 @@
 <!doctype html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/defaultLayout}">
 <head>
     <meta charset="UTF_8">
     <meta name="viewport"
@@ -7,24 +10,27 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>FilmSQ</title>
     <script defer th:src="@{/resources/scripts/common.js}"></script>
-    <script defer th:src="@{/resources/scripts/index.login.js}"></script>
-    <script defer th:src="@{/resources/scripts/register.js}"></script>
-    <script defer th:src="@{/resources/scripts/recover.js}"></script>
+    <script defer th:src="@{/resources/scripts/login.js}"></script>
+<!--    <script defer th:src="@{/resources/scripts/register.js}"></script>-->
+<!--    <script defer th:src="@{/resources/scripts/recover.js}"></script>-->
     <link rel="stylesheet" th:href="@{/resources/stylesheets/common.css}">
-    <link rel="stylesheet" th:href="@{/resources/stylesheets/index.css}">
+    <link rel="stylesheet" th:href="@{/resources/stylesheets/user.css}">
 
 </head>
 <body>
-<form id="loginForm" >
+<th:block layout:fragment="customContents">
+<form id="loginForm" class="visible">
     <span class="title">회원 로그인</span>
     <span class="subtitle">아이디(이메일)</span>
     <label class="label">
-        <input type="email" class="_object-input input" maxlength="50" name="email" placeholder="이메일 주소">
+        <input type="email" class="_object-input input" maxlength="50" name="email" placeholder="아이디 (이메일)">
     </label>
+    <span class="warning email" rel="emailWarning"></span>
     <span class="subtitle">비밀번호</span>
     <label class="label">
-        <input type="password" class="_object-input input" maxlength="50" name="password" placeholder="비밀번호">
+        <input type="password" class="_object-input input" maxlength="50" name="password" placeholder="비밀번호 입력">
     </label>
+    <span class="warning password" rel="passwordWarning"></span>
     <span class="warning login" rel="loginWarning"></span>
     <label class="_object-check-wrapper">
         <input class="_check_input" type="checkbox" name="rememberEmail">
@@ -35,10 +41,10 @@
     </label>
     <ul class="menu">
         <li class="item">
-            <a class="link" href="#" data-method="showRecover">아이디/비밀번호 찾기</a>
+            <a class="link" th:href="@{/recover}">아이디/비밀번호 찾기</a>
         </li>
         <li class="item">
-            <a class="link" href="#" data-method="showRegister">회원가입</a>
+            <a class="link" th:href="@{/register}" >회원가입</a>
         </li>
     </ul>
     <div class="speed-container">
@@ -47,216 +53,13 @@
             <a class="logo kakao" href="#">
                 <img class="image" src="/resources/images/kakao_login.png" alt="">
             </a>
-            <a href="#" class="logo naver">
+            <a class="logo naver" href="#" >
                 <img class="image" src="/resources/images/naver_login.png" alt="">
 
             </a>
         </div>
     </div>
 </form>
-<form id="recoverForm">
-    <div class="option-container">
-        <label class="label email">
-            <input checked class="option " name="option" type="radio" value="email">
-            <span class="title">이메일 찾기</span>
-        </label>
-        <label class="label password">
-            <input class="option" name="option" type="radio" value="password">
-            <span class="title">비밀번호 재설정</span>
-        </label>
-    </div>
-    <div class="field email-container" rel="email-container">
-        <span class="subtitle">이름</span>
-        <label class="label">
-            <input autofocus type="text" class="_object-input input" maxlength="10" name="eName"
-                   placeholder="이름">
-        </label>
-        <span class="warning email" rel="eNameWarning"></span>
-        <span class="subtitle">생년월일</span>
-        <label class="label">
-            <input autofocus type="date" class="_object-input input" maxlength="10" name="eBirth"
-                   placeholder="생년월일">
-        </label>
-        <span class="warning birth" rel="eBirthWarning"></span>
-        <span class="subtitle">연락처</span>
-        <label class="label button-container">
-            <input autofocus type="text" class="_object-input input" maxlength="12" name="eContact"
-                   placeholder="연락처('_' 없이 입력)">
-            <input type="button" class="_object-button" name="eContactSend" value="인증번호 전송">
-        </label>
-        <span class="warning contact" rel="eContactWarning"></span>
-        <span class="subtitle">인증번호 확인</span>
-        <label class="label button-container">
-            <input type="text" class="_object-input input"
-                   name="eContactCode" maxlength="6" placeholder="인증번호(6자리)">
-            <input disabled class="_object-button" name="eContactVerify" type="button" value="인증번호 확인">
-        </label>
-        <span class="warning contactCode" rel="contactCodeWarning"></span>
-        <span class="text">휴대폰번호가 변경된 경우 하단 <b>휴대폰 인증 찾기</b>를 통하여 <b>아이디 찾기</b>를 진행해주시기 바랍니다.</span>
-        <input class="_object-button _color-concept" type="submit" value="아이디 찾기">
-        <input hidden name="eContactSalt" type="hidden">
-    </div>
-    <div class="field password-container">
-        <span class="subtitle">아이디</span>
-        <label class="label">
-            <input autofocus type="email" class="_object-input input" maxlength="50" name="pMail"
-                   placeholder="이메일 주소">
-        </label>
-        <span class="warning" rel="pMailWarning"></span>
-        <span class="subtitle">이름</span>
-        <label class="label">
-            <input autofocus type="text" class="_object-input input" maxlength="10" name="pName"
-                   placeholder="이름">
-        </label>
-        <span class="warning email" rel="pNameWarning">올바른 이메일을 입력해 주세요</span>
-        <span class="subtitle">생년월일</span>
-        <label class="label">
-            <input autofocus type="date" class="_object-input input" maxlength="10" name="pBirth"
-                   placeholder="생년월일">
-        </label>
-        <span class="warning email" rel="pBirthWarning">올바른 이메일을 입력해 주세요</span>
-        <span class="text">휴대폰번호가 변경된 경우 하단 <b>휴대폰 인증 찾기</b>를 통하여 <b>아이디 찾기</b>를 진행해주시기 바랍니다.</span>
-        <input class="_object-button _color-concept" type="submit" name="pMailSend" value="비밀번호 재설정">
-        <span class="warning password" rel="findPasswordWarning"></span>
-    </div>
-    <div class="find-container">
-        <span class="subtitle">휴대폰 인증으로 찾기</span>
-        <span class="text">*본인 인증 시 제공되는 정보는 해당 인증기관에서 직접 수집하며, 인증 이외의 용도로 이용 또는 저장되지 않습니다.</span>
-        <input type="button" class="_object-button" name="contact" value="휴대폰 인증">
-    </div>
-</form>
-<form id="registerForm" class="visible step-3 " >
-    <header class="header">
-        <div class="text-container">
-            <h2 class="title">회원가입</h2>
-            <h3 class="subtitle step-1">본인 인증</h3>
-            <h3 class="subtitle step-2">서비스 이용약관 & 개인정보 처리방침</h3>
-            <h3 class="subtitle step-3">개인 정보 입력</h3>
-            <h3 class="subtitle step-4">회원가입 완료</h3>
-        </div>
-        <div class="step-container">
-            <div class="number-container">
-                <div class="number step-1">1</div>
-                <div class="number step-2">2</div>
-                <div class="number step-3">3</div>
-                <div class="number step-4">4</div>
-            </div>
-            <div class="stage-container">
-                <div class="stage step-1">step-1</div>
-                <div class="stage step-2">step-2</div>
-                <div class="stage step-3">step-3</div>
-                <div class="stage step-4">step-4</div>
-
-            </div>
-        </div>
-    </header>
-    <section class="section step-1">
-        <span class="subtitle">이름</span>
-        <label class="label">
-            <input autofocus type="text" class="_object-input input line" maxlength="12" name="cName"
-                   placeholder="이름">
-        </label>
-        <span class="warning name" rel="cNameWarning"></span>
-        <span class="subtitle">연락처</span>
-        <label class="label button-container">
-            <input autofocus type="text" class="_object-input input" maxlength="12" name="cContact"
-                   placeholder="연락처('_' 없이 입력)">
-            <input type="button" class="_object-button" name="cContactSend" value="인증번호 전송">
-        </label>
-        <span class="warning contact" rel="cContactWarning"></span>
-        <span class="subtitle">인증번호 확인</span>
-        <label class="label button-container">
-            <input type="text" class="_object-input input"
-                   name="cContactCode" maxlength="6" placeholder="인증번호(6자리)">
-            <input class="_object-button" name="cContactVerify" type="button" value="인증번호 확인">
-        </label>
-        <span class="warning contactCode" rel="cContactCodeWarning"></span>
-        <input hidden name="contactSalt" type="hidden">
-    </section>
-    <section class="section step-2">
-        <label class="label">
-            <span class="title">서비스 이용약관</span>
-            <textarea readonly class="_object-input content" spellcheck="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris malesuada, velit sed efficitur gravida, felis ex auctor ipsum, eu facilisis libero ipsum vel magna. Donec metus diam, feugiat non congue in, auctor quis ex. Praesent vitae rutrum risus, at dignissim tellus. Ut ipsum libero, bibendum vitae arcu id, molestie pellentesque mi. Morbi quis quam non dui ornare sagittis. Etiam sed eros augue. Phasellus a nibh vitae dui cursus tincidunt. Etiam sed malesuada nulla. Fusce lacinia ligula nec est volutpat aliquam. Aliquam purus ex, pulvinar id tellus vel, interdum ultricies sapien. Quisque finibus pulvinar dolor ut bibendum.
-
-Proin eget orci finibus, vulputate elit ut, congue tortor. Mauris est magna, malesuada vitae dolor sed, hendrerit tincidunt massa. Curabitur massa mauris, blandit eu volutpat vitae, scelerisque at ante. Nullam suscipit ex augue, a cursus felis viverra eget. Praesent sodales elit quam, sed maximus massa sollicitudin ut. Morbi id elit id leo viverra porttitor eget sed risus. Praesent fringilla quam nec justo facilisis faucibus. Pellentesque eget orci ullamcorper, gravida nisl et, hendrerit eros. Donec varius rutrum neque ut eleifend. Cras eget massa sollicitudin massa pellentesque auctor ac et justo. Cras faucibus congue ligula, eu dapibus mi lacinia a. Maecenas accumsan, tellus ut malesuada rhoncus, quam tellus lobortis velit, sed tempus odio dolor quis arcu. Maecenas viverra sapien at imperdiet lacinia. Nam erat magna, ultrices vel mollis sed, posuere nec augue. Duis tristique vehicula leo.
-
-Nullam tortor eros, fermentum elementum nisi in, bibendum euismod sem. Curabitur sollicitudin, sem id egestas iaculis, sapien justo sagittis lorem, non auctor enim nibh vel arcu. Phasellus mattis venenatis pretium. Duis blandit leo sed mauris vehicula, eu imperdiet libero facilisis. Phasellus a cursus ligula. Aliquam nec diam eu odio mattis aliquam. Ut turpis risus, ultrices sit amet magna vitae, viverra fermentum lectus. Nullam imperdiet commodo diam, ultrices tincidunt leo congue vel. Nam lobortis in mauris et placerat. Duis lectus risus, tincidunt vel augue eu, aliquam malesuada massa. Morbi mollis neque sed ipsum commodo placerat. Nullam cursus velit a feugiat sodales. In finibus nibh in tempor luctus. In molestie vulputate libero vitae feugiat.
-
-Morbi ac finibus leo. Mauris ut eleifend justo. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Maecenas sed cursus nisi. Etiam lobortis metus ac gravida efficitur. Ut ut consequat mauris, eget dapibus velit. Donec ac libero dolor. Pellentesque molestie at turpis sit amet blandit.
-
-Morbi rutrum neque semper, dictum ex suscipit, congue magna. Fusce tortor arcu, pulvinar a turpis in, hendrerit porttitor nisl. Fusce eget ullamcorper libero, ultricies venenatis dui. Donec nec iaculis ante. Aenean vitae tortor aliquam, tristique ex et, commodo nisl. Vestibulum aliquam congue risus, vitae sodales velit dapibus ut. Donec volutpat ipsum in tellus iaculis ultrices. Pellentesque quis ornare elit. Phasellus tristique, libero non rhoncus malesuada, ante orci lobortis ex, ac ultrices neque augue vitae orci. Morbi commodo posuere convallis. Fusce consequat vel neque vel sodales.</textarea>
-        </label>
-        <label class="check-container">
-            <input class="_check_input" name="agreeService" type="checkbox">
-            <span class="text">서비스 이용약관 동의 <span class="color">(필수)</span></span>
-        </label>
-        <label class="label">
-            <span class="title">개인정보 수집 및 이용 </span>
-            <textarea readonly class="_object-input content" spellcheck="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris malesuada, velit sed efficitur gravida, felis ex auctor ipsum, eu facilisis libero ipsum vel magna. Donec metus diam, feugiat non congue in, auctor quis ex. Praesent vitae rutrum risus, at dignissim tellus. Ut ipsum libero, bibendum vitae arcu id, molestie pellentesque mi. Morbi quis quam non dui ornare sagittis. Etiam sed eros augue. Phasellus a nibh vitae dui cursus tincidunt. Etiam sed malesuada nulla. Fusce lacinia ligula nec est volutpat aliquam. Aliquam purus ex, pulvinar id tellus vel, interdum ultricies sapien. Quisque finibus pulvinar dolor ut bibendum.
-
-Proin eget orci finibus, vulputate elit ut, congue tortor. Mauris est magna, malesuada vitae dolor sed, hendrerit tincidunt massa. Curabitur massa mauris, blandit eu volutpat vitae, scelerisque at ante. Nullam suscipit ex augue, a cursus felis viverra eget. Praesent sodales elit quam, sed maximus massa sollicitudin ut. Morbi id elit id leo viverra porttitor eget sed risus. Praesent fringilla quam nec justo facilisis faucibus. Pellentesque eget orci ullamcorper, gravida nisl et, hendrerit eros. Donec varius rutrum neque ut eleifend. Cras eget massa sollicitudin massa pellentesque auctor ac et justo. Cras faucibus congue ligula, eu dapibus mi lacinia a. Maecenas accumsan, tellus ut malesuada rhoncus, quam tellus lobortis velit, sed tempus odio dolor quis arcu. Maecenas viverra sapien at imperdiet lacinia. Nam erat magna, ultrices vel mollis sed, posuere nec augue. Duis tristique vehicula leo.
-
-Nullam tortor eros, fermentum elementum nisi in, bibendum euismod sem. Curabitur sollicitudin, sem id egestas iaculis, sapien justo sagittis lorem, non auctor enim nibh vel arcu. Phasellus mattis venenatis pretium. Duis blandit leo sed mauris vehicula, eu imperdiet libero facilisis. Phasellus a cursus ligula. Aliquam nec diam eu odio mattis aliquam. Ut turpis risus, ultrices sit amet magna vitae, viverra fermentum lectus. Nullam imperdiet commodo diam, ultrices tincidunt leo congue vel. Nam lobortis in mauris et placerat. Duis lectus risus, tincidunt vel augue eu, aliquam malesuada massa. Morbi mollis neque sed ipsum commodo placerat. Nullam cursus velit a feugiat sodales. In finibus nibh in tempor luctus. In molestie vulputate libero vitae feugiat.
-
-Morbi ac finibus leo. Mauris ut eleifend justo. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Maecenas sed cursus nisi. Etiam lobortis metus ac gravida efficitur. Ut ut consequat mauris, eget dapibus velit. Donec ac libero dolor. Pellentesque molestie at turpis sit amet blandit.
-
-Morbi rutrum neque semper, dictum ex suscipit, congue magna. Fusce tortor arcu, pulvinar a turpis in, hendrerit porttitor nisl. Fusce eget ullamcorper libero, ultricies venenatis dui. Donec nec iaculis ante. Aenean vitae tortor aliquam, tristique ex et, commodo nisl. Vestibulum aliquam congue risus, vitae sodales velit dapibus ut. Donec volutpat ipsum in tellus iaculis ultrices. Pellentesque quis ornare elit. Phasellus tristique, libero non rhoncus malesuada, ante orci lobortis ex, ac ultrices neque augue vitae orci. Morbi commodo posuere convallis. Fusce consequat vel neque vel sodales.</textarea>
-        </label>
-        <label class="check-container">
-            <input class="_check-input" name="agreePrivacy" type="checkbox">
-            <span class="text">개인정보 수집 및 이용 동의 <span class="color">(필수)</span></span>
-        </label>
-        <span class="warning term" rel="agreeWarning"></span>
-    </section>
-    <section class="section step-3">
-        <span class="subtitle">이름</span>
-        <label class="label">
-            <input class="_object-input input" maxlength="50" name="name" placeholder="이름" type="email">
-        </label>
-        <span class="warning name" rel="nameWarning"></span>
-        <span class="subtitle">생년월일</span>
-        <label class="label">
-            <input autofocus type="date" class="_object-input input" maxlength="10" name="birth"
-                   placeholder="생년월일">
-        </label>
-        <span class="warning birth" rel="birthWarning"></span>
-        <span class="subtitle">아이디(이메일)</span>
-        <label class="label">
-            <input autofocus type="email" class="_object-input input" maxlength="50" name="mail"
-                   placeholder="이메일 주소">
-        </label>
-        <span class="warning" rel="emailWarning"></span>
-        <span class="subtitle">비밀번호</span>
-        <label class="label">
-            <input type="password" class="_object-input input" maxlength="50" name="password"
-                   placeholder="비밀번호">
-        </label>
-        <span class="warning password" rel="passwordWarning"></span>
-        <span class="subtitle">비밀번호 확인</span>
-        <label class="label">
-            <input class="_object-input input" maxlength="50" name="passwordCheck" placeholder="비밀번호 확인"
-                   type="password">
-        </label>
-        <span class="warning password" rel="passwordCheckWarning"></span>
-        <span class="subtitle">닉네임</span>
-        <label class="label">
-            <input class="_object-input input" maxlength="10" name="nickname"
-                   placeholder="별명 (2자 이상 10자 이하 완성 한글)" type="text">
-        </label>
-        <span class="warning nickname" rel="nicknameWarning"></span>
-    </section>
-    <section class="section step-4">
-        <img class="image" th:src="@{/resources/images/congratulation.jpg}" alt="">
-        <span class="title text">입력하신 이메일로 계정 인증을 위한 링크가 담긴 메일을 전송하였습니다.</span>
-        <span class="title text">전송된 링크는 1시간 동안 유효함으로 유의해주시기 바랍니다.</span>
-        <span class="text">* 이메일 인증을 완료한 후 로그인 및 서비스 이용이 가능합니다. *</span>
-    </section>
-    <div class="button-container">
-        <a class="_object-button button cancel" href="#">취소</a>
-        <a class="_object-button button main" href="#">메인화면</a>
-        <input class="_object-button _color-concept button next" type="submit" value="다음">
-        <a class="_object-button _color-concept button finish" th:href="@{/login}">완료</a>
-    </div>
-</form>
+</th:block>
 </body>
 </html>
