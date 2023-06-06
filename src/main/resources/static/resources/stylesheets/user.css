@@ -153,7 +153,7 @@
     text-decoration: none;
     margin-top: 1rem;
     left: 4.5rem;
-    flex:1;
+    flex: 1;
 }
 
 #loginForm > .speed-container > .speedLogin > .logo > .image {
@@ -167,11 +167,10 @@
 /*region register*/
 #registerForm {
     width: 40rem;
-    min-height: calc(100vh - 20rem);
+    min-height: calc(100vh - 10rem);
     padding: 2.5rem;
-    margin: 4rem 0 5rem 0;
     box-sizing: border-box;
-
+    margin-top: 2rem;
     position: relative;
     left: 50%;
     transform: translate(-50%, 0);
@@ -375,7 +374,7 @@
 }
 
 #registerForm.step-2 > .section.step-2 > .label > .content {
-    height: 10rem;
+    height: 8.5rem;
     resize: none;
     border: 0.0625rem solid #eaecee;
     border-radius: 0.25rem;
