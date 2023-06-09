@@ -56,6 +56,16 @@ public class UserController {
         return responseObject.toString();
     }
 
+
+    // 로그인
+    @ResponseBody
+    @RequestMapping(value ="login",
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public String postLogin(HttpSession session, UserEntity user){
+        return null;
+    }
+
     // 회원가입 휴대폰 인증번호 확인
     @ResponseBody
     @RequestMapping(value = "contactCode",
