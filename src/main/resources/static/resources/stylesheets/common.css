@@ -1,24 +1,35 @@
 @charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
 
 
 /*region common*/
 
+
 html {
-    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    /*font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;*/
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 body {
-    margin: unset;
-    position: relative;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
 }
 
+:root {
+    --color-font-default: black;
+    --concept-color-mint: #74ccd4;
+    --concept-color-violet: #462d82;
+    --concept-color-lightblue: #5ca8d8;
+    --concept-color-orange : #f76265;
+}
 
 a:link, a:visited {
-    color: #727272;
+    color: var(--color-font-default);
     text-decoration: none;
 }
 
-a:hover, a:visited:hover {
+a:link:hover, a:visited:hover {
     text-decoration: underline;
 }
 
@@ -28,29 +39,26 @@ h1, h2, h3, h4, h5, h6 {
     margin-inline: unset;
 }
 
-
 input, select, textarea {
     background-color: inherit;
     border: unset;
     color: inherit;
-    margin: unset;
-    outline: unset;
     font: inherit;
+    margin: unset;
+    outline: none;
     padding: unset;
 }
 
-input[type="radio"] {
-    appearance: unset;
-}
-
-
-a, ol, ul {
+ol, ul {
     list-style-type: none;
     margin-block: unset;
     margin-inline: unset;
-    padding-inline: unset;
     padding-block: unset;
+    padding-inline: unset;
+}
 
+input[type=radio]{
+    appearance: none;
 }
 
 
@@ -98,9 +106,6 @@ a, ol, ul {
     height: 2rem;
     margin: 0 2rem;
 }
-.mainMenu > .listMenu >a {
-    text-decoration: none;
-}
 
 .loginMenu {
     margin: 2rem 0;
@@ -117,74 +122,12 @@ a, ol, ul {
     padding-left: 1rem;
 }
 
-/*.content {*/
-/*    display: flex;*/
-/*    min-height: 100vh;*/
-/*    position: relative;*/
-/*    justify-content: center;*/
-/*    align-items: center*/
-/*}*/
-
-
 /* footer */
 footer {
     background-color: lightgray;
     min-height: 5rem;
     position: absolute;
     width: 100%;
-}
-
-
-
-
-
-
-
-._object-button {
-    border-radius: 0.25rem;
-    background-color: #e0e0e0;
-    cursor: pointer;
-    padding: 0.6rem 0.8rem;
-    margin: 0 0.5rem;
-    font-size: 1rem;
-}
-
-._object-button:hover {
-    filter: brightness(95%);
-}
-
-._object-button:active {
-    filter: brightness(90%);
-
-}
-
-._object-button:disabled {
-    background-color: #eeeeee;
-    color: #bdbdbd;
-    cursor: default;
-    filter: none;
-}
-
-._object-button._blue {
-    background-color: #576ea0;
-}
-
-
-._object-button._pink {
-    background-color: #ef5350;
-}
-
-
-._object-button._color-concept {
-    background-color: #803e7e;
-}
-
-._object-button._color-concept:hover {
-    filter: brightness(95%);
-}
-
-._object-button._color-concept:active {
-    filter: brightness(90%);
 }
 
 

@@ -2,7 +2,7 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <header id="menuContainer" th:fragment="headerFragment">
     <div id="menu">
-        <div><img alt="" class="logo" th:src="@{/resources/images/logo.png}"></div>
+        <div><a th:href="@{/}"><img alt="" class="logo" th:src="@{/resources/images/logo.png}"></a></div>
         <ul class="mainMenu">
             <li class="listMenu"><a href="#"><span>예매</span></a></li>
             <li class="active listMenu"><a href="#"><span>영화</span></a></li>

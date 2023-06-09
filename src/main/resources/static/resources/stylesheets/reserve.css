@@ -1,7 +1,7 @@
 @charset "UTF-8";
-@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard.css");
+/*@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard.css");*/
 
-/*region payForm*/
+
 body {
 
 }
@@ -14,6 +14,57 @@ body {
 }
 
 
+/*region button*/
+._object-button {
+    border-radius: 0.25rem;
+    background-color: #e0e0e0;
+    cursor: pointer;
+    padding: 0.6rem 0.8rem;
+    margin: 0 0.5rem;
+    font-size: 1rem;
+}
+
+._object-button:hover {
+    filter: brightness(95%);
+}
+
+._object-button:active {
+    filter: brightness(90%);
+
+}
+
+._object-button:disabled {
+    background-color: #eeeeee;
+    color: #bdbdbd;
+    cursor: default;
+    filter: none;
+}
+
+._object-button._blue {
+    background-color: var(--concept-color-lightblue);
+}
+
+
+._object-button._orange {
+    background-color: var(--concept-color-orange);
+}
+
+
+._object-button._color-concept {
+    background-color: var(--concept-color-violet);
+}
+
+._object-button._color-concept:hover {
+    filter: brightness(95%);
+}
+
+._object-button._color-concept:active {
+    filter: brightness(90%);
+}
+
+/*endregion*/
+
+/*region payForm*/
 #payForm {
     min-width: 70rem;
     height: 40rem;
@@ -244,7 +295,7 @@ body {
     bottom: 0;
 }
 
-#payForm > .price-container > .button-container > ._object-button{
+#payForm > .price-container > .button-container > ._object-button._orange{
     margin: unset;
     font-size: 1.2rem;
     text-decoration: none;
@@ -264,8 +315,6 @@ body {
 }
 
 
-
-
 /*endregion*/
 
 
@@ -279,7 +328,8 @@ body {
     align-items: center;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
+    
     margin-top: 3rem;
     transition-property: opacity;
 }
@@ -359,7 +409,7 @@ body {
 #container > #cardForm > .title {
     font-size: 1.3rem;
     padding-bottom: 0.5rem;
-    border-bottom: 0.25rem solid #81c5c0;
+    border-bottom: 0.25rem solid var(--concept-color-mint);
     text-align: center;
     font-weight: 600;
 }

@@ -3,6 +3,7 @@ const number = document.querySelectorAll('.number');
 const payForm = document.getElementById('payForm');
 const container = document.getElementById('container');
 
+// 번호 입력 시 카드 번호 보이기
 for (let i = 0; i < numberEl.length; i++) {
     numberEl[i].oninput = () =>{
         number[i].innerText = numberEl[i].value;
@@ -14,8 +15,8 @@ for (let i = 0; i < numberEl.length; i++) {
         }
     }
 }
-const expireEl = document.querySelectorAll('.expire-input');
 
+const expireEl = document.querySelectorAll('.expire-input');
 const month = document.querySelector('.month');
 const year = document.querySelector('.year');
 
@@ -28,14 +29,11 @@ expireEl[0].oninput = () => {
 
 expireEl[1].oninput = () => year.innerText = expireEl[1].value;
 
-
 payForm.onsubmit = e => {
     e.preventDefault();
     container.classList.add('visible');
     payForm.classList.remove('visible');
 }
-
-
 
 
 container.show = () => {

@@ -14,11 +14,27 @@
 <th:block th:replace="layouts/header :: header"></th:block>
 
 <!-- content fragment 사용 -->
-
 <th:block layout:fragment="customContents"></th:block>
 
 <!-- footer fragment 사용 -->
 <th:block th:replace="layouts/footer :: footer"></th:block>
-
 </body>
 </html>
+
+<!--
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head th:replace="fragments/head :: headFragment"></head>
+<body>
+&lt;!&ndash;header&ndash;&gt;
+<th:block th:replace="fragments/header :: header"></th:block>
+
+&lt;!&ndash;content&ndash;&gt;
+<th:block layout:fragment="customContents"></th:block>
+
+&lt;!&ndash;footer&ndash;&gt;
+<th:block th:replace="fragments/footer :: footer"></th:block>
+</body>
+</html>-->
