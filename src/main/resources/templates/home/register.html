@@ -31,11 +31,10 @@
         <div class="number step-4">4</div>
       </div>
       <div class="stage-container">
-        <div class="stage step-1">step-1</div>
-        <div class="stage step-2">step-2</div>
-        <div class="stage step-3">step-3</div>
-        <div class="stage step-4">step-4</div>
-
+        <div class="stage step-1">STEP1</div>
+        <div class="stage step-2">STEP2</div>
+        <div class="stage step-3">STEP3</div>
+        <div class="stage step-4">STEP4</div>
       </div>
     </div>
   </header>
@@ -53,7 +52,7 @@
              name="cContactCode" maxlength="6" placeholder="인증번호 (6자리)">
       <input disabled class="_object-button" name="cContactVerify" type="button" value="인증번호 확인">
     </label>
-    <input hidden name="contactSalt" type="hidden">
+    <input hidden name="contactSalt"  type="hidden">
     <span class="warning contactCode" rel="cContactCodeWarning"></span>
   </section>
   <section class="section step-2">
@@ -94,12 +93,12 @@ Morbi rutrum neque semper, dictum ex suscipit, congue magna. Fusce tortor arcu, 
   <section class="section step-3">
     <span class="subtitle">이름</span>
     <label class="label">
-      <input class="_object-input input" maxlength="50" name="name" placeholder="성명입력" type="text">
+      <input autofocus class="_object-input input" maxlength="50" name="name" placeholder="성명 입력" type="text">
     </label>
     <span class="warning name" rel="nameWarning"></span>
     <span class="subtitle">생년월일</span>
     <label class="label">
-      <input autofocus type="date" class="_object-input input" maxlength="10" name="birth">
+      <input autofocus type="date" class="_object-input input" maxlength="10" name="birth" placeholder="8자리, '-'제외">
     </label>
     <span class="warning birth" rel="birthWarning"></span>
     <span class="subtitle">아이디</span>
@@ -109,9 +108,9 @@ Morbi rutrum neque semper, dictum ex suscipit, congue magna. Fusce tortor arcu, 
     </label>
     <span class="warning email" rel="emailWarning"></span>
     <span class="subtitle">비밀번호</span>
-    <label class="label">
-      <input type="password" class="_object-input input" maxlength="20" name="password"
-             placeholder="영문 (대문자 1개이상 포함)+숫자+특수문자 8~20자리">
+    <label class="label password">
+      <input type="password" class="_object-input input password" maxlength="20" name="password"
+             placeholder="대문자+소문자+숫자+특수문자 1개이상포함 8~20자리">
     </label>
     <span class="warning password" rel="passwordWarning"></span>
     <span class="subtitle">비밀번호 확인</span>
@@ -120,8 +119,6 @@ Morbi rutrum neque semper, dictum ex suscipit, congue magna. Fusce tortor arcu, 
              type="password">
     </label>
     <span class="warning password" rel="passwordCheckWarning"></span>
-    <span class="warning nickname" rel="nicknameWarning"></span>
-    <span class="warning contact" rel="contactWarning"></span>
   </section>
   <section class="section step-4">
     <img class="image" th:src="@{/resources/images/congratulation.jpg}" alt="">
@@ -130,8 +127,8 @@ Morbi rutrum neque semper, dictum ex suscipit, congue magna. Fusce tortor arcu, 
   </section>
   <div class="button-container">
     <a class="_object-button button cancel" href="#">취소</a>
-    <a class="_object-button button main" href="#">메인화면</a>
-    <input class="_object-button _color-concept button next" type="submit" value="다음">
+    <a class="_object-button button main" th:href="@{/}">메인화면</a>
+    <input disabled class="_object-button _color-concept button next" type="submit" value="다음" name="next">
     <a class="_object-button _color-concept button finish" th:href="@{/login}">완료</a>
   </div>
 </form>
