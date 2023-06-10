@@ -30,7 +30,7 @@ public class UserService {
         // 값이 없거나 정규식이 틀린 경우
         if (registerCode == null
                 || registerCode.getContact() == null
-                || registerCode.getContact().matches("/^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/")) {
+                || !registerCode.getContact().matches("^01(?:0|1|[6-9])(?:\\d{3}|\\d{4})\\d{4}$")) {
             return RegisterSendCodeResult.FAILURE;
         }
 
@@ -38,6 +38,7 @@ public class UserService {
         if (this.userMapper.selectUserByContact(registerCode.getContact()) != null) {
             return RegisterSendCodeResult.FAILURE_DUPLICATE;
         }
+
 
         String code = RandomStringUtils.randomNumeric(6); // 6자리의 임의의 숫자 문자열을 생성하는 기능
         String salt = CryptoUtil.hashSha512(String.format("%s%s%f%f",
@@ -78,15 +79,16 @@ public class UserService {
 
         existingRegister.setExpired(true);
 
+        this.userMapper.updateRegisterExpired(existingRegister);
 
-        return this.userMapper.updateRegisterExpired(existingRegister) > 0
+        return existingRegister.isExpired()
                 ? VerifyRegisterCodeResult.SUCCESS
                 : VerifyRegisterCodeResult.FAILURE;
 
     }
 
     // 회원가입 완료
-    public RegisterResult registerUser (UserEntity user) {
+    public RegisterResult registerUser(UserEntity user) {
 
         if (this.userMapper.selectUserByEmail(user.getEmail()) != null) {
             return RegisterResult.FAILURE_EMAIL_DUPLICATE;
@@ -103,11 +105,11 @@ public class UserService {
     }
 
     // 로그인
-    public LoginResult loginUser (HttpSession session, UserEntity user){
+    public LoginResult loginUser(HttpSession session, UserEntity user) {
         UserEntity existingUser = this.userMapper.selectUserByEmail(user.getEmail());
 
         // 가입된 이메일이 없을 때
-        if(existingUser == null){
+        if (existingUser == null) {
             return LoginResult.FAILURE_WRONG_ID;
         }
 
@@ -115,15 +117,15 @@ public class UserService {
         user.setPassword(CryptoUtil.hashSha512(user.getPassword()));
 
         // 가입된 이메일의 비밀번호와 입력받은 비밀번호 동일 여부
-        if(!user.getPassword().equals(existingUser.getPassword())){
+        if (!user.getPassword().equals(existingUser.getPassword())) {
             return LoginResult.FAILURE_WRONG_PWD;
         }
         // 삭제된 계정
-        if(existingUser.getStatus().equals("DELETED")){
+        if (existingUser.getStatus().equals("DELETED")) {
             return LoginResult.FAILURE_DELETED;
         }
         // 사용 중지된 계정
-        if(existingUser.getStatus().equals("SUSPENDED")){
+        if (existingUser.getStatus().equals("SUSPENDED")) {
             return LoginResult.FAILURE_SUSPENDED;
         }
 
@@ -132,13 +134,39 @@ public class UserService {
                 .setContact(existingUser.getContact())
                 .setRegisteredAt(existingUser.getRegisteredAt());
 
-       return LoginResult.SUCCESS;
+        return LoginResult.SUCCESS;
     }
 
     // 아이디 찾기 휴대폰 인증번호 보내기
-    public RecoverEmailCodeResult recoverSendContactCode(RecoverCodeEntity recoverCode){
+    public RecoverSendCodeResult recoverSendContactCode(RecoverCodeEntity recoverCode) {
+        if (recoverCode == null
+                || recoverCode.getContact() == null
+                || !recoverCode.getContact().matches("^01(?:0|1|[6-9])(?:\\d{3}|\\d{4})\\d{4}$")) {
+            return RecoverSendCodeResult.FAILURE;
+        }
 
-        return null;
+        String code = RandomStringUtils.randomNumeric(6);
+        String salt = CryptoUtil.hashSha512(String.format("%s%s%f%f",
+                recoverCode.getContact(),
+                code,
+                Math.random(),
+                Math.random()));
+        recoverCode.setCreatedAt(new Date());
+
+        Date createdAt = new Date();
+        Date expiresAt = DateUtils.addMinutes(createdAt, 5);
+
+        recoverCode.setCode(code)
+                .setSalt(salt)
+                .setCreatedAt(createdAt)
+                .setExpiresAt(expiresAt)
+                .setExpired(false);
+
+
+        return this.userMapper.insertRecoverContactCode(recoverCode) > 0
+                ? RecoverSendCodeResult.SUCCESS
+                : RecoverSendCodeResult.FAILURE;
+
     }
 
 }

@@ -37,9 +37,9 @@
         VALUES (#{contact},
                 #{code},
                 #{salt},
-                #{createdAt},
+                IFNULL(#{createdAt},DEFAULT(`created_at`)),
                 #{expiresAt},
-                #{ixExpired})
+                IFNULL(#{isExpired}, DEFAULT(`expired_flag`)))
     </insert>
     <select id="selectUserByEmail" resultType="com.ixtx.projectmoviesq.entities.UserEntity">
         SELECT `email`         AS `email`,

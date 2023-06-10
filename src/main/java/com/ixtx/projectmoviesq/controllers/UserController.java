@@ -1,12 +1,10 @@
 package com.ixtx.projectmoviesq.controllers;
 
 
+import com.ixtx.projectmoviesq.entities.RecoverCodeEntity;
 import com.ixtx.projectmoviesq.entities.RegisterCodeEntity;
 import com.ixtx.projectmoviesq.entities.UserEntity;
-import com.ixtx.projectmoviesq.enums.LoginResult;
-import com.ixtx.projectmoviesq.enums.RegisterResult;
-import com.ixtx.projectmoviesq.enums.RegisterSendCodeResult;
-import com.ixtx.projectmoviesq.enums.VerifyRegisterCodeResult;
+import com.ixtx.projectmoviesq.enums.*;
 import com.ixtx.projectmoviesq.services.UserService;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +50,8 @@ public class UserController {
 
         if (result == RegisterSendCodeResult.SUCCESS) {
             responseObject.put("salt", registerCode.getSalt());
+            System.out.println(registerCode.isExpired());
+            responseObject.put("expired", registerCode.isExpired());
         }
 
         return responseObject.toString();
@@ -62,8 +62,17 @@ public class UserController {
     @RequestMapping(value = "recoverSendCode",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public String postRecoverSendCode() {
-        return null;
+    public String postRecoverSendCode(RecoverCodeEntity recoverCode) {
+        RecoverSendCodeResult result = this.userService.recoverSendContactCode(recoverCode);
+        JSONObject responseObject = new JSONObject();
+        responseObject.put("result", result.name().toLowerCase());
+
+        if(result == RecoverSendCodeResult.SUCCESS){
+            responseObject.put("salt", recoverCode.getSalt());
+
+        }
+
+        return responseObject.toString();
     }
 
     // 로그인
@@ -92,6 +101,7 @@ public class UserController {
         VerifyRegisterCodeResult result = this.userService.verifyRegisterCode(registerCode);
         JSONObject responseObject = new JSONObject();
         responseObject.put("result", result.name().toLowerCase());
+
 
         return responseObject.toString();
     }

@@ -17,7 +17,7 @@ public interface UserMapper {
     // 인증번호 전송 (아이디 찾기)
     int insertRecoverContactCode(RecoverCodeEntity recoverCode);
 
-    // 인증번호 전송(연락처 중복확인)
+    // 인증번호 전송(회원가입, 연락처 중복확인)
     UserEntity selectUserByContact(@Param(value="contact") String contact);
 
     // 인증번호 확인 (회원가입)

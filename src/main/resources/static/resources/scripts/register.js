@@ -66,7 +66,7 @@ registerForm['cContactSend'].onclick = () => {
         registerForm['cContact'].focus();
         return;
     }
-    if (!new RegExp(/^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/).test(registerForm['cContact'].value)) {
+    if (!new RegExp(/^01(?:0|1|[6-9])(?:\d{3}|\d{4})\d{4}$/).test(registerForm['cContact'].value)) {
         registerForm.cContactWarning.show('올바른 전화번호를 입력해주세요.');
         registerForm['cContact'].focus();
         registerForm['cContact'].select();
@@ -90,6 +90,7 @@ registerForm['cContactSend'].onclick = () => {
                         registerForm['contactSalt'].value = responseObject.salt;
                         registerForm['cContactCode'].focus();
                         registerForm.cContactWarning.show('입력하신 연락처로 인증번호로 전송했습니다. <br> 아래 인증번호 확인란에 5분 이내로 입력해 주세요.');
+                        sessionStorage.setItem("expired", responseObject['expired']);
                         break;
                     case 'failure_duplicate':
                         registerForm.cContactWarning.show('이미 가입된 번호입니다. 가입하신 아이디로 로그인해주세요.<br>기억이 나지 않으시면 아이디 찾기를 이용해 주세요.');
@@ -179,7 +180,7 @@ registerForm.onsubmit = e => {
             registerForm['cContact'].focus();
             return;
         }
-        if (!new RegExp(/^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/).test(registerForm['cContact'].value)) {
+        if (!new RegExp(/^01(?:0|1|[6-9])(?:\d{3}|\d{4})\d{4}$/).test(registerForm['cContact'].value)) {
             registerForm.cContactWarning.show('올바른 전화번호를 입력해주세요.');
             return;
         }
@@ -203,6 +204,10 @@ registerForm.onsubmit = e => {
             return;
         }
 
+        if(sessionStorage.getItem("expired") === 'false') {
+            registerForm.cContactCodeWarning.show('인증번호 확인을 진행해 주세요.')
+            return;
+        }
         registerForm.classList.remove('step-1');
         registerForm.classList.add('step-2');
 
