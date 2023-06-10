@@ -3,6 +3,7 @@ package com.ixtx.projectmoviesq.controllers;
 
 import com.ixtx.projectmoviesq.entities.RegisterCodeEntity;
 import com.ixtx.projectmoviesq.entities.UserEntity;
+import com.ixtx.projectmoviesq.enums.LoginResult;
 import com.ixtx.projectmoviesq.enums.RegisterResult;
 import com.ixtx.projectmoviesq.enums.RegisterSendCodeResult;
 import com.ixtx.projectmoviesq.enums.VerifyRegisterCodeResult;
@@ -45,7 +46,7 @@ public class UserController {
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public String postSendContactCode(RegisterCodeEntity registerCode) {
-        RegisterSendCodeResult result = this.userService.sendContactCode(registerCode);
+        RegisterSendCodeResult result = this.userService.registerSendContactCode(registerCode);
         JSONObject responseObject = new JSONObject();
         responseObject.put("result", result.name().toLowerCase());
 
@@ -57,13 +58,29 @@ public class UserController {
     }
 
 
-    // 로그인
     @ResponseBody
-    @RequestMapping(value ="login",
+    @RequestMapping(value = "recoverSendCode",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public String postLogin(HttpSession session, UserEntity user){
+    public String postRecoverSendCode() {
         return null;
+    }
+
+    // 로그인
+    @ResponseBody
+    @RequestMapping(value = "login",
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public String postLogin(HttpSession session, UserEntity user) {
+        LoginResult result = this.userService.loginUser(session, user);
+
+        if (result == LoginResult.SUCCESS) {
+            session.setAttribute("user", user);
+        }
+
+        JSONObject responseObject = new JSONObject();
+        responseObject.put("result", result.name().toLowerCase());
+        return responseObject.toString();
     }
 
     // 회원가입 휴대폰 인증번호 확인
@@ -80,17 +97,16 @@ public class UserController {
     }
 
 
-
     // 회원가입 진행 완료
     @ResponseBody
     @RequestMapping(value = "register", method = RequestMethod.POST)
-    public String postRegister(UserEntity user, @RequestParam(value="birthStr")String birthStr) throws ParseException {
+    public String postRegister(UserEntity user, @RequestParam(value = "birthStr") String birthStr) throws ParseException {
         //birth type : String -> Date 바꾸기
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date birth = sdf.parse(birthStr);
         user.setBirthday(birth);
 
-        RegisterResult result = this.userService.putUser(user);
+        RegisterResult result = this.userService.registerUser(user);
         JSONObject responseObject = new JSONObject();
         responseObject.put("result", result.name().toLowerCase());
 

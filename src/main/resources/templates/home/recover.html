@@ -14,76 +14,88 @@
 </head>
 <body>
 <th:block layout:fragment="customContents">
-<form id="recoverForm" class="visible">
-    <div class="option-container">
-        <label class="label email">
-            <input checked class="option " name="option" type="radio" value="email">
-            <span class="title">이메일 찾기</span>
-        </label>
-        <label class="label password">
-            <input class="option" name="option" type="radio" value="password">
-            <span class="title">비밀번호 재설정</span>
-        </label>
+    <div id="cover"></div>
+    <div id="popUp">
+        <div class="title">알림</div>
+        <div class="content">
+            <div class="text"><b class="text user">홍길동</b>님</div>
+            <div class="text">ID는 <b class="text email">[exasdfasdfample@example.com]</b>입니다.</div>
+        </div>
+        <div class="button-container">
+            <a th:href="@{/login}" class="_object-button" href="">로그인</a>
+            <input class="_object-button _color-concept" type="button" value="비밀번호 재설정" data-method="recoverPassword">
+        </div>
     </div>
-    <div class="field email-container" rel="email-container">
-        <span class="subtitle">이름</span>
-        <label class="label">
-            <input autofocus type="text" class="_object-input input" maxlength="10" name="eName"
-                   placeholder="성명입력">
-        </label>
-        <span class="warning email" rel="nameWarning"></span>
-        <span class="subtitle">생년월일</span>
-        <label class="label">
-            <input autofocus type="date" class="_object-input input" maxlength="8" name="eBirth"
-                   placeholder="생년월일">
-        </label>
-        <span class="warning birth" rel="birthWarning"></span>
-        <span class="subtitle">연락처</span>
-        <label class="label button-container">
-            <input autofocus type="text" class="_object-input input" maxlength="11  " name="eContact"
-                   placeholder="휴대전화입력('-' 없이 입력)">
-            <input type="button" class="_object-button" name="eContactSend" value="인증번호 전송">
-        </label>
-        <span class="warning contact" rel="contactWarning"></span>
-        <span class="subtitle">인증번호 확인</span>
-        <label class="label button-container">
-            <input type="text" class="_object-input input"
-                   name="eContactCode" maxlength="6" placeholder="인증번호 (6자리)">
-            <input disabled class="_object-button" name="eContactVerify" type="button" value="인증번호 확인">
-        </label>
-        <span class="warning contactCode" rel="contactCodeWarning"></span>
-        <span class="text">휴대폰번호가 변경된 경우 하단 <b>휴대폰 인증 찾기</b>를 통하여 <b>아이디 찾기</b>를 진행해주시기 바랍니다.</span>
-        <input class="_object-button _color-concept" type="submit" value="아이디 찾기">
-        <input hidden name="eContactSalt" type="hidden">
-    </div>
-    <div class="field password-container">
-        <span class="subtitle">아이디</span>
-        <label class="label">
-            <input autofocus type="email" class="_object-input input" maxlength="50" name="pMail"
-                   placeholder="아이디 (이메일)">
-        </label>
-        <span class="warning" rel="emailWarning"></span>
-        <span class="subtitle">이름</span>
-        <label class="label">
-            <input autofocus type="text" class="_object-input input" maxlength="10" name="pName"
-                   placeholder="성명입력">
-        </label>
-        <span class="warning email" rel="pNameWarning">올바른 이메일을 입력해 주세요</span>
-        <span class="subtitle">생년월일</span>
-        <label class="label">
-            <input autofocus type="date" class="_object-input input" maxlength="10" name="pBirth">
-        </label>
-        <span class="warning email" rel="pBirthWarning">올바른 이메일을 입력해 주세요</span>
-        <span class="text">휴대폰번호가 변경된 경우 하단 <b>휴대폰 인증 찾기</b>를 통하여 <b>아이디 찾기</b>를 진행해주시기 바랍니다.</span>
-        <input class="_object-button _color-concept" type="submit" name="pMailSend" value="비밀번호 재설정">
-        <span class="warning password" rel="findPasswordWarning"></span>
-    </div>
-    <div class="find-container">
-        <span class="subtitle">휴대폰 인증으로 찾기</span>
-        <span class="text">*본인 인증 시 제공되는 정보는 해당 인증기관에서 직접 수집하며, 인증 이외의 용도로 이용 또는 저장되지 않습니다.</span>
-        <input type="button" class="_object-button" name="contact" value="휴대폰 인증">
-    </div>
-</form>
+    <form id="recoverForm" class="visible">
+        <div class="option-container">
+            <label class="label email">
+                <input checked class="option " name="option" type="radio" value="email">
+                <span class="title">아이디 찾기</span>
+            </label>
+            <label class="label password">
+                <input class="option" name="option" type="radio" value="password">
+                <span class="title">비밀번호 재설정</span>
+            </label>
+        </div>
+        <div class="field email-container" rel="email-container">
+            <span class="subtitle">이름</span>
+            <label class="label">
+                <input autofocus type="text" class="_object-input input" maxlength="10" name="eName"
+                       placeholder="성명입력">
+            </label>
+            <span class="warning email" rel="eNameWarning"></span>
+            <span class="subtitle">생년월일</span>
+            <label class="label">
+                <input autofocus type="date" class="_object-input input" maxlength="8" name="eBirth"
+                       placeholder="생년월일">
+            </label>
+            <span class="warning birth" rel="eBirthWarning"></span>
+            <span class="subtitle">연락처</span>
+            <label class="label button-container">
+                <input autofocus type="text" class="_object-input input" maxlength="11  " name="eContact"
+                       placeholder="휴대전화입력('-' 없이 입력)">
+                <input type="button" class="_object-button" name="eContactSend" value="인증번호 전송">
+            </label>
+            <span class="warning contact" rel="eContactWarning"></span>
+            <span class="subtitle">인증번호 확인</span>
+            <label class="label button-container">
+                <input disabled type="text" class="_object-input input"
+                       name="eContactCode" maxlength="6" placeholder="인증번호 (6자리)">
+                <input disabled class="_object-button" name="eContactVerify" type="button" value="인증번호 확인">
+            </label>
+            <span class="warning contactCode" rel="eContactCodeWarning"></span>
+            <span class="text">휴대폰번호가 변경된 경우 하단 <b>휴대폰 인증 찾기</b>를 통하여 <b>아이디 찾기</b>를 진행해주시기 바랍니다.</span>
+            <input class="_object-button _color-concept" type="submit" value="아이디 찾기">
+            <input hidden name="eContactSalt" type="hidden">
+        </div>
+        <div class="field password-container">
+            <span class="subtitle">아이디</span>
+            <label class="label">
+                <input autofocus type="email" class="_object-input input" maxlength="50" name="pMail"
+                       placeholder="아이디 (이메일)">
+            </label>
+            <span class="warning" rel="pMailWarning"></span>
+            <span class="subtitle">이름</span>
+            <label class="label">
+                <input autofocus type="text" class="_object-input input" maxlength="10" name="pName"
+                       placeholder="성명입력">
+            </label>
+            <span class="warning email" rel="pNameWarning">올바른 이메일을 입력해 주세요</span>
+            <span class="subtitle">생년월일</span>
+            <label class="label">
+                <input autofocus type="date" class="_object-input input" maxlength="10" name="pBirth">
+            </label>
+            <span class="warning email" rel="pBirthWarning">올바른 이메일을 입력해 주세요</span>
+            <span class="text">휴대폰번호가 변경된 경우 하단 <b>휴대폰 인증 찾기</b>를 통하여 <b>아이디 찾기</b>를 진행해주시기 바랍니다.</span>
+            <input class="_object-button _color-concept" type="submit" name="pMailSend" value="비밀번호 재설정">
+            <span class="warning password" rel="findPasswordWarning"></span>
+        </div>
+        <!--    <div class="find-container">
+                <span class="subtitle">휴대폰 인증으로 찾기</span>
+                <span class="text">*본인 인증 시 제공되는 정보는 해당 인증기관에서 직접 수집하며, 인증 이외의 용도로 이용 또는 저장되지 않습니다.</span>
+                <input type="button" class="_object-button" name="contact" value="휴대폰 인증">
+            </div>-->
+    </form>
 </th:block>
 </body>
 </html>

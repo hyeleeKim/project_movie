@@ -11,8 +11,10 @@
             <li class="listMenu"><a href="#"><span>마이페이지</span></a></li>
         </ul>
         <div class="loginMenu">
-            <a th:href="@{/login}" class="listLogin">로그인</a>
-            <a th:href="@{/register}" class="listRegister">회원가입</a>
+            <a th:href="@{/login}" th:if="${session.user == null}" class="listLogin">로그인</a>
+            <span class="userName" th:if="${session.user != null}" th:text="${session.user.getName()+' 님'}"></span>
+            <a th:href="@{/register}" th:if="${session.user == null}" class="listRegister">회원가입</a>
+            <a th:href="@{/logout}" th:if="${session.user != null}" class="logout">로그아웃</a>
         </div>
     </div>
 </header>

@@ -1,11 +1,10 @@
 package com.ixtx.projectmoviesq.services;
 
 
+import com.ixtx.projectmoviesq.entities.RecoverCodeEntity;
 import com.ixtx.projectmoviesq.entities.RegisterCodeEntity;
 import com.ixtx.projectmoviesq.entities.UserEntity;
-import com.ixtx.projectmoviesq.enums.RegisterResult;
-import com.ixtx.projectmoviesq.enums.RegisterSendCodeResult;
-import com.ixtx.projectmoviesq.enums.VerifyRegisterCodeResult;
+import com.ixtx.projectmoviesq.enums.*;
 import com.ixtx.projectmoviesq.mappers.UserMapper;
 import com.ixtx.projectmoviesq.utils.CryptoUtil;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -26,7 +25,7 @@ public class UserService {
     }
 
     // 회원가입 휴대폰 인증번호 보내기
-    public RegisterSendCodeResult sendContactCode(RegisterCodeEntity registerCode) {
+    public RegisterSendCodeResult registerSendContactCode(RegisterCodeEntity registerCode) {
 
         // 값이 없거나 정규식이 틀린 경우
         if (registerCode == null
@@ -61,6 +60,7 @@ public class UserService {
 
     }
 
+    // 회원가입 인증번호 확인
     public VerifyRegisterCodeResult verifyRegisterCode(RegisterCodeEntity registerCode) {
 
         // DB 인증번호인지 확인
@@ -85,7 +85,8 @@ public class UserService {
 
     }
 
-    public RegisterResult putUser(UserEntity user) {
+    // 회원가입 완료
+    public RegisterResult registerUser (UserEntity user) {
 
         if (this.userMapper.selectUserByEmail(user.getEmail()) != null) {
             return RegisterResult.FAILURE_EMAIL_DUPLICATE;
@@ -100,4 +101,44 @@ public class UserService {
                 ? RegisterResult.SUCCESS
                 : RegisterResult.FAILURE;
     }
+
+    // 로그인
+    public LoginResult loginUser (HttpSession session, UserEntity user){
+        UserEntity existingUser = this.userMapper.selectUserByEmail(user.getEmail());
+
+        // 가입된 이메일이 없을 때
+        if(existingUser == null){
+            return LoginResult.FAILURE_WRONG_ID;
+        }
+
+        // 입력받은 비밀번호 암호화
+        user.setPassword(CryptoUtil.hashSha512(user.getPassword()));
+
+        // 가입된 이메일의 비밀번호와 입력받은 비밀번호 동일 여부
+        if(!user.getPassword().equals(existingUser.getPassword())){
+            return LoginResult.FAILURE_WRONG_PWD;
+        }
+        // 삭제된 계정
+        if(existingUser.getStatus().equals("DELETED")){
+            return LoginResult.FAILURE_DELETED;
+        }
+        // 사용 중지된 계정
+        if(existingUser.getStatus().equals("SUSPENDED")){
+            return LoginResult.FAILURE_SUSPENDED;
+        }
+
+        user.setName(existingUser.getName())
+                .setBirthday(existingUser.getBirthday())
+                .setContact(existingUser.getContact())
+                .setRegisteredAt(existingUser.getRegisteredAt());
+
+       return LoginResult.SUCCESS;
+    }
+
+    // 아이디 찾기 휴대폰 인증번호 보내기
+    public RecoverEmailCodeResult recoverSendContactCode(RecoverCodeEntity recoverCode){
+
+        return null;
+    }
+
 }

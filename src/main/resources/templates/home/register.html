@@ -14,7 +14,7 @@
 </head>
 <body>
 <th:block layout:fragment="customContents">
-<form id="registerForm" class="step-1">
+<form id="registerForm" class="step-4">
   <header class="header">
     <div class="text-container">
       <h2 class="title">회원가입</h2>
@@ -122,8 +122,9 @@ Morbi rutrum neque semper, dictum ex suscipit, congue magna. Fusce tortor arcu, 
   </section>
   <section class="section step-4">
     <img class="image" th:src="@{/resources/images/congratulation.jpg}" alt="">
-    <span class="title text">[] 님 회원가입이 완료되었습니다.</span>
-    <span class="text">* 로그인 이후 MovieSQ 서비스 이용이 가능합니다. *</span>
+    <span class="title text"><span id="user" >홍길동</span>님 회원가입이 완료되었습니다.</span>
+    <span class="text">완료버튼 누르면 로그인 화면으로 이동합니다.</span>
+    <span class="text">로그인 이후 MovieSQ 서비스 이용이 가능합니다.</span>
   </section>
   <div class="button-container">
     <a class="_object-button button cancel" href="#">취소</a>

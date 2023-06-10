@@ -122,6 +122,13 @@ input[type=radio]{
     padding-left: 1rem;
 }
 
+
+.loginMenu >  .logout {
+    border-left: 0.0625rem solid dimgrey;
+    margin-left: 1rem;
+    padding-left: 1rem;
+}
+
 /* footer */
 footer {
     background-color: lightgray;

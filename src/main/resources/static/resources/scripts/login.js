@@ -12,21 +12,21 @@ loginForm.show = () => {
 // 로그인 경고창 show,hide 정의 (이메일, 비밀번호 미작성, 불일치)
 loginForm.emailWarning = loginForm.querySelector('[rel="emailWarning"]');
 loginForm.emailWarning.show = (text) => {
-    loginForm.emailWarning.innerText = text;
+    loginForm.emailWarning.innerHTML = text;
     loginForm.emailWarning.classList.add('visible');
 }
 loginForm.emailWarning.hide = () => loginForm.emailWarning.classList.remove('visible');
 
 loginForm.passwordWarning = loginForm.querySelector('[rel="passwordWarning"]');
 loginForm.passwordWarning.show = (text) => {
-    loginForm.passwordWarning.innerText = text;
+    loginForm.passwordWarning.innerHTML = text;
     loginForm.passwordWarning.classList.add('visible');
 }
 loginForm.passwordWarning.hide = () => loginForm.passwordWarning.classList.remove('visible');
 
 loginForm.loginWarning = loginForm.querySelector('[rel="loginWarning"]');
 loginForm.loginWarning.show = (text) => {
-    loginForm.loginWarning.innerText = text;
+    loginForm.loginWarning.innerHTML = text;
     loginForm.loginWarning.classList.add('visible');
 }
 
@@ -74,10 +74,31 @@ loginForm.onsubmit = e => {
     xhr.onreadystatechange = () =>{
         if(xhr.readyState === XMLHttpRequest.DONE){
             if(xhr.status >= 200 && xhr.status < 400){
-                //TODO 로그인 진행하기
-                alert('성공');
+                const responseObject = JSON.parse(xhr.responseText);
+                switch(responseObject.result){
+                    case 'success':
+                        location.href = '/';
+                        break;
+                    case 'failure':
+                        loginForm.loginWarning.show('로그인에 실패했습니다. <br>잠시 후 다시 시도해 주세요.');
+                        break;
+                    case 'failure_wrong_id':
+                        loginForm.loginWarning.show('아이디 혹은 비밀번호를 잘못 입력하셨습니다. <br> 다시 한번 확인해 주세요.');
+                        break;
+                    case 'failure_wrong_pwd':
+                        loginForm.loginWarning.show('아이디 혹은 비밀번호를 잘못 입력하셨습니다. <br> 다시 한번 확인해 주세요.');
+                        break;
+                    case 'failure_deleted':
+                        loginForm.loginWarning.show('해당 계정은 삭제된 계정입니다.');
+                        break;
+                    case 'failure_suspended':
+                        loginForm.loginWarning.show('해당 계정은 이용이 정지된 계정입니다. <br>관리자에게 문의해 주세요.')
+                        break;
+                    default :
+                        loginForm.loginWarning.show('알 수 없는 이유로 로그인에 실패했습니다.<br> 잠시 후 다시 시도해 주세요.');
+                }
             } else {
-                alert('실패!');
+                loginForm.loginWarning.show('서버 통신에 실패했습니다. <br> 잠시 후 다시 시도해 주세요.');
             }
         }
     };

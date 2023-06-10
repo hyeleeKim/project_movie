@@ -1,5 +1,5 @@
 const registerForm = document.getElementById('registerForm');
-
+const user = document.getElementById('user');
 
 // 회원가입 보여주기
 // registerForm.show = () => {
@@ -89,10 +89,10 @@ registerForm['cContactSend'].onclick = () => {
                         registerForm['cContactVerify'].removeAttribute('disabled');
                         registerForm['contactSalt'].value = responseObject.salt;
                         registerForm['cContactCode'].focus();
-                        registerForm.cContactWarning.show('입력하신 번호로 인증번호로 전송했습니다. <br> 아래 인증번호 확인란에 5분 이내로 입력해 주세요.');
+                        registerForm.cContactWarning.show('입력하신 연락처로 인증번호로 전송했습니다. <br> 아래 인증번호 확인란에 5분 이내로 입력해 주세요.');
                         break;
                     case 'failure_duplicate':
-                        registerForm.cContactWarning.show('이미 회원가입된 번호입니다. 가입하신 아이디로 로그인해주세요.<br>기억이 나지 않으시면 아이디 찾기를 이용해 주세요.');
+                        registerForm.cContactWarning.show('이미 가입된 번호입니다. 가입하신 아이디로 로그인해주세요.<br>기억이 나지 않으시면 아이디 찾기를 이용해 주세요.');
                         registerForm['cContact'].focus();
                         registerForm['cContact'].select();
                         break;
@@ -323,6 +323,7 @@ registerForm.onsubmit = e => {
                         case 'success':
                             registerForm.classList.remove('step-3');
                             registerForm.classList.add('step-4');
+                            user.innerText = registerForm['name'].value;
                             break;
                     }
                 } else {

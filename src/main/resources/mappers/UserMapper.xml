@@ -4,20 +4,21 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ixtx.projectmoviesq.mappers.UserMapper">
     <insert id="insertRegisterContactCode"
-    useGeneratedKeys="true"
-    keyColumn="index"
-    keyProperty="index"
-    parameterType="com.ixtx.projectmoviesq.entities.RegisterCodeEntity">
-    INSERT INTO `moviesq`.`register_codes`(`contact`, `code`, `salt`, `created_at`, `expires_at`, `expired_flag`)
+            useGeneratedKeys="true"
+            keyColumn="index"
+            keyProperty="index"
+            parameterType="com.ixtx.projectmoviesq.entities.RegisterCodeEntity">
+        INSERT INTO `moviesq`.`register_codes`(`contact`, `code`, `salt`, `created_at`, `expires_at`, `expired_flag`)
         VALUES (#{contact},
-               #{code},
-               #{salt},
-               IFNULL(#{createdAt},DEFAULT(`created_at`)),
-               #{expiresAt},
-               IFNULL(#{isExpired}, DEFAULT(`expired_flag`)))
+                #{code},
+                #{salt},
+                IFNULL(#{createdAt}, DEFAULT(`created_at`)),
+                #{expiresAt},
+                IFNULL(#{isExpired}, DEFAULT(`expired_flag`)))
     </insert>
     <insert id="insertUser">
-        INSERT INTO `moviesq`.`users`(`email`, `password`, `name`, `birth`, `contact`, `status`, `admin_flag`, `registered_at`)
+        INSERT INTO `moviesq`.`users`(`email`, `password`, `name`, `birth`, `contact`, `status`, `admin_flag`,
+                                      `registered_at`)
         VALUES (#{email},
                 #{password},
                 #{name},
@@ -27,47 +28,61 @@
                 #{isAdmin},
                 IFNULL(#{registeredAt}, DEFAULT(`admin_flag`)))
     </insert>
+    <insert id="insertRecoverContactCode"
+            useGeneratedKeys="true"
+            keyProperty="index"
+            keyColumn="index"
+            parameterType="com.ixtx.projectmoviesq.entities.RecoverCodeEntity">
+        INSERT INTO `moviesq`.`recover_account_contact_codes`(`contact`, `code`, `salt`, `created_at`, `expires_at`, `expired_flag`)
+        VALUES (#{contact},
+                #{code},
+                #{salt},
+                #{createdAt},
+                #{expiresAt},
+                #{ixExpired})
+    </insert>
     <select id="selectUserByEmail" resultType="com.ixtx.projectmoviesq.entities.UserEntity">
-        SELECT `email` AS `email`,
-               `password` AS `password`,
-               `name` AS `name`,
-               `birth` AS `birth`,
-               `contact` AS `contact`,
-               `status` AS `status`,
-               `admin_flag` AS `isAdmin`,
+        SELECT `email`         AS `email`,
+               `password`      AS `password`,
+               `name`          AS `name`,
+               `birth`         AS `birth`,
+               `contact`       AS `contact`,
+               `status`        AS `status`,
+               `admin_flag`    AS `isAdmin`,
                `registered_at` AS `registeredAt`
         FROM `moviesq`.`users`
-        WHERE `email` = #{email}
+        WHERE BINARY `email` = #{email}
         LIMIT 1
     </select>
     <select id="selectUserByContact"
             resultType="com.ixtx.projectmoviesq.entities.UserEntity">
-        SELECT `email` AS `email`,
-               `password` AS `password`,
-               `name` AS `name`,
-               `birth` AS `birth`,
-               `contact` AS `contact`,
-               `status` AS `status`,
-               `admin_flag` AS `isAdmin`,
+        SELECT `email`         AS `email`,
+               `password`      AS `password`,
+               `name`          AS `name`,
+               `birth`         AS `birth`,
+               `contact`       AS `contact`,
+               `status`        AS `status`,
+               `admin_flag`    AS `isAdmin`,
                `registered_at` AS `registeredAt`
         FROM `moviesq`.`users`
-        WHERE `contact` = #{contact}
+        WHERE BINARY `contact` = #{contact}
         LIMIT 1
     </select>
+
     <select id="selectRegisterByContactCodeSalt"
             resultType="com.ixtx.projectmoviesq.entities.RegisterCodeEntity"
             parameterType="com.ixtx.projectmoviesq.entities.RegisterCodeEntity">
-        SELECT `index` AS `index`,
-               `contact` AS `contact`,
-               `code` AS `code`,
-               `salt` AS `salt`,
-               `created_at` AS `createdAt`,
-               `expires_at` AS `expiresAt`,
+        SELECT `index`        AS `index`,
+               `contact`      AS `contact`,
+               `code`         AS `code`,
+               `salt`         AS `salt`,
+               `created_at`   AS `createdAt`,
+               `expires_at`   AS `expiresAt`,
                `expired_flag` AS `isExpired`
         FROM `moviesq`.`register_codes`
         WHERE BINARY `contact` = #{contact}
-         AND BINARY `code` = #{code}
-         AND BINARY `salt` = #{salt}
+          AND BINARY `code` = #{code}
+          AND BINARY `salt` = #{salt}
         LIMIT 1
     </select>
     <update id="updateRegisterExpired" parameterType="com.ixtx.projectmoviesq.entities.RegisterCodeEntity">

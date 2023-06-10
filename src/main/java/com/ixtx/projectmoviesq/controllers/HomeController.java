@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping(value = "/")
 public class HomeController {
@@ -18,6 +20,13 @@ public class HomeController {
     @RequestMapping(value = "login", method = RequestMethod.GET)
     public ModelAndView getLogin(){
         return new ModelAndView("home/login");
+    }
+
+    @RequestMapping(value ="logout", method = RequestMethod.GET)
+    public ModelAndView getLogout(HttpSession session){
+        session.setAttribute("user", null);
+
+        return new ModelAndView("home/index");
     }
 
 }

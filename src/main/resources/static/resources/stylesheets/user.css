@@ -2,7 +2,6 @@
 /*@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard.css");*/
 
 
-
 /*region button*/
 ._object-button {
     border-radius: 0.25rem;
@@ -93,7 +92,6 @@
     max-height: 3rem;
     padding: 0.5rem 0.5rem;
 }
-
 
 
 #loginForm > .title {
@@ -438,7 +436,6 @@
 }
 
 
-
 #registerForm.step-3 > .section.step-3 > .label > .input {
     border-bottom: 0.0125rem solid #727272;
     padding: 0.5rem;
@@ -449,9 +446,6 @@
     width: 100%;
 
 }
-
-
-
 
 
 /*회원가입 4단계*/
@@ -469,14 +463,16 @@
 #registerForm.step-4 > .section.step-4 > .text.title {
     font-size: 1rem;
     font-weight: 600;
+    margin-bottom: 1rem;
 }
 
-#registerForm.step-4 > .section.step-4 > .title + .title {
-    margin-top: 1rem;
-}
 
 #registerForm.step-4 > .section.step-4 > .text + .text {
-    margin-bottom: 2rem;
+    margin-bottom: 0.5rem;
+    color: #727272;
+    font-weight: 400;
+    font-size: 0.8rem;
+
 }
 
 
@@ -543,6 +539,100 @@
 /*endregion*/
 
 /*region recoverForm*/
+
+#cover {
+    width: 100vw;
+    height: 100vh;
+    filter: blur(80%);
+    background-color: black;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    opacity: 0;
+    pointer-events: none;
+}
+
+#cover.visible {
+    opacity: 70%;
+    pointer-events: all;
+}
+
+#popUp {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 20rem;
+    min-height: 10rem;
+    background-color: white;
+    position: fixed;
+    z-index: 9;
+    box-sizing: border-box;
+    border-radius: 0.5rem;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    opacity: 0;
+    pointer-events: none;
+}
+
+#popUp.visible {
+    opacity: 1;
+    pointer-events: all;
+}
+
+
+#popUp > .title {
+    width: 100%;
+    background: var(--concept-color-orange);
+    align-self: flex-start;
+    height: 1.5rem;
+    text-align: center;
+    color: white;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    padding: 0.3rem 0;
+}
+
+#popUp > .content {
+    padding: 1.5rem;
+}
+
+#popUp > .content > .text {
+    font-size: 0.9rem;
+}
+
+#popUp > .content > .text + .text {
+    margin-top: 0.4rem;
+}
+
+#popUp > .button-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%
+}
+
+#popUp > .button-container > ._object-button {
+    margin: unset;
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+    font-size: 0.9rem;
+    border-bottom-left-radius: 0.5rem;
+    text-decoration: none;
+}
+
+
+#popUp > .button-container > ._object-button._color-concept {
+    color: white;
+    border-bottom-left-radius: unset;
+    border-bottom-right-radius: 0.5rem;
+}
+
+
 #recoverForm > .option-container {
     display: grid;
     gap: 0.5rem;
