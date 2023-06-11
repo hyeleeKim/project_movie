@@ -9,6 +9,7 @@ import com.ixtx.projectmoviesq.mappers.UserMapper;
 import com.ixtx.projectmoviesq.utils.CryptoUtil;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.time.DateUtils;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -65,21 +66,24 @@ public class UserService {
     public VerifyRegisterCodeResult verifyRegisterCode(RegisterCodeEntity registerCode) {
 
         // DB 인증번호인지 확인
-        RegisterCodeEntity existingRegister = this.userMapper.selectRegisterByContactCodeSalt(registerCode.getContact(), registerCode.getCode(), registerCode.getSalt());
+        RegisterCodeEntity existingRegister = this.userMapper.selectRegisterByContactCodeSalt(registerCode.getContact(),
+                registerCode.getCode(),
+                registerCode.getSalt());
 
+        // 인증번호 발송한 회원이 아닌 경우
         if (existingRegister == null) {
             return VerifyRegisterCodeResult.FAILURE;
         }
 
-        Date current = new Date();
+        // 유효시간이 지난경우
 
+        Date current = new Date();
         if (current.compareTo(existingRegister.getExpiresAt()) > 0) {
             return VerifyRegisterCodeResult.FAILURE_EXPIRED;
         }
 
+        // 인증완료
         existingRegister.setExpired(true);
-
-        this.userMapper.updateRegisterExpired(existingRegister);
 
         return existingRegister.isExpired()
                 ? VerifyRegisterCodeResult.SUCCESS

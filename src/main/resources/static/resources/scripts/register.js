@@ -56,10 +56,13 @@ registerForm.passwordCheckWarning.show = (text) => showWarning(registerForm.pass
 registerForm.passwordCheckWarning.hide = () => hideWarning(registerForm.passwordCheckWarning);
 
 
+window.onload = () => {
+    sessionStorage.clear();
+}
+
 // 회원가입 휴대폰 인증
 registerForm['cContactSend'].onclick = () => {
     registerForm.cContactWarning.hide();
-
 
     if (registerForm['cContact'].value === '') {
         registerForm.cContactWarning.show('휴대전화 번호를 입력해주세요.');
@@ -146,6 +149,8 @@ registerForm['cContactVerify'].onclick = () => {
                     case 'success':
                         registerForm.cContactCodeWarning.show('인증번호 인증이 완료되었습니다. <br> 다음 버튼을 눌러 회원가입을 진행해 주세요.');
                         registerForm['next'].removeAttribute('disabled');
+                        sessionStorage.setItem("expired", responseObject['expired']);
+
                         return;
                     case 'failure':
                         registerForm.cContactCodeWarning.show('인증번호를 잘못 입력하셨습니다. <br> 다시한번 확인해 주세요.');
@@ -204,7 +209,7 @@ registerForm.onsubmit = e => {
             return;
         }
 
-        if(sessionStorage.getItem("expired") === 'false') {
+        if(sessionStorage.getItem('expired') === 'false') {
             registerForm.cContactCodeWarning.show('인증번호 확인을 진행해 주세요.')
             return;
         }

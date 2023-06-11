@@ -50,7 +50,6 @@ public class UserController {
 
         if (result == RegisterSendCodeResult.SUCCESS) {
             responseObject.put("salt", registerCode.getSalt());
-            System.out.println(registerCode.isExpired());
             responseObject.put("expired", registerCode.isExpired());
         }
 
@@ -102,7 +101,10 @@ public class UserController {
         JSONObject responseObject = new JSONObject();
         responseObject.put("result", result.name().toLowerCase());
 
-
+        if (result == VerifyRegisterCodeResult.SUCCESS) {
+            responseObject.put("salt", registerCode.getSalt());
+            responseObject.put("expired", !registerCode.isExpired());
+        }
         return responseObject.toString();
     }
 
