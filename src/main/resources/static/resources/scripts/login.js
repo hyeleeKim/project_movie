@@ -70,7 +70,7 @@ loginForm.onsubmit = e => {
     const formData = new FormData();
     formData.append("email",loginForm['email'].value);
     formData.append("password",loginForm['password'].value);
-    xhr.open('POST','./login');
+    xhr.open('POST','/login');
     xhr.onreadystatechange = () =>{
         if(xhr.readyState === XMLHttpRequest.DONE){
             if(xhr.status >= 200 && xhr.status < 400){

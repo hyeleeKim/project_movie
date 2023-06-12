@@ -133,7 +133,7 @@ input[type=radio]{
 footer {
     background-color: lightgray;
     min-height: 5rem;
-    position: absolute;
+    position: relative;
     width: 100%;
 }
 

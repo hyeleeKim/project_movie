@@ -38,12 +38,19 @@ public class UserController {
         return new ModelAndView("home/register");
     }
 
+
+    // ID 찾기, 비밀번호 재설정
+    @RequestMapping(value = "recover", method = RequestMethod.GET)
+    public ModelAndView getRecover() {
+        return new ModelAndView("home/recover");
+    }
+
     //회원가입 휴대폰 인증번호 보내기
     @ResponseBody
-    @RequestMapping(value = "sendContactCode",
-            method = RequestMethod.POST,
+    @RequestMapping(value = "contactCode",
+            method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public String postSendContactCode(RegisterCodeEntity registerCode) {
+    public String getContactCode(RegisterCodeEntity registerCode) {
         RegisterSendCodeResult result = this.userService.registerSendContactCode(registerCode);
         JSONObject responseObject = new JSONObject();
         responseObject.put("result", result.name().toLowerCase());
@@ -56,23 +63,45 @@ public class UserController {
         return responseObject.toString();
     }
 
-
+    // 아이디 찾기 휴대폰 인증번호 보내기
     @ResponseBody
-    @RequestMapping(value = "recoverSendCode",
-            method = RequestMethod.POST,
+    @RequestMapping(value = "contactCodeRec",
+            method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public String postRecoverSendCode(RecoverCodeEntity recoverCode) {
+    public String getContactCodeRec(RecoverCodeEntity recoverCode) {
         RecoverSendCodeResult result = this.userService.recoverSendContactCode(recoverCode);
         JSONObject responseObject = new JSONObject();
         responseObject.put("result", result.name().toLowerCase());
 
-        if(result == RecoverSendCodeResult.SUCCESS){
+        if (result == RecoverSendCodeResult.SUCCESS) {
             responseObject.put("salt", recoverCode.getSalt());
-
         }
 
         return responseObject.toString();
     }
+
+    // 아이디 찾기
+    @ResponseBody
+    @RequestMapping(value = "searchId",
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public String postContactCodeRec(UserEntity user, @RequestParam(value = "birthStr") String birthStr) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date birth = sdf.parse(birthStr);
+        user.setBirthday(birth);
+
+        RecoverIdResult result = this.userService.findId(user) ;
+        JSONObject responseObject = new JSONObject();
+        responseObject.put("result",result);
+
+        if(result == RecoverIdResult.SUCCESS){
+            responseObject.put("name",user.getName());
+            responseObject.put("name",user.getEmail());
+        }
+
+        return null;
+    }
+
 
     // 로그인
     @ResponseBody
@@ -91,27 +120,10 @@ public class UserController {
         return responseObject.toString();
     }
 
-    // 회원가입 휴대폰 인증번호 확인
-    @ResponseBody
-    @RequestMapping(value = "contactCode",
-            method = RequestMethod.PATCH,
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    public String patchContactCode(RegisterCodeEntity registerCode) {
-        VerifyRegisterCodeResult result = this.userService.verifyRegisterCode(registerCode);
-        JSONObject responseObject = new JSONObject();
-        responseObject.put("result", result.name().toLowerCase());
-
-        if (result == VerifyRegisterCodeResult.SUCCESS) {
-            responseObject.put("salt", registerCode.getSalt());
-            responseObject.put("expired", !registerCode.isExpired());
-        }
-        return responseObject.toString();
-    }
-
-
     // 회원가입 진행 완료
     @ResponseBody
-    @RequestMapping(value = "register", method = RequestMethod.POST)
+    @RequestMapping(value = "register",
+            method = RequestMethod.POST)
     public String postRegister(UserEntity user, @RequestParam(value = "birthStr") String birthStr) throws ParseException {
         //birth type : String -> Date 바꾸기
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -126,10 +138,36 @@ public class UserController {
     }
 
 
-    // ID 찾기, 비밀번호 재설정
-    @RequestMapping(value = "recover", method = RequestMethod.GET)
-    public ModelAndView getRecover() {
-        return new ModelAndView("home/recover");
+    // 회원가입 휴대폰 인증번호 확인
+    @ResponseBody
+    @RequestMapping(value = "contactCode",
+            method = RequestMethod.PATCH,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public String patchContactCode(RegisterCodeEntity registerCode) {
+        VerifyRegisterCodeResult result = this.userService.registerCodeResult(registerCode);
+        JSONObject responseObject = new JSONObject();
+        responseObject.put("result", result.name().toLowerCase());
+
+        if (result == VerifyRegisterCodeResult.SUCCESS) {
+            responseObject.put("salt", registerCode.getSalt());
+            responseObject.put("expired", !registerCode.isExpired());
+        }
+        return responseObject.toString();
     }
+
+    // 아이디 찾기 휴대폰 인증번호 확인
+    @ResponseBody
+    @RequestMapping(value = "contactCodeRec",
+            method = RequestMethod.PATCH,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public String patchContactCodeRec(RecoverCodeEntity recoverCode) {
+        VerifyRecoverCodeResult result = this.userService.recoverCodeResult(recoverCode);
+
+        JSONObject responseObject = new JSONObject();
+        responseObject.put("result", result.name().toLowerCase());
+
+        return responseObject.toString();
+    }
+
 
 }

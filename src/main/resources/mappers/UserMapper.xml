@@ -37,7 +37,7 @@
         VALUES (#{contact},
                 #{code},
                 #{salt},
-                IFNULL(#{createdAt},DEFAULT(`created_at`)),
+                IFNULL(#{createdAt}, DEFAULT(`created_at`)),
                 #{expiresAt},
                 IFNULL(#{isExpired}, DEFAULT(`expired_flag`)))
     </insert>
@@ -68,7 +68,22 @@
         WHERE BINARY `contact` = #{contact}
         LIMIT 1
     </select>
-
+    <select id="selectUserByNameBirthContact"
+            resultType="com.ixtx.projectmoviesq.entities.UserEntity">
+        SELECT `email`         AS `email`,
+               `password`      AS `password`,
+               `name`          AS `name`,
+               `birth`         AS `birth`,
+               `contact`       AS `contact`,
+               `status`        AS `status`,
+               `admin_flag`    AS `isAdmin`,
+               `registered_at` AS `registeredAt`
+        FROM `moviesq`.`users`
+        WHERE BINARY `name` = #{name}
+          AND BINARY `birth` = #{birthday}
+          AND BINARY `contact` = #{contact}
+        LIMIT 1
+    </select>
     <select id="selectRegisterByContactCodeSalt"
             resultType="com.ixtx.projectmoviesq.entities.RegisterCodeEntity"
             parameterType="com.ixtx.projectmoviesq.entities.RegisterCodeEntity">
@@ -85,6 +100,36 @@
           AND BINARY `salt` = #{salt}
         LIMIT 1
     </select>
+    <select id="selectRecoverIdByContactCodeSalt"
+            resultType="com.ixtx.projectmoviesq.entities.RecoverCodeEntity"
+            parameterType="com.ixtx.projectmoviesq.entities.RecoverCodeEntity">
+        SELECT `index`        AS `index`,
+               `contact`      AS `contact`,
+               `code`         AS `code`,
+               `salt`         AS `salt`,
+               `created_at`   AS `createdAt`,
+               `expires_at`   AS `expiresAt`,
+               `expired_flag` AS `isExpired`
+        FROM `moviesq`.`recover_account_contact_codes`
+        WHERE BINARY `contact` = #{contact}
+          AND BINARY `code` = #{code}
+          AND BINARY `salt` = #{salt}
+        LIMIT 1
+    </select>
+    <select id="selectRecoverIdByContact"
+    resultType="com.ixtx.projectmoviesq.entities.RecoverCodeEntity"
+    parameterType="com.ixtx.projectmoviesq.entities.RecoverCodeEntity">
+        SELECT `index`        AS `index`,
+               `contact`      AS `contact`,
+               `code`         AS `code`,
+               `salt`         AS `salt`,
+               `created_at`   AS `createdAt`,
+               `expires_at`   AS `expiresAt`,
+               `expired_flag` AS `isExpired`
+        FROM `moviesq`.`recover_account_contact_codes`
+        WHERE BINARY `contact` = #{contact}
+        LIMIT 1
+    </select>
     <update id="updateRegisterExpired" parameterType="com.ixtx.projectmoviesq.entities.RegisterCodeEntity">
         UPDATE `moviesq`.`register_codes`
         SET `contact`= #{contact},
@@ -92,6 +137,17 @@
             `salt` = #{salt},
             `created_at` = #{createdAt},
             `expires_at` = #{expiresAt},
+            `expired_flag` = #{isExpired}
+        WHERE `index` = #{index}
+        LIMIT 1
+    </update>
+    <update id="updateRecoverExpired" parameterType="com.ixtx.projectmoviesq.entities.RecoverCodeEntity">
+        UPDATE `moviesq`.`recover_account_contact_codes`
+        SET `contact`      = #{contact},
+            `code`         = #{code},
+            `salt`         = #{salt},
+            `created_at`= #{createdAt},
+            `expires_at`   = #{expiresAt},
             `expired_flag` = #{isExpired}
         WHERE `index` = #{index}
         LIMIT 1

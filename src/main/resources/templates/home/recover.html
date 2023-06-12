@@ -14,8 +14,8 @@
 </head>
 <body>
 <th:block layout:fragment="customContents">
-    <div id="cover"></div>
-    <div id="popUp">
+    <div id="cover" ></div>
+    <div id="popUp" >
         <div class="title">알림</div>
         <div class="content">
             <div class="text"><b class="text user">홍길동</b>님</div>
@@ -64,7 +64,7 @@
                 <input disabled class="_object-button" name="eContactVerify" type="button" value="인증번호 확인">
             </label>
             <span class="warning contactCode" rel="eContactCodeWarning"></span>
-            <span class="text">휴대폰번호가 변경된 경우 하단 <b>휴대폰 인증 찾기</b>를 통하여 <b>아이디 찾기</b>를 진행해주시기 바랍니다.</span>
+<!--            <span class="text">휴대폰번호가 변경된 경우 하단 <b>휴대폰 인증 찾기</b>를 통하여 <b>아이디 찾기</b>를 진행해주시기 바랍니다.</span>-->
             <input class="_object-button _color-concept" type="submit" value="아이디 찾기">
             <input hidden name="eContactSalt" type="hidden">
         </div>
@@ -86,7 +86,7 @@
                 <input autofocus type="date" class="_object-input input" maxlength="10" name="pBirth">
             </label>
             <span class="warning email" rel="pBirthWarning">올바른 이메일을 입력해 주세요</span>
-            <span class="text">휴대폰번호가 변경된 경우 하단 <b>휴대폰 인증 찾기</b>를 통하여 <b>아이디 찾기</b>를 진행해주시기 바랍니다.</span>
+<!--            <span class="text">휴대폰번호가 변경된 경우 하단 <b>휴대폰 인증 찾기</b>를 통하여 <b>아이디 찾기</b>를 진행해주시기 바랍니다.</span>-->
             <input class="_object-button _color-concept" type="submit" name="pMailSend" value="비밀번호 재설정">
             <span class="warning password" rel="findPasswordWarning"></span>
         </div>

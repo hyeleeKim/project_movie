@@ -77,9 +77,7 @@ registerForm['cContactSend'].onclick = () => {
     }
 
     const xhr = new XMLHttpRequest();
-    const formData = new FormData();
-    formData.append("contact", registerForm['cContact'].value);
-    xhr.open('POST', '/sendContactCode');
+    xhr.open('GET', `/contactCode?contact=${registerForm['cContact'].value}`);
     xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status >= 200 && xhr.status < 400) {
@@ -109,7 +107,7 @@ registerForm['cContactSend'].onclick = () => {
             }
         }
     };
-    xhr.send(formData);
+    xhr.send();
 
 }
 

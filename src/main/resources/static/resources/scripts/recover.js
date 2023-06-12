@@ -9,7 +9,7 @@ recoverForm.show = () => {
 // 아이디 찾기 경고
 recoverForm.nameWarning = recoverForm.querySelector('[rel="eNameWarning"]');
 recoverForm.nameWarning.show = (text) => {
-    recoverForm.nameWarning.innerText = text;
+    recoverForm.nameWarning.innerHTML = text;
     recoverForm.nameWarning.classList.add('visible');
 }
 recoverForm.nameWarning.hide = () =>
@@ -17,7 +17,7 @@ recoverForm.nameWarning.hide = () =>
 
 recoverForm.birthWarning = recoverForm.querySelector('[rel="eBirthWarning"]');
 recoverForm.birthWarning.show = (text) => {
-    recoverForm.birthWarning.innerText = text;
+    recoverForm.birthWarning.innerHTML = text;
     recoverForm.birthWarning.classList.add('visible');
 }
 recoverForm.birthWarning.hide = () => {
@@ -42,21 +42,21 @@ recoverForm.contactCodeWarning.classList.remove('visible');
 //비밀번호 재설정 경고
 recoverForm.emailWarning = recoverForm.querySelector('[rel="pMailWarning"]');
 recoverForm.emailWarning.show = (text) => {
-    recoverForm.emailWarning.innerText = text;
+    recoverForm.emailWarning.innerHTML = text;
     recoverForm.emailWarning.classList.add('visible');
 }
 recoverForm.emailWarning.classList.remove('visible');
 
 recoverForm.pNameWarning = recoverForm.querySelector('[rel="pNameWarning"]');
 recoverForm.pNameWarning.show = (text) => {
-    recoverForm.pNameWarning.innerText = text;
+    recoverForm.pNameWarning.innerHTML = text;
     recoverForm.pNameWarning.classList.add('visible');
 }
 recoverForm.pNameWarning.classList.remove('visible');
 
 recoverForm.pBirthWarning = recoverForm.querySelector('[rel="pBirthWarning"]');
 recoverForm.pBirthWarning.show = (text) => {
-    recoverForm.pBirthWarning.innerText = text;
+    recoverForm.pBirthWarning.innerHTML = text;
     recoverForm.pBirthWarning.classList.add('visible');
 }
 recoverForm.pBirthWarning.classList.remove('visible');
@@ -66,6 +66,8 @@ const cover = document.getElementById('cover');
 const popUp = document.getElementById('popUp');
 const recoverPwd = document.querySelector('[data-method="recoverPassword"]');
 const radios = recoverForm.elements.option;
+const email = document.getElementsByClassName('.text.email');
+const name = document.getElementsByClassName('.text.user');
 
 // 이메일 확인 후 이동
 recoverPwd.onclick = () => {
@@ -93,9 +95,7 @@ recoverForm['eContactSend'].onclick = () => {
     }
 
     const xhr = new XMLHttpRequest();
-    const formData = new FormData();
-    xhr.open('POST', '/recoverSendCode');
-    formData.append("contact", recoverForm['eContact'].value);
+    xhr.open('GET', `/contactCodeRec?contact=${recoverForm['eContact'].value}`);
     xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status >= 200 && xhr.status < 300) {
@@ -121,7 +121,7 @@ recoverForm['eContactSend'].onclick = () => {
             }
         }
     };
-    xhr.send(formData);
+    xhr.send();
 
 }
 
@@ -145,12 +145,43 @@ recoverForm['eContactVerify'].onclick = () => {
         return;
     }
 
-    //TODO
+    const xhr = new XMLHttpRequest();
+    const formData = new FormData();
+    formData.append("contact",recoverForm['eContact'].value);
+    formData.append("code", recoverForm['eContactCode'].value);
+    formData.append("salt", recoverForm['eContactSalt'].value);
+    xhr.open('PATCH','contactCodeRec');
+    xhr.onreadystatechange = () => {
+        if(xhr.readyState === XMLHttpRequest.DONE){
+            if(xhr.status >=200 && xhr.status <300){
+                const responseText = JSON.parse(xhr.responseText);
+                switch(responseText.result){
+                    case 'failure':
+                        recoverForm.contactCodeWarning.show('인증번호를 잘못 입력 하셨습니다. 다시 한번 확인해 주세요.');
+                        break;
+                    case'failure_expired':
+                        recoverForm.contactCodeWarning.show('해당 번호는 유효기간이 만료되었습니다. 다시 처음부터 진행해 주세요.');
+                        break;
+                    case'success':
+                        recoverForm.contactCodeWarning.show('인증번호 인증이 완료되었습니다. <br> 아이디 찾기 버튼을 눌러 주세요.');
+                        recoverForm['eContactCode'].setAttribute('disabled','disabled');
+                        recoverForm['eContactVerify'].setAttribute('disabled','disabled');
+                        break;
+                    default :
+                        recoverForm.contactCodeWarning.show('인증번호 인증에 실패했습니다. 잠시 후 다시 시도해 주세요.');
+                }
+            }else{
+                recoverForm.contactCodeWarning.show('서버와 통신하지 못했습니다. 잠시 후 다시 시도해 주세요.');
+
+            }
+        }
+    };
+    xhr.send(formData);
 }
 
 
 
-// 아이디 찾기 경고
+// 아이디 찾기 , 비밀번호 재설정 확인
 recoverForm.onsubmit = e => {
     e.preventDefault();
     recoverForm.emailWarning.hide();
@@ -227,13 +258,31 @@ recoverForm.onsubmit = e => {
         }
 
         const xhr = new XMLHttpRequest();
-        xhr.open('GET', '');
+        const formData = new FormData();
+        formData.append('name',recoverForm['eName'].value);
+        formData.append('birthStr',recoverForm['eBirth'].value);
+        formData.append('contact',recoverForm['eContact'].value);
+        xhr.open('POST', 'searchId');
         xhr.onreadystatechange = () => {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status >= 200 && xhr.status < 400) {
-                    //TODO
+                 const responseText = JSON.parse(xhr.responseText);
+                 switch (responseText.result){
+                     case'failure':
+                         recoverForm.contactCodeWarning.show('회원정보를 잘못 입력하셨거나 가입한 회원이 아닙니다.');
+                         break;
+                     case 'failure_not_verify':
+                         recoverForm.contactCodeWarning.show('연락처 인증을 완료해 주세요.');
+                         break;
+                     case 'success':
+                         cover.classList.add('visible');
+                         popUp.classList.add('visible');
+                         user.innerText = responseText.name;
+                         email.innerText = responseText.email;
+                         break;
+                 }
                 } else {
-
+                    recoverForm.contactCodeWarning.show('서버와 통신하지 못했습니다. 잠시 후 다시 시도해 주세요.');
                 }
             }
         };

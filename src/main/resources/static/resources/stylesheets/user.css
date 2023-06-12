@@ -9,7 +9,7 @@
     cursor: pointer;
     padding: 0.6rem 0.8rem;
     margin: 0 0.5rem;
-    font-size: 1rem;
+    font-size: 0.9rem;
 }
 
 ._object-button:hover {
@@ -133,6 +133,7 @@
     font-weight: 600;
     border-radius: 0.5rem;
     color: white;
+    margin-top: 4rem;
 }
 
 

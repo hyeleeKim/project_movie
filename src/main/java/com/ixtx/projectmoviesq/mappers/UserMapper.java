@@ -26,7 +26,20 @@ public interface UserMapper {
     // 회원가입 이메일 중복, 로그인
     UserEntity selectUserByEmail(@Param("email")String email);
 
-    // 인증번호 확인후 상태 변경
+    // 아이디 찾기
+    UserEntity selectUserByNameBirthContact(UserEntity user);
+
+    // 인증번호 확인 (아이디 찾기)
+    RecoverCodeEntity selectRecoverIdByContactCodeSalt(@Param(value="contact")String contact ,@Param(value ="code")String code, @Param(value="salt")String salt);
+
+    // 아이디 찾기 휴대폰 인증여부
+    RecoverCodeEntity selectRecoverIdByContact(@Param(value ="contact")String contact);
+
+
+    // 회원가입 인증번호 확인후 상태 변경
     int updateRegisterExpired(RegisterCodeEntity registerCode);
+
+    // 아이디 찾기 인증번호 확인후 상태 변경
+    int updateRecoverExpired(RecoverCodeEntity recoverCode);
 
 }

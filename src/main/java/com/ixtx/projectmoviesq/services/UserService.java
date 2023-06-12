@@ -8,6 +8,7 @@ import com.ixtx.projectmoviesq.enums.*;
 import com.ixtx.projectmoviesq.mappers.UserMapper;
 import com.ixtx.projectmoviesq.utils.CryptoUtil;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,8 +63,8 @@ public class UserService {
 
     }
 
-    // 회원가입 인증번호 확인
-    public VerifyRegisterCodeResult verifyRegisterCode(RegisterCodeEntity registerCode) {
+    // 회원가입 휴대폰 인증번호 확인
+    public VerifyRegisterCodeResult registerCodeResult(RegisterCodeEntity registerCode) {
 
         // DB 인증번호인지 확인
         RegisterCodeEntity existingRegister = this.userMapper.selectRegisterByContactCodeSalt(registerCode.getContact(),
@@ -82,10 +83,9 @@ public class UserService {
             return VerifyRegisterCodeResult.FAILURE_EXPIRED;
         }
 
-        // 인증완료
+        // 인증완료 데이터 바꿔주기
         existingRegister.setExpired(true);
-
-        return existingRegister.isExpired()
+        return this.userMapper.updateRegisterExpired(existingRegister) > 0
                 ? VerifyRegisterCodeResult.SUCCESS
                 : VerifyRegisterCodeResult.FAILURE;
 
@@ -143,9 +143,14 @@ public class UserService {
 
     // 아이디 찾기 휴대폰 인증번호 보내기
     public RecoverSendCodeResult recoverSendContactCode(RecoverCodeEntity recoverCode) {
+
         if (recoverCode == null
                 || recoverCode.getContact() == null
                 || !recoverCode.getContact().matches("^01(?:0|1|[6-9])(?:\\d{3}|\\d{4})\\d{4}$")) {
+            return RecoverSendCodeResult.FAILURE;
+        }
+
+        if (this.userMapper.selectUserByContact(recoverCode.getContact()) == null) {
             return RecoverSendCodeResult.FAILURE;
         }
 
@@ -173,4 +178,46 @@ public class UserService {
 
     }
 
+    // 아이디 찾기 휴대폰 인증번호 확인
+    public VerifyRecoverCodeResult recoverCodeResult(RecoverCodeEntity recoverCode) {
+        //입력받은 연락처 코드 솔트에 대한 데이터가 있는지
+        RecoverCodeEntity existingRecover = this.userMapper.selectRecoverIdByContactCodeSalt(recoverCode.getContact(), recoverCode.getCode(), recoverCode.getSalt());
+
+        // 없다면
+        if (existingRecover == null) {
+            return VerifyRecoverCodeResult.FAILURE;
+        }
+
+        //유효기간 만료여부
+        Date current = new Date();
+        if (current.compareTo(existingRecover.getExpiresAt()) > 0) {
+            return VerifyRecoverCodeResult.FAILURE_EXPIRED;
+        }
+
+        // 변경여부 변경
+        existingRecover.setExpired(true);
+        return this.userMapper.updateRecoverExpired(existingRecover) > 0
+                ? VerifyRecoverCodeResult.SUCCESS
+                : VerifyRecoverCodeResult.FAILURE;
+    }
+
+    // 아아디 찾기
+    public RecoverIdResult findId(UserEntity user) {
+        // 인증번호 확인 완료 여부
+        RecoverCodeEntity recoverCode = this.userMapper.selectRecoverIdByContact(user.getContact());
+
+        if (!recoverCode.isExpired()) {
+            return RecoverIdResult.FAILURE_NOT_VERIFY;
+        }
+
+        // 가입한 회원 정보 불러오기
+        UserEntity existingUser = this.userMapper.selectUserByNameBirthContact(user);
+
+        return existingUser != null
+                ? RecoverIdResult.SUCCESS
+                : RecoverIdResult.FAILURE;
+
+
+        // 회원정보 입력하면 -> 데이터 찾아서 회원여부, 인증여부 확인 후 -> 이메일 찾아주기
+    }
 }
